@@ -2,7 +2,7 @@
 # Reads in from a file and stores all the directinoal edges in a list of lists
 def readFromFile(edges):
     # Will need to change based on machine
-    file = open('/Users/markymarkscomputer/Desktop/Untitled/fiveVec3.txt', 'r')
+    file = open('/Users/markymarkscomputer/Desktop/Untitled/Non5Labelings/non5graph1.txt', 'r')
     content = file.readlines()
 
     for line in content:
