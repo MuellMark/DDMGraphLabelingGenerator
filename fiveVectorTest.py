@@ -34,8 +34,13 @@ def getSums(edges,sumsPerEdge):
     
 
 #Will verify once the other list is filled in
-def verifier():
-    print("TODO")
+def verifier(sumsPerEdge):
+    valid = True
+    for i in sumsPerEdge:
+        if(i[0] != i[1]):
+            valid= False
+            break
+    return valid
 
 
 edges=[] #Stores all the edges
@@ -45,3 +50,4 @@ readFromFile(edges)
 sumsPerEdge=[]
 getSums(edges,sumsPerEdge)
 print(sumsPerEdge) 
+print(verifier(sumsPerEdge))
