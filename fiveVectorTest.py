@@ -1,6 +1,7 @@
 
+# Reads in from a file and stores all the directinoal edges in a list of lists
 def readFromFile(edges):
-    # Will need to change for machine
+    # Will need to change based on machine
     file = open('/Users/markymarkscomputer/Desktop/Untitled/fiveVec1.txt', 'r')
     content = file.readlines()
 
@@ -8,6 +9,7 @@ def readFromFile(edges):
         tempNode = [0,0]  #list that takes in a temp pairing
         index =0
         for i in line:
+            # Based on the file structure, each line only has 2 ints
             if(i.isdigit()):
                 tempNode[index]=int(i)
                 index+=1
@@ -15,6 +17,7 @@ def readFromFile(edges):
 
     file.close()
 
+# Based on the list of edges, find the values of nodes going in and out from the nodes
 def getSums(edges,sumsPerEdge):
     #Init the sums list to have 5 empty "tuples"
     i=0
@@ -23,17 +26,18 @@ def getSums(edges,sumsPerEdge):
         sumsPerEdge.append(tempPair)
         i+=1
 
+    # For each edge, add the value of the node going in and coming out
     for i in edges:
         indexOut = i[0]-1
         indexIn = i[1]-1
-        sumsPerEdge[indexOut][1]+=i[1]
-        sumsPerEdge[indexIn][0]+=i[0]
+        sumsPerEdge[indexOut][1]+=i[1]  #Going out
+        sumsPerEdge[indexIn][0]+=i[0]   #Coming in
         # Debugging Statements
         # print(i)
         # print(sumsPerEdge)
     
 
-#Will verify once the other list is filled in
+#Verifies that the values of nodes going in is the same as the nodes going out
 def verifier(sumsPerEdge):
     valid = True
     for i in sumsPerEdge:
@@ -42,12 +46,12 @@ def verifier(sumsPerEdge):
             break
     return valid
 
+# "Main Method" calls all the other funcitons
 
 edges=[] #Stores all the edges
 readFromFile(edges)
-#print(edges) 
 
-sumsPerEdge=[]
+sumsPerEdge=[]  #Stores all the in/out values
 getSums(edges,sumsPerEdge)
-print(sumsPerEdge) 
-print(verifier(sumsPerEdge))
+print(sumsPerEdge)
+print(verifier(sumsPerEdge)) #prints if it is a valid labeling
