@@ -1,14 +1,20 @@
-# Demonstrated Python Program
-# to read file character by character
- 
- 
+
+# Will need to change for machine
 file = open('/Users/markymarkscomputer/Desktop/Untitled/fiveVec1.txt', 'r')
-char = file.read(1)
-while (char):
-    if(char.isdigit()):
-        print(char)
-    # read by character
-    char = file.read(1)         
+content = file.readlines()
+
+edges=[]
+
+for line in content:
+    tempNode = [0,0]
+    index =0
+    for i in line:
+        if(i.isdigit()):
+            tempNode[index]=int(i)
+            index+=1
+    #print(tempNode)
+    edges.append(tempNode)
+print(edges)   
 
          
     
