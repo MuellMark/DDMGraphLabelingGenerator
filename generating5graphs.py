@@ -6,18 +6,34 @@ def initListOfLists(list,size):
         tempPair =[0,0]
         list.append(tempPair)
         i+=1
-       
 
-def generatePossibleGraph(edges,sumofedges,possibleGraphs):
+def computeSums(edges,sumofedges):
     for i in edges:
-        if(i[0]==0 or i[1]==0):
-            i[0]=1
-            i[1]=2
+        indexOut = i[0]-1
+        indexIn = i[1]-1
+        sumofedges[indexOut][1]+=i[1]  #Going out
+        sumofedges[indexIn][0]+=i[0]   #Coming in
 
-edges={(1,2),(1,3),(1,4),(1,5),(2,1),(2,3),(2,4),(2,5)} #Stores all the edges
+def computeInvsOut(edges,invsout):
+    for i in edges:
+        invsout[i[1]-1][0]+=1
+        invsout[i[0]-1][1]+=1
+
+def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
+    computeInvsOut(edges,invsout)
+    for i in edges:
+        print(i)
+
+edges=[[1,2],[1,3],[1,4],[1,5],[2,1],[2,3],[2,4],[2,5]] #Stores all the edges
 sumofedges=[]
 initListOfLists(sumofedges,5)
+computeSums(edges,sumofedges)
+
+invsout=[]
+initListOfLists(invsout,5)
 
 possibleGraphs=[] #stores all possible graphs that were made
-#generatePossibleGraph(edges,sumofedges,possibleGraphs)
+generatePossibleGraph(edges,sumofedges,possibleGraphs,invsout)
 print(edges)
+print(sumofedges)
+print(invsout)
