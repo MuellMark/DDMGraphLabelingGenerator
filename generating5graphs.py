@@ -6,6 +6,7 @@ def initListOfLists(list,size):
         tempPair =[0,0]
         list.append(tempPair)
         i+=1
+       
 
 def generatePossibleGraph(edges,sumofedges,possibleGraphs):
     for i in edges:
@@ -13,11 +14,10 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs):
             i[0]=1
             i[1]=2
 
-edges=[] #Stores all the edges
-initListOfLists(edges,8) #For now, assume min and max edges is 8
+edges={(1,2),(1,3),(1,4),(1,5),(2,1),(2,3),(2,4),(2,5)} #Stores all the edges
 sumofedges=[]
 initListOfLists(sumofedges,5)
 
 possibleGraphs=[] #stores all possible graphs that were made
-generatePossibleGraph(edges,sumofedges,possibleGraphs)
+#generatePossibleGraph(edges,sumofedges,possibleGraphs)
 print(edges)
