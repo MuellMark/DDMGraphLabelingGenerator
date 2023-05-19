@@ -54,7 +54,7 @@ def augmentEdges(invsout, edges):
         i+=1
     return valToChange
 
-def compareEdges(edges,invalidGraphs):
+def checkRepeatGraph(edges,invalidGraphs):
     newElement = True
     graph =0
     while(graph<len(invalidGraphs)):
@@ -73,7 +73,6 @@ def compareEdges(edges,invalidGraphs):
 def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs):
     computeInvsOut(edges,invsout)
     val =checkInvsOut(invsout)
-    print(val)
     if(val ==  0):
         print("Found: ")
         print(edges)
@@ -82,25 +81,31 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraph
         i=0
         j=0
         while(i<len(edges)):
-            #print(val) #debugging
+            # print(val) #debugging
             while(j<len(verticesToChange)):
                 if(edges[i][0]==verticesToChange[j]):
+                    print("First "+str(edges))
                     edges[i][0]=val
-                    newGraph=compareEdges(edges,invalidGraphs)
+                    print("after "+str(edges))
+                    newGraph=checkRepeatGraph(edges,invalidGraphs)
                     if(newGraph):
+                        print("added to invalid: "+ str(edges))
                         invalidGraphs.append(edges)
+                        print("\n INVALID:"+str(invalidGraphs))
                         generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 elif(edges[i][1]==verticesToChange[j]):
+                    print("First "+str(edges))
                     edges[i][1]=val
-                    newGraph=compareEdges(edges,invalidGraphs)
+                    print("after "+str(edges))
+                    newGraph=checkRepeatGraph(edges,invalidGraphs)
                     if(newGraph):
+                        print("happens")
                         invalidGraphs.append(edges)
                         generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 j+=1
             i+=1
 
         # Will loop thru edges, first edge that it finds with more than 4 going in and out replace
-    print(checkInvsOut(invsout))
 
 edges=[[1,2],[1,3],[1,4],[1,5],[2,1],[2,3],[2,4],[2,5]] #Stores all the edges
 sumofedges=[] #stores sum of edges
@@ -115,7 +120,11 @@ invalidGraphs = [] #Stores all invalid graphs for chekcing, may need to be a dic
 generatePossibleGraph(edges,sumofedges,possibleGraphs,invsout,invalidGraphs)
 
 #debugging
-print(edges)
-print(sumofedges)
-print(invsout)
+# print("edges: "+str(edges))
+# print(sumofedges)
+# print(invsout)
+print("\n INVALID:"+str(invalidGraphs))
+test = [3,4,5]
+invalidGraphs.append(test)
+test.append(7)
 print(invalidGraphs)
