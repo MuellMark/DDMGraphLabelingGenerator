@@ -49,7 +49,7 @@ def augmentEdges(invsout, edges):
     valToChange = []
     i=0
     while(i<5): 
-        if(invsout[i][0]+invsout[i][1]>2):
+        if(invsout[i][0]+invsout[i][1]>3): #should be 2
             valToChange.append(i+1)
         i+=1
     return valToChange
@@ -61,9 +61,12 @@ def checkRepeatGraph(edges,invalidGraphs):
         if(edges==invalidGraphs[graph]):
             newElement=False
             graph+=len(invalidGraphs)
+        graph+=1
     return newElement
 
-
+def copyIntoInvalid(edges,invalidGraphs):
+    for i in edges:
+        invalidGraphs[0].append(i)
        
 
 #Focus on generating one graph first, then see how to generate more before stopping again
@@ -83,29 +86,27 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraph
         while(i<len(edges)):
             # print(val) #debugging
             while(j<len(verticesToChange)):
-                tempGraph=[]
                 if(edges[i][0]==verticesToChange[j]):
                     print("First "+str(edges))
                     edges[i][0]=val
-                    tempGraph = edges
                     print("after "+str(edges))
                     newGraph=checkRepeatGraph(edges,invalidGraphs)
                     if(newGraph):
                         print("added to invalid: "+ str(edges))
-                        invalidGraphs.insert(0,tempGraph)
+                        copyIntoInvalid(edges,invalidGraphs)
                         generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 elif(edges[i][1]==verticesToChange[j]):
                     edges[i][1]=val
-                    tempGraph = edges
                     newGraph=checkRepeatGraph(edges,invalidGraphs)
                     if(newGraph):
-                        invalidGraphs.insert(0,tempGraph)
+                        copyIntoInvalid(edges,invalidGraphs)
                         generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 j+=1
             i+=1
 
         # Will loop thru edges, first edge that it finds with more than 4 going in and out replace
 
+temp = [[1,2],[1,3],[1,4],[1,5],[2,1],[2,3],[2,4],[2,5]]
 edges=[[1,2],[1,3],[1,4],[1,5],[2,1],[2,3],[2,4],[2,5]] #Stores all the edges
 sumofedges=[] #stores sum of edges
 initListOfLists(sumofedges,5)
@@ -116,6 +117,7 @@ initListOfLists(invsout,5)
 
 possibleGraphs =[] #stores all possible graphs that were made
 invalidGraphs = [] #Stores all invalid graphs for chekcing, may need to be a dict
+invalidGraphs.append(temp)
 generatePossibleGraph(edges,sumofedges,possibleGraphs,invsout,invalidGraphs)
 
 #debugging
