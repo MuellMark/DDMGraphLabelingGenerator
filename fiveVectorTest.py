@@ -1,8 +1,10 @@
+import sys
 
 # Reads in from a file and stores all the directinoal edges in a list of lists
 def readFromFile(edges):
+    commandFile = sys.argv[1]
     # Will need to change based on machine
-    file = open('/Users/markymarkscomputer/Desktop/Untitled/Non5Labelings/non5graph2.txt', 'r')
+    file = open('/Users/markymarkscomputer/Desktop/Untitled/known5Labelings/'+commandFile, 'r')
     content = file.readlines()
 
     for line in content:
@@ -53,5 +55,5 @@ readFromFile(edges)
 
 sumsPerEdge=[]  #Stores all the in/out values
 getSums(edges,sumsPerEdge)
-print(sumsPerEdge)
+print()
 print(verifier(sumsPerEdge)) #prints if it is a valid labeling
