@@ -57,8 +57,23 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
     if(val ==  0):
         print("Found: "+edges)
     else:
-        print("TODO")
-        # verticesToChange = augmentEdges(invsout, edges)
+        verticesToChange = augmentEdges(invsout, edges)
+        i=0
+        j=0
+        while(i<len(edges)):
+            while(j<len(verticesToChange)):
+                if(edges[i][0]==verticesToChange):
+                    #print("Happens")
+                    edges[i][0]=val
+                    generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
+                elif(edges[i][1]==verticesToChange):
+                    edges[i][1]=val
+                    generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
+                j+=1
+            i+=1
+
+
+        # 
         # for edge in edges:
         #     for i in verticesToChange:
         #         if(edge[0]==i):
