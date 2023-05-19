@@ -83,24 +83,23 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraph
         while(i<len(edges)):
             # print(val) #debugging
             while(j<len(verticesToChange)):
+                tempGraph=[]
                 if(edges[i][0]==verticesToChange[j]):
                     print("First "+str(edges))
                     edges[i][0]=val
+                    tempGraph = edges
                     print("after "+str(edges))
                     newGraph=checkRepeatGraph(edges,invalidGraphs)
                     if(newGraph):
                         print("added to invalid: "+ str(edges))
-                        invalidGraphs.append(edges)
-                        print("\n INVALID:"+str(invalidGraphs))
+                        invalidGraphs.insert(0,tempGraph)
                         generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 elif(edges[i][1]==verticesToChange[j]):
-                    print("First "+str(edges))
                     edges[i][1]=val
-                    print("after "+str(edges))
+                    tempGraph = edges
                     newGraph=checkRepeatGraph(edges,invalidGraphs)
                     if(newGraph):
-                        print("happens")
-                        invalidGraphs.append(edges)
+                        invalidGraphs.insert(0,tempGraph)
                         generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 j+=1
             i+=1
@@ -124,7 +123,3 @@ generatePossibleGraph(edges,sumofedges,possibleGraphs,invsout,invalidGraphs)
 # print(sumofedges)
 # print(invsout)
 print("\n INVALID:"+str(invalidGraphs))
-test = [3,4,5]
-invalidGraphs.append(test)
-test.append(7)
-print(invalidGraphs)
