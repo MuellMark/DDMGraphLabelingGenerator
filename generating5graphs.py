@@ -7,6 +7,11 @@ def initListOfLists(list,size):
         list.append(tempPair)
         i+=1
 
+def clearInVsOut(invsout):
+    for i in invsout:
+        i[0]=0
+        i[1]=0
+
 #Computes sums of vertices going in and out, same as in other file
 def computeSums(edges,sumofedges):
     for i in edges:
@@ -17,6 +22,7 @@ def computeSums(edges,sumofedges):
 
 #computes the number of edges going in and out, same as sums, but without the edge weights
 def computeInvsOut(edges,invsout):
+    clearInVsOut(invsout)
     for i in edges:
         #print(edges)
         invsout[i[1]-1][0]+=1
@@ -32,9 +38,9 @@ def checkInvsOut(invsout):
             valNeedsMore = i+1
             i+=5
         i+=1
-    print("insvsouts:")
-    print(invsout)
-    print(valNeedsMore)
+    # print("insvsouts:")
+    # print(invsout)
+    # print(valNeedsMore)
     return valNeedsMore
 
 #Finds all possible edges with 4 or more connections, returns list of all possible
@@ -58,6 +64,7 @@ def augmentEdges(invsout, edges):
 def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
     computeInvsOut(edges,invsout)
     val =checkInvsOut(invsout)
+    print(val)
     if(val ==  0):
         print("Found: ")
         print(edges)
@@ -77,16 +84,6 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
                 j+=1
             i+=1
 
-
-        # 
-        # for edge in edges:
-        #     for i in verticesToChange:
-        #         if(edge[0]==i):
-        #             edge[0]=val
-        #             generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
-        #         elif(edge[1]==i):
-        #             edge[1]=val
-        #             generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
         # Will loop thru edges, first edge that it finds with more than 4 going in and out replace
     print(checkInvsOut(invsout))
 
