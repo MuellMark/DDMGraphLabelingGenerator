@@ -49,10 +49,19 @@ def augmentEdges(invsout, edges):
     valToChange = []
     i=0
     while(i<5): 
-        if(invsout[i][0]+invsout[i][1]>3):
+        if(invsout[i][0]+invsout[i][1]>2):
             valToChange.append(i+1)
         i+=1
     return valToChange
+
+def compareEdges(edges,invalidGraphs):
+    newElement = True
+    graph =0
+    while(graph<len(invalidGraphs)):
+        if(edges==invalidGraphs[graph]):
+            newElement=False
+            graph+=len(invalidGraphs)
+    return newElement
 
 
        
@@ -61,7 +70,7 @@ def augmentEdges(invsout, edges):
 #After checking, check which one has too many, take one from there, replace the with the new
 #one in the direction that has too many (so first, replace ones that start from 1, will need to
 # be new method)
-def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
+def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs):
     computeInvsOut(edges,invsout)
     val =checkInvsOut(invsout)
     print(val)
@@ -77,10 +86,16 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
             while(j<len(verticesToChange)):
                 if(edges[i][0]==verticesToChange[j]):
                     edges[i][0]=val
-                    generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
+                    newGraph=compareEdges(edges,invalidGraphs)
+                    if(newGraph):
+                        invalidGraphs.append(edges)
+                        generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 elif(edges[i][1]==verticesToChange[j]):
                     edges[i][1]=val
-                    generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
+                    newGraph=compareEdges(edges,invalidGraphs)
+                    if(newGraph):
+                        invalidGraphs.append(edges)
+                        generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout, invalidGraphs)
                 j+=1
             i+=1
 
@@ -95,10 +110,12 @@ computeSums(edges,sumofedges)
 invsout=[] #stores edges coming in vs out
 initListOfLists(invsout,5)
 
-possibleGraphs=[] #stores all possible graphs that were made
-generatePossibleGraph(edges,sumofedges,possibleGraphs,invsout)
+possibleGraphs =[] #stores all possible graphs that were made
+invalidGraphs = [] #Stores all invalid graphs for chekcing, may need to be a dict
+generatePossibleGraph(edges,sumofedges,possibleGraphs,invsout,invalidGraphs)
 
 #debugging
 print(edges)
 print(sumofedges)
 print(invsout)
+print(invalidGraphs)
