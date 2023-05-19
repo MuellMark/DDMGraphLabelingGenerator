@@ -26,19 +26,38 @@ def computeInvsOut(edges,invsout):
 def checkInvsOut(invsout):
     valNeedsMore =0
     i=0
-    while(i<5):
+    while(i<5): #Constant, to be changed for more vertices
         if(invsout[i][0]+invsout[i][1]<3):
             valNeedsMore = i+1
             i+=5
         i+=1
     return valNeedsMore
 
+#Finds all possible edges with 4 or more connections, returns list of all possible
+#edges to change
+def augmentEdges(invsout, edges):
+    valToChange = []
+    i=0
+    while(i<5): 
+        if(invsout[i][0]+invsout[i][1]>3):
+            valToChange.append(i+1)
+        i+=1
+    return valToChange
+
+
+       
+
 #Focus on generating one graph first, then see how to generate more before stopping again
 #After checking, check which one has too many, take one from there, replace the with the new
 #one in the direction that has too many (so first, replace ones that start from 1, will need to
 # be new method)
 def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
-    computeInvsOut(edges,invsout)
+    val =computeInvsOut(edges,invsout)
+    if(val ==  0):
+        print("Found: "+edges)
+    else:
+        # Will loop thru edges, first edge that it finds with more than 4 going in and out replace
+        print("TODO")
     print(checkInvsOut(invsout))
 
 edges=[[1,2],[1,3],[1,4],[1,5],[2,1],[2,3],[2,4],[2,5]] #Stores all the edges
