@@ -18,6 +18,7 @@ def computeSums(edges,sumofedges):
 #computes the number of edges going in and out, same as sums, but without the edge weights
 def computeInvsOut(edges,invsout):
     for i in edges:
+        #print(edges)
         invsout[i[1]-1][0]+=1
         invsout[i[0]-1][1]+=1
 
@@ -56,8 +57,17 @@ def generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout):
     if(val ==  0):
         print("Found: "+edges)
     else:
-        # Will loop thru edges, first edge that it finds with more than 4 going in and out replace
         print("TODO")
+        # verticesToChange = augmentEdges(invsout, edges)
+        # for edge in edges:
+        #     for i in verticesToChange:
+        #         if(edge[0]==i):
+        #             edge[0]=val
+        #             generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
+        #         elif(edge[1]==i):
+        #             edge[1]=val
+        #             generatePossibleGraph(edges,sumofedges,possibleGraphs, invsout)
+        # Will loop thru edges, first edge that it finds with more than 4 going in and out replace
     print(checkInvsOut(invsout))
 
 edges=[[1,2],[1,3],[1,4],[1,5],[2,1],[2,3],[2,4],[2,5]] #Stores all the edges
