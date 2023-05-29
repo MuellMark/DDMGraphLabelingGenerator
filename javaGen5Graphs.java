@@ -42,8 +42,10 @@ class javaGen5Graphs{
     }
 
     public static void printPossibleGraphs(ArrayList <int[][]> possibleGraphs){
+        System.out.println("Graphs generated: "+ possibleGraphs.size());
        for(int i=0;i<possibleGraphs.size();i++){
-        printEdges(possibleGraphs.get(i));
+            printEdges(possibleGraphs.get(i));
+            System.out.print("\n");
        } 
     }
 
@@ -58,8 +60,13 @@ class javaGen5Graphs{
         //int current=0;
         for(int i=0;i<startEdges.length;i++){
             for(int j=0;j<startEdges[i].length;j++){
-                startEdges[i][j]+=1;
-                possibleGraphs.add(startEdges);
+                
+                for(int k=1;k<=5;k++){
+                    int[][] temp = startEdges;
+                    System.out.println(startEdges[0][0]);
+                    temp[i][j]=k;
+                    possibleGraphs.add(temp.clone());
+                }
             }
         }
 
