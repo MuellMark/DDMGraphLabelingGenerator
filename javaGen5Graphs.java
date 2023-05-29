@@ -22,12 +22,13 @@ class javaGen5Graphs{
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
 
-        possibleGraphs.add(copyArr(test));
-        test[0][0]=78;
-        possibleGraphs.add(copyArr(test));
+        // Debugging, can remove after enxt commit
+        // possibleGraphs.add(copyArr(test));
+        // test[0][0]=78;
+        // possibleGraphs.add(copyArr(test));
         //printEdges(possibleGraphs.get(0));
 
-        //possibleGraphs=generate(possibleGraphs, test);
+        possibleGraphs=generate(possibleGraphs, test);
         printPossibleGraphs( possibleGraphs);
 
     }
@@ -44,6 +45,7 @@ class javaGen5Graphs{
         }
     }
 
+    // Prints all graphs in possibleGraphs
     public static void printPossibleGraphs(ArrayList <int[][]> possibleGraphs){
         System.out.println("Graphs generated: "+ possibleGraphs.size());
        for(int i=0;i<possibleGraphs.size();i++){
@@ -52,6 +54,7 @@ class javaGen5Graphs{
        } 
     }
 
+    // Creates a copy of an array to get around the pointer issue wI was having
     public static int[][] copyArr(int[][] srcArr){
         int[][] newArr = new int[srcArr.length][srcArr[0].length];
         for(int i=0;i<srcArr.length;i++){
