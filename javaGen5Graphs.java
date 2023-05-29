@@ -22,7 +22,7 @@ class javaGen5Graphs{
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
 
-        //possibleGraphs=generate(possibleGraphs, test);
+        possibleGraphs=recursiveGenerate(possibleGraphs, test);
         printPossibleGraphs( possibleGraphs);
 
     }
@@ -60,7 +60,36 @@ class javaGen5Graphs{
     }
 
     public static ArrayList <int[][]> recursiveGenerate(ArrayList <int[][]> possibleGraphs,int[][] startEdges){
+        int[] index = {0,0};
+        helper(possibleGraphs,startEdges,index);
         return possibleGraphs;
+    }
+
+    private static void helper(ArrayList <int[][]> possibleGraphs,int[][] startEdges,int[] index){
+        if(index[0]>=startEdges.length){
+            System.out.println("aw yea");
+        }else if(!(startEdges[index[0]][index[1]]==5)){
+            int[] tempIndex = {0,0};
+            tempIndex[0]=index[0];
+            tempIndex[1]=index[1];
+
+            possibleGraphs.add(copyArr(startEdges));
+            startEdges[index[0]][index[1]]++;
+            System.out.println(index[0]);
+            helper(possibleGraphs,startEdges,index);
+
+            if(index[1]==1){
+                index[0]++;
+                index[1]=0;
+            }else{index[1]++;}
+            System.out.println(index[0]);
+            helper(possibleGraphs,startEdges,index);
+            startEdges[tempIndex[0]][tempIndex[1]]--;
+            helper(possibleGraphs,startEdges,index);
+            
+        }
+        
+        
     }
 
     //TODO: This method will be for generating the graphs
