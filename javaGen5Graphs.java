@@ -22,12 +22,6 @@ class javaGen5Graphs{
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
 
-        // Debugging, can remove after enxt commit
-        // possibleGraphs.add(copyArr(test));
-        // test[0][0]=78;
-        // possibleGraphs.add(copyArr(test));
-        //printEdges(possibleGraphs.get(0));
-
         possibleGraphs=generate(possibleGraphs, test);
         printPossibleGraphs( possibleGraphs);
 
@@ -74,14 +68,15 @@ class javaGen5Graphs{
         // Checking each one, then seeing if I can scale it down
 
         //int current=0;
+
+        int[][] edges = startEdges;
         for(int i=0;i<startEdges.length;i++){
             for(int j=0;j<startEdges[i].length;j++){
                 
                 for(int k=1;k<=5;k++){
-                    int[][] temp = startEdges;
-                    System.out.println(startEdges[0][0]);
-                    temp[i][j]=k;
-                    possibleGraphs.add(temp.clone());
+                    edges[i][j]=k;
+                    //System.out.println(startEdges[0][0]);
+                    possibleGraphs.add(copyArr(edges));
                 }
             }
         }
