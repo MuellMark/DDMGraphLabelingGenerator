@@ -10,9 +10,9 @@ class javaGen5Graphs{
             }
         }
 
-        // Test for generate, will have 6 total edges to add instead of 8
-        int[][] test =new int[3][2];
-        for(int i=0;i<3;i++){
+        // Test for generate, will have 4 total edges to add instead of 8
+        int[][] test =new int[2][2];
+        for(int i=0;i<2;i++){
             for(int j=0;j<2;j++){
                 test[i][j]=1;
             }
@@ -20,7 +20,7 @@ class javaGen5Graphs{
 
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
-        possibleGraphs.add(edges);
+        possibleGraphs.add(test);
 
         //printEdges(possibleGraphs.get(0));
 
@@ -31,7 +31,7 @@ class javaGen5Graphs{
 
     // Prints the edges in a readable format
     public static void printEdges(int[][] edges){
-        for(int i=0;i<8;i++){
+        for(int i=0;i<edges.length;i++){
             System.out.print("[");
             for(int j=0;j<2;j++){
                 System.out.print(edges[i][j]);
@@ -55,7 +55,14 @@ class javaGen5Graphs{
         // I'm going to try an iterative approach that first goes through all possible permutations
         // Checking each one, then seeing if I can scale it down
 
-        System.out.print("TODO");
+        //int current=0;
+        for(int i=0;i<startEdges.length;i++){
+            for(int j=0;j<startEdges[i].length;j++){
+                startEdges[i][j]+=1;
+                possibleGraphs.add(startEdges);
+            }
+        }
+
         return possibleGraphs;
     }
 }
