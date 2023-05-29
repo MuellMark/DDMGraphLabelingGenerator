@@ -22,11 +22,9 @@ class javaGen5Graphs{
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
 
-        int[][]temp=new int[2][2];
-        System.arraycopy(test, 0, temp, 0, test.length);
-        possibleGraphs.add(temp);
+        possibleGraphs.add(copyArr(test));
         test[0][0]=78;
-        possibleGraphs.add(test);
+        possibleGraphs.add(copyArr(test));
         //printEdges(possibleGraphs.get(0));
 
         //possibleGraphs=generate(possibleGraphs, test);
@@ -52,6 +50,16 @@ class javaGen5Graphs{
             printEdges(possibleGraphs.get(i));
             System.out.print("\n");
        } 
+    }
+
+    public static int[][] copyArr(int[][] srcArr){
+        int[][] newArr = new int[srcArr.length][srcArr[0].length];
+        for(int i=0;i<srcArr.length;i++){
+            for(int j=0;j<2;j++){
+                newArr[i][j]=srcArr[i][j];
+            }
+        }
+        return newArr;
     }
 
     //TODO: This method will be for generating the graphs
