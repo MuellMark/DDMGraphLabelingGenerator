@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class javaGen5Graphs{
     public static void main (String []args){
@@ -20,11 +21,15 @@ class javaGen5Graphs{
 
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
-        possibleGraphs.add(test);
 
+        int[][]temp=new int[2][2];
+        System.arraycopy(test, 0, temp, 0, test.length);
+        possibleGraphs.add(temp);
+        test[0][0]=78;
+        possibleGraphs.add(test);
         //printEdges(possibleGraphs.get(0));
 
-        possibleGraphs=generate(possibleGraphs, test);
+        //possibleGraphs=generate(possibleGraphs, test);
         printPossibleGraphs( possibleGraphs);
 
     }
