@@ -59,6 +59,17 @@ class javaGen5Graphs{
         return newArr;
     }
 
+//TODO: This method will be for generating the graphs, round 2 baby
+    public static ArrayList <int[][]> iterGenerate(ArrayList <int[][]> possibleGraphs,int[][] edges){
+        while(edges[edges.length-1][1]<5){
+            
+        }
+        return possibleGraphs;
+    }
+
+
+
+    //REcursive attempt to generate, with helper
     public static ArrayList <int[][]> recursiveGenerate(ArrayList <int[][]> possibleGraphs,int[][] startEdges){
         int[] index = {0,0};
         helper(possibleGraphs,startEdges,index);
