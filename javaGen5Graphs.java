@@ -69,9 +69,6 @@ class javaGen5Graphs{
         if(index[0]>=startEdges.length){
             System.out.println("aw yea");
         }else if(!(startEdges[index[0]][index[1]]==5)){
-            int[] tempIndex = {0,0};
-            tempIndex[0]=index[0];
-            tempIndex[1]=index[1];
 
             possibleGraphs.add(copyArr(startEdges));
             startEdges[index[0]][index[1]]++;
@@ -83,8 +80,6 @@ class javaGen5Graphs{
                 index[1]=0;
             }else{index[1]++;}
             System.out.println(index[0]);
-            helper(possibleGraphs,startEdges,index);
-            startEdges[tempIndex[0]][tempIndex[1]]--;
             helper(possibleGraphs,startEdges,index);
             
         }
