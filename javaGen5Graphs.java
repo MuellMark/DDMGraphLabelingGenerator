@@ -67,16 +67,20 @@ class javaGen5Graphs{
         // I'm going to try an iterative approach that first goes through all possible permutations
         // Checking each one, then seeing if I can scale it down
 
-        //int current=0;
+        int currentEdge=0;
+        int currentElement=0;
 
         int[][] edges = startEdges;
         for(int i=0;i<startEdges.length;i++){
             for(int j=0;j<startEdges[i].length;j++){
                 
                 for(int k=1;k<=5;k++){
-                    edges[i][j]=k;
-                    //System.out.println(startEdges[0][0]);
-                    possibleGraphs.add(copyArr(edges));
+                    if(!(i==currentEdge)||!(j==currentElement)){
+                        edges[i][j]=k;
+                        //System.out.println(startEdges[0][0]);
+                        possibleGraphs.add(copyArr(edges));
+                    }
+                    
                 }
             }
         }
