@@ -22,7 +22,7 @@ class javaGen5Graphs{
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
 
-        possibleGraphs=generate(possibleGraphs, test);
+        //possibleGraphs=generate(possibleGraphs, test);
         printPossibleGraphs( possibleGraphs);
 
     }
@@ -59,6 +59,10 @@ class javaGen5Graphs{
         return newArr;
     }
 
+    public static ArrayList <int[][]> recursiveGenerate(ArrayList <int[][]> possibleGraphs,int[][] startEdges){
+        return possibleGraphs;
+    }
+
     //TODO: This method will be for generating the graphs
     // inputs: a start arr of edges, and the arraylist
     // output: arraylist, to be used to test
@@ -67,6 +71,7 @@ class javaGen5Graphs{
         // I'm going to try an iterative approach that first goes through all possible permutations
         // Checking each one, then seeing if I can scale it down
 
+        // Used to keep an element the same
         int currentEdge=0;
         int currentElement=0;
 
@@ -83,6 +88,8 @@ class javaGen5Graphs{
                     
                 }
             }
+            
+
         }
 
         return possibleGraphs;
