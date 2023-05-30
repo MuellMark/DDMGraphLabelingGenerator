@@ -6,7 +6,8 @@ class iterComboGeneratorTest{
         ArrayList <int[]> combos= new ArrayList<int[]>();
         generate(combos, test);
         printCombos(combos);
-    }
+        System.out.println(combos.size());
+        }
 
     // Generates all of the permutations for 4
     public static void generate(ArrayList <int[]> combos,int[] test){
