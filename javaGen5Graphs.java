@@ -25,14 +25,10 @@ class javaGen5Graphs{
         int[] startarr = convertTo1D(test); // Will be used as start of generate
         generate(possibleGraphs, startarr);
 
-
-        
         printPossibleGraphs( possibleGraphs);
-
-
     }
 
-    //conerts from 1d to 2d
+    //conerts from 1d array to 2d array for storing in list
     public static int[][] convertTo2D(int[] arr){
         int[][] new2Darr = new int[arr.length/2][2];
         int i2D=0;
@@ -46,7 +42,8 @@ class javaGen5Graphs{
         }
         return new2Darr;
     }
-     //conerts from 2d to 1d
+
+     //conerts from 2d to 1d for starting the generate method
      public static int[] convertTo1D(int[][] arr2D){
         int[] newArr = new int[arr2D.length*2];
         int i2D=0;
@@ -61,13 +58,8 @@ class javaGen5Graphs{
         return newArr;
     }
 
-    public static void print1DArray(int[] arr){
-        for(int i=0;i<arr.length;i++){
-            System.out.print(arr[i]+",");
-        }
-    }
-
-    // Prints the edges in a readable format
+    
+    // Prints the edges in a readable format (2D array)
     public static void printEdges(int[][] edges){
         for(int i=0;i<edges.length;i++){
             System.out.print("[");
@@ -79,16 +71,16 @@ class javaGen5Graphs{
         }
     }
 
-    // Prints all graphs in possibleGraphs
+    // Prints all graphs in possibleGraphs (arraylist of the 2D arrays)
     public static void printPossibleGraphs(ArrayList <int[][]> possibleGraphs){
-        System.out.println("Graphs generated: "+ possibleGraphs.size());
        for(int i=0;i<possibleGraphs.size();i++){
             printEdges(possibleGraphs.get(i));
             System.out.print("\n");
-       } 
+       } // Moved to bottom incase too many were made
+       System.out.println("Graphs generated: "+ possibleGraphs.size());
     }
 
-    // Creates a copy of an array to get around the pointer issue wI was having
+    // Creates a copy of a 2D array to get around the pointer issue I was having
     public static int[][] copyArr(int[][] srcArr){
         int[][] newArr = new int[srcArr.length][srcArr[0].length];
         for(int i=0;i<srcArr.length;i++){
@@ -99,27 +91,18 @@ class javaGen5Graphs{
         return newArr;
     }
 
-
-
-    // Generates all of the permutations for 4
+    // Generates all of the permutations the graph, brute force style
     public static void generate(ArrayList <int[][]> combos,int[] test){
         int index=0; //Keeps track of current position, only goes up
         int adding=0; //Keeps track of where it will be added
-        // Goes until all are 5's
-        while(!checkAllFives(test, test.length-1)){ 
-            // Prints arrays and number added, for debugging
-            // for(int i=0;i<test.length;i++){
-            //     System.out.print(test[i]+",");
-            // }
-            // System.out.println();
-            // combos.add(convertto2D(copyArr(test))); // Adds to array list
+        // Goes until all elements are 5's
+        while(!checkAllFives(test, test.length-1)){ // fence post problem, maybe fix later
+            // adds array to list
             combos.add(copyArr(convertTo2D(test)));
-            // System.out.println(combos.size());
 
             // 3 cases: 1st checks if all are 5's upto index. If it is,
             // Then increases index (and it's position), and clears everything before it to 1's
             if(checkAllFives(test, index)){
-                //System.out.print("happens"); //debugging
                 index++;
                 test[index]++;
                 adding=0;
@@ -147,14 +130,13 @@ class javaGen5Graphs{
                    test[i]=1;
                }
                adding=0;
-               }
-                 
+               }   
             }
         }
     }
 
     // Checks if all entries are 5 upto a certain index in an arr. If it is, return true
-    // else return false
+    // else return false, for generate
     public static boolean checkAllFives(int[]arr, int end){
         for(int i=0;i<=end;i++){
             if(!(arr[i]==5)) return false;
@@ -162,7 +144,7 @@ class javaGen5Graphs{
         return true;
     }
 
-    // copies array into a new array for the list
+    // copies 1D array into a new array, not needed, keeping just incase, as copying a 1D array could be needed
     public static int[] copyArr(int[] srcArr){
         int[] newArr = new int[srcArr.length];
         for(int i=0;i<srcArr.length;i++){
@@ -171,81 +153,13 @@ class javaGen5Graphs{
         return newArr;
     }
 
-    // Prints all combos in the array list
-    public static void printCombos(ArrayList <int[]> combos){
-        System.out.println("Combos generated: "+ combos.size());
-       for(int i=0;i<combos.size();i++){
-            for(int j=0;j<combos.get(i).length;j++){
-                System.out.print(combos.get(i)[j]);
-            }
-            System.out.println();
-       } 
+
+
+    // Used for debugging, to check 1D arrays
+    public static void print1DArray(int[] arr){
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+",");
+        }   
     }
 
-
-
-
-
-//Failed attempts 
-
-//     //REcursive attempt to generate, with helper
-//     public static ArrayList <int[][]> recursiveGenerate(ArrayList <int[][]> possibleGraphs,int[][] startEdges){
-//         int[] index = {0,0};
-//         helper(possibleGraphs,startEdges,index);
-//         return possibleGraphs;
-//     }
-
-//     private static void helper(ArrayList <int[][]> possibleGraphs,int[][] startEdges,int[] index){
-//         if(index[0]>=startEdges.length){
-//             System.out.println("aw yea");
-//         }else if(!(startEdges[index[0]][index[1]]==5)){
-
-//             possibleGraphs.add(copyArr(startEdges));
-//             startEdges[index[0]][index[1]]++;
-//             System.out.println(index[0]);
-//             helper(possibleGraphs,startEdges,index);
-
-//             if(index[1]==1){
-//                 index[0]++;
-//                 index[1]=0;
-//             }else{index[1]++;}
-//             System.out.println(index[0]);
-//             helper(possibleGraphs,startEdges,index);
-            
-//         }
-        
-        
-//     }
-
-//     //TODO: This method will be for generating the graphs
-//     // inputs: a start arr of edges, and the arraylist
-//     // output: arraylist, to be used to test
-//     public static ArrayList <int[][]> generate(ArrayList <int[][]> possibleGraphs,int[][] startEdges){
-//         //First, I need a starting point for the array of edges
-//         // I'm going to try an iterative approach that first goes through all possible permutations
-//         // Checking each one, then seeing if I can scale it down
-
-//         // Used to keep an element the same
-//         int currentEdge=0;
-//         int currentElement=0;
-
-//         int[][] edges = startEdges;
-//         for(int i=0;i<startEdges.length;i++){
-//             for(int j=0;j<startEdges[i].length;j++){
-                
-//                 for(int k=1;k<=5;k++){
-//                     if(!(i==currentEdge)||!(j==currentElement)){
-//                         edges[i][j]=k;
-//                         //System.out.println(startEdges[0][0]);
-//                         possibleGraphs.add(copyArr(edges));
-//                     }
-                    
-//                 }
-//             }
-            
-
-//         }
-
-//         return possibleGraphs;
-//     }
  }
