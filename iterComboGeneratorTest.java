@@ -11,7 +11,7 @@ class iterComboGeneratorTest{
     public static void generate(ArrayList <int[]> combos,int[] test){
         int index=0;
         int adding=0;
-        while(combos.size()<625){ //Will need to change
+        while(!checkAllFives(test, test.length-1)){ //Will need to change
             for(int i=0;i<test.length;i++){
                 System.out.print(test[i]+",");
             }
