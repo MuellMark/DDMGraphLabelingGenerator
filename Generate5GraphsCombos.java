@@ -6,12 +6,6 @@ class generate5GraphsCombos{
         ArrayList<Integer> freeNums = new ArrayList<Integer>();
         for(int i=5;i>0;i--) freeNums.add(i);
 
-        //DEBUggING
-        // System.out.println(freeNums.get(0));
-        // // Removed as soon as added to any vertex
-        // freeNums.remove(0); //al.remove(Integer.valueOf(1));
-        // System.out.println(freeNums.get(0));
-
         //edges is the whole strucutre
         //edges[1-5] calls a given vertex
         //edges[1-5][0-1] calls ins vs outs, 0 for out and 1 for ins, this is an arraylist
@@ -29,6 +23,23 @@ class generate5GraphsCombos{
         System.out.println(edges[2][1].get(0));
         // System.out.println(edges2[3][1].get(0));
 
+        gen5KickOff(edges);
 
     }
+
+    // Kick off for generating from 5
+    public static void gen5KickOff(ArrayList<Integer>[][] edges){
+        // Need the 3 cases, go to a different recurssive method
+
+        //First case: 5: 1+4 and 2+3
+        edges[5][1].add(1); // adding 1 and 4 as in
+        edges[5][1].add(4);
+        edges[1][0].add(5);
+        edges[4][0].add(5);
+
+        edges[5][0].add(2); // adding 2 and 3 as out
+        edges[5][0].add(3);
+        edges[2][1].add(5);
+        edges[3][1].add(5);
+    }   
 }
