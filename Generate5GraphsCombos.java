@@ -41,5 +41,19 @@ class generate5GraphsCombos{
         edges[5][0].add(3);
         edges[2][1].add(5);
         edges[3][1].add(5);
+
+        generate(edges, 4);
     }   
+
+    public static void generate(ArrayList<Integer>[][] edges,int vertex){
+        ArrayList<Integer> unusable = new ArrayList<>();
+        unusable.add(vertex);
+        for(int i=0;i<edges[vertex][0].size();i++){
+            unusable.add(edges[vertex][0].get(i));
+        }for(int i=0;i<edges[vertex][1].size();i++){
+            unusable.add(edges[vertex][1].get(i));
+        }
+        // Need to find all combos and assign them accordingly
+    }
+
 }
