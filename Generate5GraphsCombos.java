@@ -19,8 +19,8 @@ class generate5GraphsCombos{
             edges[i]=test;
         }
         //DEbugging
-        edges[2][1].add(53);
-        System.out.println(edges[2][1].get(0));
+        // edges[2][1].add(53);
+        // System.out.println(edges[2][1].get(0));
         // System.out.println(edges2[3][1].get(0));
 
         gen5KickOff(edges);
@@ -53,7 +53,28 @@ class generate5GraphsCombos{
         }for(int i=0;i<edges[vertex][1].size();i++){
             unusable.add(edges[vertex][1].get(i));
         }
+        //System.out.println(unusable);
         // Need to find all combos and assign them accordingly
+        checkForSums(edges, unusable);
+    }
+
+    public static ArrayList<Integer>[] checkForSums(ArrayList<Integer>[][] edges, ArrayList<Integer> unusable){
+        // Should actually be arraylist of these
+        ArrayList<Integer>[] possibleAddition = new ArrayList[2];
+            for (int j = 0; j < 2; j++) {
+                possibleAddition[j] = new ArrayList<Integer>();
+            }
+        ArrayList<Integer> set = new ArrayList<>();
+        for(int i=1;i<6;i++){
+            boolean inUnusable = false;
+            for(int j=0;j<unusable.size();j++){
+                if(i==unusable.get(j)) inUnusable=true;
+            }
+            if(!inUnusable) set.add(i);
+        }
+        System.out.println(set);
+        // Somehow set needs to be added around to find all possible combos
+        return possibleAddition;
     }
 
 }
