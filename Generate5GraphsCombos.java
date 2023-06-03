@@ -73,8 +73,17 @@ class generate5GraphsCombos{
             if(!inUnusable) set.add(i);
         }
         System.out.println(set);
+        int maxVal = sum(set);
         // Somehow set needs to be added around to find all possible combos
         return possibleAddition;
     }
 
+    //Gets sum of array list
+    public static int sum(ArrayList<Integer> arr){
+        int sum=0;
+        for(int i =0;i<arr.size();i++){
+            sum+=arr.get(i);
+        }
+        return sum;
+    }
 }
