@@ -47,6 +47,9 @@ class generate5GraphsCombos{
     public static void generate(ArrayList<Integer>[][] edges,int vertex){
         // Could make recursive, easier to understand if this was a while loop
 
+        while(vertex>0){
+
+
         //Stores all unusable edges
         ArrayList<Integer> unusable = new ArrayList<>();
         unusable.add(vertex);
@@ -65,6 +68,7 @@ class generate5GraphsCombos{
             }
             if(!inUnusable) set.add(i);
         }
+        
         //Testing for copy
         // System.out.println(edges[4][0]);
         // System.out.println(edges[4][1]);
@@ -91,21 +95,25 @@ class generate5GraphsCombos{
             }
         }
         printEdges(edges);
+        vertex--;
+    }
         // Neeeds to be added to edges
     }
 
     // Recurssive method
     public static ArrayList<ArrayList<Integer>[]> checkForSums(ArrayList<ArrayList<Integer>[]> allPosList,
     ArrayList<Integer>[] currentIO,  ArrayList<Integer> set, int index){
-        int maxVal = sum(set);  // Max value that can be made with the set may need to change
+        int maxVal = 7;  // Max value that can be made with the set may need to change
+        
         int sumOut = sum(currentIO[0]);
         int sumIn = sum(currentIO[1]);  // Sums of the ins and outs
-        if(sumIn==sumOut && sumIn>0){  // If ins and outs equal, possible match
+        //System.out.println(sumOut);
+        if(sumIn==sumOut && sumIn>0 && sumIn<=maxVal && sumOut<=maxVal){  // If ins and outs equal, possible match
             allPosList.add(currentIO);
             System.out.println("AAAAAA!!!!!!");
-            // System.out.println(currentIO[1]);
+            //System.out.println(currentIO[1]);
         // Recursive case only if not at end of index, and the I/O aren't mroe than max
-        }else if(index<set.size() && sumIn<=maxVal && sumOut<=maxVal){
+        }else if(index<set.size() && sumIn+index<=maxVal && sumOut+index<=maxVal){
             // System.out.println(currentIO[0]);
             // System.out.println(currentIO[1]);
             
