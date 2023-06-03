@@ -79,7 +79,12 @@ class generate5GraphsCombos{
 
         ArrayList<ArrayList<Integer>[]> allPosList = new ArrayList<>();
         allPosList = checkForSums(allPosList, currentIO, set, 0);
-        for(int i=0;i<allPosList.get(0)[0].size();i++){
+        // Put a temp checker here to bypass the first index for index 3
+        int tempi=0;
+        if (vertex==3){
+            tempi=1;
+        }
+        for(int i=0;i<allPosList.get(tempi)[0].size();i++){
             //System.out.println(allPosList.get(0)[0].get(i)+" ");
             //System.out.println(edges[vertex][0].contains(5));
             if(!(edges[vertex][0].contains(allPosList.get(0)[0].get(i)))){
@@ -87,7 +92,7 @@ class generate5GraphsCombos{
                 edges[allPosList.get(0)[0].get(i)][1].add(vertex);
             }
         }
-        for(int i=0;i<allPosList.get(0)[1].size();i++){
+        for(int i=0;i<allPosList.get(tempi)[1].size();i++){
             //System.out.println(allPosList.get(0)[1].get(i)+" ");
             if(!(edges[vertex][1].contains(allPosList.get(0)[1].get(i)))){
                 edges[vertex][1].add(allPosList.get(0)[1].get(i));
