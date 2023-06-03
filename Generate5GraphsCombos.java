@@ -65,7 +65,9 @@ class generate5GraphsCombos{
             }
             if(!inUnusable) set.add(i);
         }
-        ArrayList<Integer>[] currentIO = edges[4];
+        System.out.println(edges[4][0]);
+        System.out.println(edges[4][1]);
+        ArrayList<Integer>[] currentIO = copy(edges[4]);
         
         edges[4][0].add(12);
         System.out.println(currentIO[0]);
@@ -88,12 +90,14 @@ class generate5GraphsCombos{
         if(sumIn==sumOut && sumIn>0){
             allPosList.add(currentIO);
             System.out.println("AAAAAA!!!!!!");
+            System.out.println(currentIO[1]);
         }else if(index<set.size() && sumIn<=maxVal && sumOut<=maxVal){
             //REcursive cases
-            
-            ArrayList<Integer>[] tempIncIn = currentIO;
+            System.out.println(currentIO[0]);
+            System.out.println(currentIO[1]);
+            ArrayList<Integer>[] tempIncIn = copy(currentIO);
             tempIncIn[1].add(set.get(index));
-            ArrayList<Integer>[] tempIncOut = currentIO;
+            ArrayList<Integer>[] tempIncOut = copy(currentIO);
             tempIncOut[0].add(set.get(index));
             index++;
 
@@ -126,6 +130,20 @@ class generate5GraphsCombos{
     //     // Somehow set needs to be added around to find all possible combos
     //     return possibleAddition;
     // }
+
+    public static ArrayList<Integer>[] copy(ArrayList<Integer>[] arr){
+        ArrayList<Integer>[] newArr = new ArrayList[2];
+        for (int j = 0; j < 2; j++) {
+            newArr[j] = new ArrayList<Integer>();
+        }
+
+        for(int i=0;i<arr[0].size();i++){
+            newArr[0].add(arr[0].get(i));
+        }for(int i=0;i<arr[1].size();i++){
+            newArr[1].add(arr[1].get(i));
+        }
+        return newArr;
+    }
 
     //Gets sum of array list
     public static int sum(ArrayList<Integer> arr){
