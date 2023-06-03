@@ -3,7 +3,7 @@ import java.util.*;
 
 class generate5GraphsCombos{
     public static void main (String []args){
-
+        // May actually need to be within another arraylist to track all possible outcomes
         //edges is the whole strucutre
         //edges[1-5] calls a given vertex
         //edges[1-5][0-1] calls ins vs outs, 0 for out and 1 for ins, this is an arraylist
@@ -75,6 +75,22 @@ class generate5GraphsCombos{
 
         ArrayList<ArrayList<Integer>[]> allPosList = new ArrayList<>();
         allPosList = checkForSums(allPosList, currentIO, set, 0);
+        for(int i=0;i<allPosList.get(0)[0].size();i++){
+            //System.out.println(allPosList.get(0)[0].get(i)+" ");
+            //System.out.println(edges[vertex][0].contains(5));
+            if(!(edges[vertex][0].contains(allPosList.get(0)[0].get(i)))){
+                edges[vertex][0].add(allPosList.get(0)[0].get(i));
+                edges[allPosList.get(0)[0].get(i)][1].add(vertex);
+            }
+        }
+        for(int i=0;i<allPosList.get(0)[1].size();i++){
+            //System.out.println(allPosList.get(0)[1].get(i)+" ");
+            if(!(edges[vertex][1].contains(allPosList.get(0)[1].get(i)))){
+                edges[vertex][1].add(allPosList.get(0)[1].get(i));
+                edges[allPosList.get(0)[1].get(i)][0].add(vertex);
+            }
+        }
+        printEdges(edges);
         // Neeeds to be added to edges
     }
 
@@ -109,6 +125,22 @@ class generate5GraphsCombos{
             allPosList =  checkForSums(allPosList, currentIO, set, index);
         }
         return allPosList;
+    }
+
+    public static void printEdges(ArrayList<Integer>[][] edges){
+        //edges[vertex][1].add(allPosList.get(0)[1].get(i));
+        for(int i=1;i<6;i++){
+            System.out.print("Vertex "+i+":");
+            System.out.print(" [i:");
+            for(int j=0;j<edges[i][1].size();j++){
+                System.out.print(" "+edges[i][1].get(j));
+            }
+            System.out.print("]\n          [o:");
+            for(int j=0;j<edges[i][0].size();j++){
+                System.out.print(" "+edges[i][0].get(j));
+            }
+            System.out.println("]");
+        }
     }
 
     // Copies array of arraylists
