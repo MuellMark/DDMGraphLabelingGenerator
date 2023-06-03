@@ -55,15 +55,7 @@ class generate5GraphsCombos{
         }
         //System.out.println(unusable);
         // Need to find all combos and assign them accordingly
-        checkForSums(edges, unusable);
-    }
-
-    public static ArrayList<Integer>[] checkForSums(ArrayList<Integer>[][] edges, ArrayList<Integer> unusable){
-        // Should actually be arraylist of these
-        ArrayList<Integer>[] possibleAddition = new ArrayList[2];
-            for (int j = 0; j < 2; j++) {
-                possibleAddition[j] = new ArrayList<Integer>();
-            }
+        // Gets set of all values that are usable
         ArrayList<Integer> set = new ArrayList<>();
         for(int i=1;i<6;i++){
             boolean inUnusable = false;
@@ -72,11 +64,40 @@ class generate5GraphsCombos{
             }
             if(!inUnusable) set.add(i);
         }
-        System.out.println(set);
-        int maxVal = sum(set);
-        // Somehow set needs to be added around to find all possible combos
-        return possibleAddition;
+
+        ArrayList<Integer>[] currentIO = new ArrayList[2]; // Array of 2 array lists to be added
+            for (int j = 0; j < 2; j++) {
+                currentIO[j] = new ArrayList<Integer>();
+            }
+
+        ArrayList<ArrayList<Integer>[]> allPosList = new ArrayList<>();
+        allPosList = checkForSums(allPosList, currentIO, set, 0);
+        // checkForSums(edges, set);
     }
+
+    public static ArrayList<ArrayList<Integer>[]> checkForSums(ArrayList<ArrayList<Integer>[]> allPosList,
+    ArrayList<Integer>[] currentIO,  ArrayList<Integer> set, int index){
+    
+        return allPosList;
+    }
+    
+    // public static ArrayList<Integer>[] checkForSums(ArrayList<Integer>[][] edges, ArrayList<Integer> set){
+    //     // Array list that stores sets of ins and outs to be added
+    //     ArrayList<ArrayList<Integer>[]> test = new ArrayList<>();
+    //     ArrayList<Integer>[] possibleAdditions = new ArrayList[2]; // Array of 2 array lists to be added
+    //         for (int j = 0; j < 2; j++) {
+    //             possibleAdditions[j] = new ArrayList<Integer>();
+    //         }
+    //     ArrayList<Integer>[] possibleAddition = new ArrayList[2]; // Array of 2 array lists to be added
+    //         for (int j = 0; j < 2; j++) {
+    //             possibleAddition[j] = new ArrayList<Integer>();
+    //         }
+        
+    //     System.out.println(possibleAddition.length);
+    //     int maxVal = sum(set);
+    //     // Somehow set needs to be added around to find all possible combos
+    //     return possibleAddition;
+    // }
 
     //Gets sum of array list
     public static int sum(ArrayList<Integer> arr){
