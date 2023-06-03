@@ -65,8 +65,14 @@ class generate5GraphsCombos{
             }
             if(!inUnusable) set.add(i);
         }
+        ArrayList<Integer> in = new ArrayList<>();
+        Collections.copy(in, edges[4][1]);
+        ArrayList<Integer> out = edges[4][0];
+        Collections.copy(out, edges[4][0]);
         // Collections.copy(list,zoo); // copying the ArrayList zoo to the ArrayList list
-        ArrayList<Integer>[] currentIO = Arrays.copyOf(edges[4],2);
+        ArrayList<Integer>[] currentIO = new ArrayList[2];
+        currentIO[0]=out;
+        currentIO[1]=in;
         
         edges[4][0].add(12);
         System.out.println(currentIO[0]);
