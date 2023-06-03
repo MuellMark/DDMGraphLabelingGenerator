@@ -3,9 +3,6 @@ import java.util.*;
 
 class generate5GraphsCombos{
     public static void main (String []args){
-        // Keeps track of numbers that are not tied to an vertex
-        ArrayList<Integer> freeNums = new ArrayList<Integer>();
-        for(int i=5;i>0;i--) freeNums.add(i);
 
         //edges is the whole strucutre
         //edges[1-5] calls a given vertex
@@ -43,10 +40,14 @@ class generate5GraphsCombos{
         edges[2][1].add(5);
         edges[3][1].add(5);
 
+        // Calls generate
         generate(edges, 4);
     }   
 
     public static void generate(ArrayList<Integer>[][] edges,int vertex){
+        // Could make recursive, easier to understand if this was a while loop
+
+        //Stores all unusable edges
         ArrayList<Integer> unusable = new ArrayList<>();
         unusable.add(vertex);
         for(int i=0;i<edges[vertex][0].size();i++){
@@ -54,9 +55,8 @@ class generate5GraphsCombos{
         }for(int i=0;i<edges[vertex][1].size();i++){
             unusable.add(edges[vertex][1].get(i));
         }
-        //System.out.println(unusable);
         // Need to find all combos and assign them accordingly
-        // Gets set of all values that are usable
+        // Gets set of all values that are usable from the unusable set
         ArrayList<Integer> set = new ArrayList<>();
         for(int i=1;i<6;i++){
             boolean inUnusable = false;
@@ -65,72 +65,53 @@ class generate5GraphsCombos{
             }
             if(!inUnusable) set.add(i);
         }
-        System.out.println(edges[4][0]);
-        System.out.println(edges[4][1]);
-        ArrayList<Integer>[] currentIO = copy(edges[4]);
+        //Testing for copy
+        // System.out.println(edges[4][0]);
+        // System.out.println(edges[4][1]);
+        ArrayList<Integer>[] currentIO = copy(edges[vertex]); // calls my method and makes a copy
         
-        edges[4][0].add(12);
-        System.out.println(currentIO[0]);
-        // ArrayList<Integer>[] currentIO = new ArrayList[2]; // Array of 2 array lists to be added
-        //     for (int j = 0; j < 2; j++) {
-        //         currentIO[j] = new ArrayList<Integer>();
-        //     }
+        //edges[4][0].add(12);
+        //System.out.println(currentIO[0]);
 
         ArrayList<ArrayList<Integer>[]> allPosList = new ArrayList<>();
         allPosList = checkForSums(allPosList, currentIO, set, 0);
-        //System.out.println(currentIO[1]);
-        // checkForSums(edges, set);
+        // Neeeds to be added to edges
     }
 
+    // Recurssive method
     public static ArrayList<ArrayList<Integer>[]> checkForSums(ArrayList<ArrayList<Integer>[]> allPosList,
     ArrayList<Integer>[] currentIO,  ArrayList<Integer> set, int index){
-        int maxVal = sum(set);
+        int maxVal = sum(set);  // Max value that can be made with the set may need to change
         int sumOut = sum(currentIO[0]);
-        int sumIn = sum(currentIO[1]);
-        if(sumIn==sumOut && sumIn>0){
+        int sumIn = sum(currentIO[1]);  // Sums of the ins and outs
+        if(sumIn==sumOut && sumIn>0){  // If ins and outs equal, possible match
             allPosList.add(currentIO);
             System.out.println("AAAAAA!!!!!!");
-            System.out.println(currentIO[1]);
+            // System.out.println(currentIO[1]);
+        // Recursive case only if not at end of index, and the I/O aren't mroe than max
         }else if(index<set.size() && sumIn<=maxVal && sumOut<=maxVal){
-            //REcursive cases
-            System.out.println(currentIO[0]);
-            System.out.println(currentIO[1]);
+            // System.out.println(currentIO[0]);
+            // System.out.println(currentIO[1]);
+            
+            // Adding index to ins
             ArrayList<Integer>[] tempIncIn = copy(currentIO);
             tempIncIn[1].add(set.get(index));
+            // Adding index to outs
             ArrayList<Integer>[] tempIncOut = copy(currentIO);
             tempIncOut[0].add(set.get(index));
             index++;
 
+            // 3 cases, one for ins, one for outs, one for skipping the index
             allPosList =  checkForSums(allPosList, tempIncIn, set, index);
 
             allPosList =  checkForSums(allPosList, tempIncOut, set, index);
 
             allPosList =  checkForSums(allPosList, currentIO, set, index);
-            
-            
-            //System.out.println("made it here ig");
         }
         return allPosList;
     }
-    
-    // public static ArrayList<Integer>[] checkForSums(ArrayList<Integer>[][] edges, ArrayList<Integer> set){
-    //     // Array list that stores sets of ins and outs to be added
-    //     ArrayList<ArrayList<Integer>[]> test = new ArrayList<>();
-    //     ArrayList<Integer>[] possibleAdditions = new ArrayList[2]; // Array of 2 array lists to be added
-    //         for (int j = 0; j < 2; j++) {
-    //             possibleAdditions[j] = new ArrayList<Integer>();
-    //         }
-    //     ArrayList<Integer>[] possibleAddition = new ArrayList[2]; // Array of 2 array lists to be added
-    //         for (int j = 0; j < 2; j++) {
-    //             possibleAddition[j] = new ArrayList<Integer>();
-    //         }
-        
-    //     System.out.println(possibleAddition.length);
-    //     int maxVal = sum(set);
-    //     // Somehow set needs to be added around to find all possible combos
-    //     return possibleAddition;
-    // }
 
+    // Copies array of arraylists
     public static ArrayList<Integer>[] copy(ArrayList<Integer>[] arr){
         ArrayList<Integer>[] newArr = new ArrayList[2];
         for (int j = 0; j < 2; j++) {
