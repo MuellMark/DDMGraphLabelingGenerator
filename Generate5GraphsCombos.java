@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.*;
 
 class generate5GraphsCombos{
     public static void main (String []args){
@@ -64,20 +65,48 @@ class generate5GraphsCombos{
             }
             if(!inUnusable) set.add(i);
         }
-
-        ArrayList<Integer>[] currentIO = new ArrayList[2]; // Array of 2 array lists to be added
-            for (int j = 0; j < 2; j++) {
-                currentIO[j] = new ArrayList<Integer>();
-            }
+        // Collections.copy(list,zoo); // copying the ArrayList zoo to the ArrayList list
+        ArrayList<Integer>[] currentIO = Arrays.copyOf(edges[4],2);
+        
+        edges[4][0].add(12);
+        System.out.println(currentIO[0]);
+        // ArrayList<Integer>[] currentIO = new ArrayList[2]; // Array of 2 array lists to be added
+        //     for (int j = 0; j < 2; j++) {
+        //         currentIO[j] = new ArrayList<Integer>();
+        //     }
 
         ArrayList<ArrayList<Integer>[]> allPosList = new ArrayList<>();
         allPosList = checkForSums(allPosList, currentIO, set, 0);
+        //System.out.println(currentIO[1]);
         // checkForSums(edges, set);
     }
 
     public static ArrayList<ArrayList<Integer>[]> checkForSums(ArrayList<ArrayList<Integer>[]> allPosList,
     ArrayList<Integer>[] currentIO,  ArrayList<Integer> set, int index){
-    
+        int maxVal = sum(set);
+        int sumOut = sum(currentIO[0]);
+        int sumIn = sum(currentIO[1]);
+        if(sumIn==sumOut && sumIn>0){
+            allPosList.add(currentIO);
+            System.out.println("AAAAAA!!!!!!");
+        }else if(index<set.size() && sumIn<=maxVal && sumOut<=maxVal){
+            //REcursive cases
+            
+            ArrayList<Integer>[] tempIncIn = currentIO;
+            tempIncIn[1].add(set.get(index));
+            ArrayList<Integer>[] tempIncOut = currentIO;
+            tempIncOut[0].add(set.get(index));
+            index++;
+
+            allPosList =  checkForSums(allPosList, tempIncIn, set, index);
+
+            allPosList =  checkForSums(allPosList, tempIncOut, set, index);
+
+            allPosList =  checkForSums(allPosList, currentIO, set, index);
+            
+            
+            //System.out.println("made it here ig");
+        }
         return allPosList;
     }
     
@@ -107,4 +136,5 @@ class generate5GraphsCombos{
         }
         return sum;
     }
+    //Need a method to decipher the graphs generated
 }
