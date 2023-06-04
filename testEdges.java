@@ -161,7 +161,7 @@ class testEdges{
         while(vertex>0){
             ArrayList<Integer> set = getUsuableSet(vertex);
             //System.out.println(set);
-            int currentSize=allCombos.size();
+            int currentSize=allCombos.size(); // Need some way to filter all of them, maybe with all already  check having at least 3 vertices
             for(int i=0;i<currentSize;i++){
                 edgeStorage temp = allCombos.get(i).copy();
                 // temp.addPair(4,1);
@@ -179,10 +179,31 @@ class testEdges{
         int sumOuts = current.getSumOuts(vertex);
         // System.out.println(sumIns);
         // System.out.println(sumOuts);
-        //If sums are equal, and greater than zero, and less than max, add it to the arraylist
+        //Add method that checks to make sure ALL vertices are less than max, in class?
+        if(sumIns==sumOuts && sumIns>0 && sumIns<=maxVal){
+            allCombos.add(current); // May need to make a copy
+        }else if(index<set.size()){// Recurssive, may need something with the max
+            edgeStorage addToIns = current.copy();
+            // addToIns.addPair(3,4);
+            addToIns.addPair(set.get(index),vertex);
+            // addToIns.print();
 
+            edgeStorage addToOuts = current.copy();
+            addToOuts.addPair(vertex,set.get(index));
+            // addToIns.addPair(4,3);
+            // addToIns.print();
+            edgeStorage copyCurrent = current.copy(); //Just in case
+            index++;
+
+            checkForSums(allCombos,copyCurrent,set,vertex,index);
+
+            checkForSums(allCombos,addToIns,set,vertex,index);
+
+            checkForSums(allCombos,addToOuts,set,vertex,index);
+
+        }
         //Otherwise, recurssive
-        System.out.println("TODO");
+        //System.out.println("TODO");
     }
     //Gets usable set for a vertex
     public static ArrayList<Integer> getUsuableSet(int vertex){
@@ -196,6 +217,7 @@ class testEdges{
     // Prints arraylist of edgeStorage
     public static void printAllCombos(ArrayList<edgeStorage> AllCombos){
         for(int i=0;i<AllCombos.size();i++){
+            System.out.println("EdgeStorage #"+i+":");
             AllCombos.get(i).print();
         }
     }
