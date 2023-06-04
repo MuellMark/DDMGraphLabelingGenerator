@@ -115,16 +115,38 @@ class edgeStorage{
 class testEdges{
     public static void main(String[]args){
         ArrayList<edgeStorage> AllCombos = new ArrayList<>(); //Will store all possible combos I'm working with
-        edgeStorage test = new edgeStorage(5);
-        test.addPair(5,2);
-        //test.print();
-        ArrayList<Integer> testList = test.getIns(2);
-        //System.out.println("TEST"+testList);
-        edgeStorage test2 = test.copy();
        
-        test.print();
-        test2.print();
-        //System.out.println(test2.size());
+       
+        // edgeStorage test = new edgeStorage(5);
+        // test.addPair(5,2);
+        // //test.print();
+        // ArrayList<Integer> testList = test.getIns(2);
+        // //System.out.println("TEST"+testList);
+        // edgeStorage test2 = test.copy();
+       
+        // test.print();
+        // test2.print();
+        // //System.out.println(test2.size());
+        gen5KickOff(AllCombos);
+        //print(AllCombos.get(0));
+        printAllCombos(AllCombos);
+        
+    }
+
+    public static void gen5KickOff(ArrayList<edgeStorage> AllCombos){
+        edgeStorage gen5Case1 = new edgeStorage(5);
+        gen5Case1.addPair(1, 5);
+        gen5Case1.addPair(4, 5);
+
+        gen5Case1.addPair(5, 2);
+        gen5Case1.addPair(5, 3);
+        AllCombos.add(gen5Case1);
+    }
+
+    public static void printAllCombos(ArrayList<edgeStorage> AllCombos){
+        for(int i=0;i<AllCombos.size();i++){
+            AllCombos.get(i).print();
+        }
     }
 
 }
