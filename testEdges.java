@@ -91,6 +91,20 @@ class edgeStorage{
         addIn(to,from);
     }
 
+    // Gets the sum of the ins at a vertex
+    public int getSumIns(int vertex){
+        int sum=0;
+        for(int i=0;i<edges[vertex][1].size();i++) sum+=edges[vertex][1].get(i);
+        return sum;
+    }
+
+    // Gets the sum of the outs at a vertex
+    public int getSumOuts(int vertex){
+        int sum=0;
+        for(int i=0;i<edges[vertex][0].size();i++) sum+=edges[vertex][0].get(i);
+        return sum;
+    }
+
     // gets how many vertices are in edges, not actual size of the array
     public int size(){
         return edges.length-1;
@@ -152,14 +166,22 @@ class testEdges{
                 edgeStorage temp = allCombos.get(i).copy();
                 // temp.addPair(4,1);
                 // allCombos.add(temp);
-                checkForSums(allCombos, temp, set, 0);
+                checkForSums(allCombos, temp, set, vertex, 0);
             }
             vertex--;
         }
     }
 
     public static void checkForSums(ArrayList<edgeStorage> allCombos, edgeStorage current,
-    ArrayList<Integer> set, int index){
+    ArrayList<Integer> set, int vertex, int index){
+        int maxVal = 7; // Place holder, will need a way to calculate it
+        int sumIns = current.getSumIns(vertex);
+        int sumOuts = current.getSumOuts(vertex);
+        // System.out.println(sumIns);
+        // System.out.println(sumOuts);
+        //If sums are equal, and greater than zero, and less than max, add it to the arraylist
+
+        //Otherwise, recurssive
         System.out.println("TODO");
     }
     //Gets usable set for a vertex
