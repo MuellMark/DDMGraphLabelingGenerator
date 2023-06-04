@@ -28,6 +28,7 @@ class edgeStorage{
         }
     }
     //TODO: getter methods, probably a copy method
+    // Need getters for arraylists of ins and outs
     //prints edges in a easily readable way
     public void print(){
         for(int i=1;i<edges.length;i++){
@@ -42,6 +43,16 @@ class edgeStorage{
             }
             System.out.println("]");
         }
+    }
+
+    // getter for a vertex's inputs
+    public ArrayList<Integer> getIns(int vertex){
+        return edges[vertex][1];
+    }
+
+    // getter for a vertex's outputs
+    public ArrayList<Integer> getOuts(int vertex){
+        return edges[vertex][0];
     }
 
     // Adds element to inputs at vertex
@@ -67,6 +78,7 @@ class testEdges{
         edgeStorage test = new edgeStorage(5);
         test.addPair(5,2);
         test.print();
+        System.out.println(test.getOuts(2));
     }
 
 }
