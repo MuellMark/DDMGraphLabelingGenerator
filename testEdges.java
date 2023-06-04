@@ -28,8 +28,7 @@ class edgeStorage{
             edges[i]=test;
         }
     }
-    //TODO: getter methods, probably a copy method
-    // Need getters for arraylists of ins and outs
+
     //prints edges in a easily readable way
     public void print(){
         for(int i=1;i<edges.length;i++){
@@ -46,7 +45,7 @@ class edgeStorage{
         }
     }
 
-    // getter for a vertex's inputs, makes a copy
+    // Getter for a vertex's inputs, makes a copy, returns arrayList
     public ArrayList<Integer> getIns(int vertex){
         ArrayList<Integer> ins = new ArrayList<Integer>();
         for(int i=0;i<edges[vertex][1].size();i++){
@@ -55,7 +54,7 @@ class edgeStorage{
         return ins;
     }
 
-    // getter for a vertex's outputs, makes a copy
+    // Getter for a vertex's outputs, makes a copy, returns arrayList
     public ArrayList<Integer> getOuts(int vertex){
         //System.out.println("OUT:"+edges[vertex][0]);
         ArrayList<Integer> outs = new ArrayList<Integer>();
@@ -74,12 +73,14 @@ class edgeStorage{
         edges[vertex][0].add(element);
     }
 
+    // Takes in an arraylist of ins, and adds them to then ins one by one 
     public void addInList(int vertex, ArrayList<Integer> ins){
         //for(int i=0;i<edges[vertex][i].size();i++) outs.add(edges[vertex][0].get(i));
         for(int i=0;i<ins.size();i++) edges[vertex][1].add(ins.get(i));
         //edges[vertex][1]=ins;
     }
 
+    // Takes in an arraylist of outss, and adds them to then outss one by one 
     public void addOutList(int vertex, ArrayList<Integer> outs){
         for(int i=0;i<outs.size();i++) edges[vertex][0].add(outs.get(i));
     }
@@ -90,31 +91,24 @@ class edgeStorage{
         addIn(to,from);
     }
 
-    // gets how many vertices are in edges
+    // gets how many vertices are in edges, not actual size of the array
     public int size(){
         return edges.length-1;
     }
 
+    // Returns a copy of the current edgeStorage in question
     public edgeStorage copy(){
         edgeStorage newArr = new edgeStorage(this.size());
         for(int i=1;i<=newArr.size();i++){
             ArrayList<Integer> tempIn = this.getIns(i);
-            //System.out.println(tempIn);
             newArr.addInList(i, tempIn);
 
             ArrayList<Integer> tempOut = this.getOuts(i);
-            // System.out.println("OUT:"+tempOut);
             newArr.addOutList(i, tempOut);
         }
         return newArr;
 
-
     }
-    // public ArrayList<Integer>[][] copy(ArrayList<Integer>[][] current){
-    //     edgeStorage newArr = new edgeStorage(current.length-1);
-    //     for(int i=0;i<current.length;i++);
-    //     return newArr;
-    // }
 
 }
 // Want to move all the code over here for testing
