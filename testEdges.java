@@ -114,7 +114,7 @@ class edgeStorage{
 // Want to move all the code over here for testing
 class testEdges{
     public static void main(String[]args){
-        ArrayList<edgeStorage> AllCombos = new ArrayList<>(); //Will store all possible combos I'm working with
+        ArrayList<edgeStorage> allCombos = new ArrayList<>(); //Will store all possible combos I'm working with
        
        
         // edgeStorage test = new edgeStorage(5);
@@ -127,22 +127,51 @@ class testEdges{
         // test.print();
         // test2.print();
         // //System.out.println(test2.size());
-        gen5KickOff(AllCombos);
-        //print(AllCombos.get(0));
-        printAllCombos(AllCombos);
+        gen5KickOff(allCombos);
+        printAllCombos(allCombos);
         
     }
 
-    public static void gen5KickOff(ArrayList<edgeStorage> AllCombos){
+    public static void gen5KickOff(ArrayList<edgeStorage> allCombos){
         edgeStorage gen5Case1 = new edgeStorage(5);
         gen5Case1.addPair(1, 5);
         gen5Case1.addPair(4, 5);
 
         gen5Case1.addPair(5, 2);
         gen5Case1.addPair(5, 3);
-        AllCombos.add(gen5Case1);
+        allCombos.add(gen5Case1);
+        generate(allCombos, 4);
     }
 
+    public static void generate(ArrayList<edgeStorage> allCombos, int vertex){
+        while(vertex>0){
+            ArrayList<Integer> set = getUsuableSet(vertex);
+            //System.out.println(set);
+            int currentSize=allCombos.size();
+            for(int i=0;i<currentSize;i++){
+                edgeStorage temp = allCombos.get(i).copy();
+                // temp.addPair(4,1);
+                // allCombos.add(temp);
+                checkForSums(allCombos, temp, set, 0);
+            }
+            vertex--;
+        }
+    }
+
+    public static void checkForSums(ArrayList<edgeStorage> allCombos, edgeStorage current,
+    ArrayList<Integer> set, int index){
+        System.out.println("TODO");
+    }
+    //Gets usable set for a vertex
+    public static ArrayList<Integer> getUsuableSet(int vertex){
+        ArrayList<Integer> set = new ArrayList<>();
+        for(int i=1;i<vertex;i++){
+            set.add(i);
+        }
+        return set;
+    }
+
+    // Prints arraylist of edgeStorage
     public static void printAllCombos(ArrayList<edgeStorage> AllCombos){
         for(int i=0;i<AllCombos.size();i++){
             AllCombos.get(i).print();
