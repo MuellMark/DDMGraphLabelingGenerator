@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.*;
 
+// Might make it's own file
 class edgeStorage{
     ArrayList<Integer>[][] edges;
 
@@ -45,14 +46,18 @@ class edgeStorage{
         }
     }
 
-    // getter for a vertex's inputs
+    // getter for a vertex's inputs, makes a copy
     public ArrayList<Integer> getIns(int vertex){
-        return edges[vertex][1];
+        ArrayList<Integer> ins = new ArrayList<Integer>();
+        for(int i=0;i<edges[vertex][1].size();i++) ins.add(edges[vertex][1].get(i));
+        return ins;
     }
 
-    // getter for a vertex's outputs
+    // getter for a vertex's outputs, makes a copy
     public ArrayList<Integer> getOuts(int vertex){
-        return edges[vertex][0];
+        ArrayList<Integer> outs = new ArrayList<Integer>();
+        for(int i=0;i<edges[vertex][0].size();i++) outs.add(edges[vertex][0].get(i));
+        return outs;
     }
 
     // Adds element to inputs at vertex
@@ -70,6 +75,26 @@ class edgeStorage{
         addIn(to,from);
     }
 
+    // gets how many vertices are in edges
+    public int size(){
+        return edges.length-1;
+    }
+
+    public edgeStorage copy(){
+        edgeStorage newArr = new edgeStorage(this.size());
+        for(int i=0;i<newArr.size();i++){
+            //newArr.addIn(i, this.getIns(i));
+        }
+        return newArr;
+
+
+    }
+    // public ArrayList<Integer>[][] copy(ArrayList<Integer>[][] current){
+    //     edgeStorage newArr = new edgeStorage(current.length-1);
+    //     for(int i=0;i<current.length;i++);
+    //     return newArr;
+    // }
+
 }
 // Want to move all the code over here for testing
 class testEdges{
@@ -78,7 +103,11 @@ class testEdges{
         edgeStorage test = new edgeStorage(5);
         test.addPair(5,2);
         test.print();
-        System.out.println(test.getOuts(2));
+        edgeStorage test2 = test.copy();
+        ArrayList<Integer> testList = test.getOuts(2);
+        testList.add(32);
+        test.print();
+        System.out.println(test2.size());
     }
 
 }
