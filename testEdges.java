@@ -148,29 +148,20 @@ class edgeStorage{
     }
 
 }
-// Want to move all the code over here for testing
 class testEdges{
     public static void main(String[]args){
-        ArrayList<edgeStorage> allCombos = new ArrayList<>(); //Will store all possible combos I'm working with
-       
-       
-        // edgeStorage test = new edgeStorage(5);
-        // test.addPair(5,2);
-        // //test.print();
-        // ArrayList<Integer> testList = test.getIns(2);
-        // //System.out.println("TEST"+testList);
-        // edgeStorage test2 = test.copy();
-       
-        // test.print();
-        // test2.print();
-        // //System.out.println(test2.size());
+        // Stores all possible combinations for all recurssive calls
+        ArrayList<edgeStorage> allCombos = new ArrayList<>();
+
+        //Starts generating
         gen5KickOff(allCombos);
-        //printAllCombos(allCombos);
-        //System.out.println(allCombos.get(6).equals(allCombos.get(5)));
+
+        // Filters results and prints all valid graphs
         ArrayList<edgeStorage> filtered = filterResults(allCombos);
         printAllCombos(filtered);
     }
 
+    // will need to be replaced, need a way to calculate this
     public static void gen5KickOff(ArrayList<edgeStorage> allCombos){
         edgeStorage gen5Case1 = new edgeStorage(5);
         gen5Case1.addPair(1, 5);
@@ -182,44 +173,43 @@ class testEdges{
         generate(allCombos, 4);
     }
 
+    // Loops through all recursive calls from checkforSums
     public static void generate(ArrayList<edgeStorage> allCombos, int vertex){
+        // Loops through all vertices
         while(vertex>0){
             ArrayList<Integer> set = getUsuableSet(vertex);
-            //System.out.println(set);
-            int currentSize=allCombos.size(); // Need some way to filter all of them, maybe with all already  check having at least 3 vertices
+            int currentSize=allCombos.size(); // Filter comes at end, may want to add one here 
             for(int i=0;i<currentSize;i++){
-                edgeStorage temp = allCombos.get(i).copy();
-                // temp.addPair(4,1);
-                // allCombos.add(temp);
+                edgeStorage temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
                 checkForSums(allCombos, temp, set, vertex, 0);
             }
             vertex--;
         }
     }
 
+    // Recursive method, finds all possible combinations of edges
     public static void checkForSums(ArrayList<edgeStorage> allCombos, edgeStorage current,
     ArrayList<Integer> set, int vertex, int index){
         int maxVal = 7; // Place holder, will need a way to calculate it
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
-        // System.out.println(sumIns);
-        // System.out.println(sumOuts);
-        //Add method that checks to make sure ALL vertices are less than max, in class?
-        if(sumIns==sumOuts && sumIns>0 && sumIns<=maxVal){
-            allCombos.add(current); // May need to make a copy
-        }else if(index<set.size()){// Recurssive, may need something with the max
-            edgeStorage addToIns = current.copy();
-            // addToIns.addPair(3,4);
-            addToIns.addPair(set.get(index),vertex);
-            // addToIns.print();
 
+        if(sumIns==sumOuts && sumIns>0 && sumIns<=maxVal){
+            allCombos.add(current); 
+        }else if(index<set.size()){// Recurssive, may need something with the max
+            // Creates copy and adds index to ins
+            edgeStorage addToIns = current.copy();
+            addToIns.addPair(set.get(index),vertex);
+
+            // Creates copy and adds index to outs
             edgeStorage addToOuts = current.copy();
             addToOuts.addPair(vertex,set.get(index));
-            // addToIns.addPair(4,3);
-            // addToIns.print();
-            edgeStorage copyCurrent = current.copy(); //Just in case
+            
+            // Creates copy, does not add index
+            edgeStorage copyCurrent = current.copy(); 
             index++;
 
+            //Recursive calls
             checkForSums(allCombos,copyCurrent,set,vertex,index);
 
             checkForSums(allCombos,addToIns,set,vertex,index);
@@ -227,8 +217,6 @@ class testEdges{
             checkForSums(allCombos,addToOuts,set,vertex,index);
 
         }
-        //Otherwise, recurssive
-        //System.out.println("TODO");
     }
     //Gets usable set for a vertex
     public static ArrayList<Integer> getUsuableSet(int vertex){
@@ -247,18 +235,17 @@ class testEdges{
         }
     }
 
+    // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
     public static ArrayList<edgeStorage> filterResults(ArrayList<edgeStorage> allCombos){
-        ArrayList<edgeStorage> filtered = new ArrayList<>();
+        ArrayList<edgeStorage> filtered = new ArrayList<>(); // Stores the filtered results
         for(int i=0;i<allCombos.size();i++){
-            if(allCombos.get(i).isDDMLabeling()){
-                boolean isRepeat= false;
+            if(allCombos.get(i).isDDMLabeling()){ //Checks if it is a DDM
+                boolean isRepeat= false; // Checks if repeat
                 for(int j=0;j<filtered.size();j++){
                     if(filtered.get(j).equals(allCombos.get(i))) isRepeat=true;
                 }
                 if(!isRepeat) filtered.add(allCombos.get(i));
             }
-            //Check if a ddm first
-            //If it is, check all other values in filtered, if not repeat, add
         }
         return filtered;
     }
