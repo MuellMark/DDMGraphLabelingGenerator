@@ -110,6 +110,15 @@ class edgeStorage{
         return edges.length-1;
     }
 
+    // Checks if it is a DDM labeling, not accounting for zeroes
+    public boolean isDDMLabeling(){
+        boolean isDDM = true;
+        for(int i=1;i<size()+1;i++){
+            if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
+            if(getIns(i).size()+getOuts(i).size()<3) isDDM =false; // Will need to change later for 0's
+        }
+        return isDDM;
+    }
     // Returns a copy of the current edgeStorage in question
     public edgeStorage copy(){
         edgeStorage newArr = new edgeStorage(this.size());
@@ -129,7 +138,7 @@ class edgeStorage{
         boolean equals = true;
         if(size()!=other.size()) equals = false;
         else{
-            for(int i=1;i<size();i++){
+            for(int i=1;i<size()+1;i++){
                 if(!getIns(i).equals(other.getIns(i))) equals=false;
                 if(!getIns(i).equals(other.getIns(i))) equals=false;
             }
@@ -156,9 +165,10 @@ class testEdges{
         // test2.print();
         // //System.out.println(test2.size());
         gen5KickOff(allCombos);
-        printAllCombos(allCombos);
-        System.out.println(allCombos.get(6).equals(allCombos.get(5)));
-        
+        //printAllCombos(allCombos);
+        //System.out.println(allCombos.get(6).equals(allCombos.get(5)));
+        ArrayList<edgeStorage> filtered = filterResults(allCombos);
+        printAllCombos(filtered);
     }
 
     public static void gen5KickOff(ArrayList<edgeStorage> allCombos){
@@ -237,4 +247,15 @@ class testEdges{
         }
     }
 
+    public static ArrayList<edgeStorage> filterResults(ArrayList<edgeStorage> allCombos){
+        ArrayList<edgeStorage> filtered = new ArrayList<>();
+        for(int i=0;i<allCombos.size();i++){
+            if(allCombos.get(i).isDDMLabeling()){
+                filtered.add(allCombos.get(i));
+            }
+            //Check if a ddm first
+            //If it is, check all other values in filtered, if not repeat, add
+        }
+        return filtered;
+    }
 }
