@@ -170,6 +170,21 @@ class testEdges{
         gen5Case1.addPair(5, 2);
         gen5Case1.addPair(5, 3);
         allCombos.add(gen5Case1);
+
+        edgeStorage gen5Case2 = new edgeStorage(5);
+        gen5Case2.addPair(4, 5);
+
+        gen5Case2.addPair(5, 1);
+        gen5Case2.addPair(5, 3);
+        allCombos.add(gen5Case2);
+
+        edgeStorage gen5Case3 = new edgeStorage(5);
+        gen5Case3.addPair(3, 5);
+
+        gen5Case3.addPair(5, 1);
+        gen5Case3.addPair(5, 2);
+        allCombos.add(gen5Case3);
+
         generate(allCombos, 4);
     }
 
@@ -177,11 +192,14 @@ class testEdges{
     public static void generate(ArrayList<edgeStorage> allCombos, int vertex){
         // Loops through all vertices
         while(vertex>0){
+            
             ArrayList<Integer> set = getUsuableSet(vertex);
             int currentSize=allCombos.size(); // Filter comes at end, may want to add one here 
+            
             for(int i=0;i<currentSize;i++){
                 edgeStorage temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
                 checkForSums(allCombos, temp, set, vertex, 0);
+                //System.out.println(currentSize);
             }
             vertex--;
         }
