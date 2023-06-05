@@ -164,28 +164,28 @@ class testEdges{
     // will need to be replaced, need a way to calculate this
     public static void gen5KickOff(ArrayList<edgeStorage> allCombos){
         edgeStorage gen5Case1 = new edgeStorage(5);
-        gen5Case1.addPair(1, 5);
-        gen5Case1.addPair(4, 5);
+        // gen5Case1.addPair(1, 5);
+        // gen5Case1.addPair(4, 5);
 
-        gen5Case1.addPair(5, 2);
-        gen5Case1.addPair(5, 3);
+        // gen5Case1.addPair(5, 2);
+        // gen5Case1.addPair(5, 3);
         allCombos.add(gen5Case1);
 
-        edgeStorage gen5Case2 = new edgeStorage(5);
-        gen5Case2.addPair(4, 5);
+        // edgeStorage gen5Case2 = new edgeStorage(5);
+        // gen5Case2.addPair(4, 5);
 
-        gen5Case2.addPair(5, 1);
-        gen5Case2.addPair(5, 3);
-        allCombos.add(gen5Case2);
+        // gen5Case2.addPair(5, 1);
+        // gen5Case2.addPair(5, 3);
+        // allCombos.add(gen5Case2);
 
-        edgeStorage gen5Case3 = new edgeStorage(5);
-        gen5Case3.addPair(3, 5);
+        // edgeStorage gen5Case3 = new edgeStorage(5);
+        // gen5Case3.addPair(3, 5);
 
-        gen5Case3.addPair(5, 1);
-        gen5Case3.addPair(5, 2);
-        allCombos.add(gen5Case3);
+        // gen5Case3.addPair(5, 1);
+        // gen5Case3.addPair(5, 2);
+        // allCombos.add(gen5Case3);
 
-        generate(allCombos, 4);
+        generate(allCombos, 5);
     }
 
     // Loops through all recursive calls from checkforSums
@@ -248,7 +248,7 @@ class testEdges{
     // Prints arraylist of edgeStorage
     public static void printAllCombos(ArrayList<edgeStorage> AllCombos){
         for(int i=0;i<AllCombos.size();i++){
-            System.out.println("EdgeStorage #"+i+":");
+            System.out.println("Graph #"+(i+1)+":");
             AllCombos.get(i).print();
         }
     }
