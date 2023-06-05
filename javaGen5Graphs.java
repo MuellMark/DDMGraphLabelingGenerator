@@ -12,18 +12,19 @@ class javaGen5Graphs{
         }
 
         // Test for generate, will have 4 total edges to add instead of 8
-        int[][] test =new int[2][2];
-        for(int i=0;i<2;i++){
-            for(int j=0;j<2;j++){
-                test[i][j]=1;
-            }
-        }
+        // int[][] test =new int[2][2];
+        // for(int i=0;i<2;i++){
+        //     for(int j=0;j<2;j++){
+        //         test[i][j]=1;
+        //     }
+        // }
+       //int[] startarr = convertTo1D(test); // Will be used as start of generate
 
         //Stores all possible graphs
         ArrayList <int[][]> possibleGraphs= new ArrayList<int[][]>();
-
-        int[] startarr = convertTo1D(test); // Will be used as start of generate
-        generate(possibleGraphs, startarr);
+        int[] test = {1,1,1,1};
+        
+        generate(possibleGraphs, test);
 
         printPossibleGraphs( possibleGraphs);
     }
@@ -132,14 +133,23 @@ class javaGen5Graphs{
                adding=0;
                }   
             }
+            checkForLoops(test);
         }
     }
 
+    // If there is a loop, increment the element in the first position
+    public static void checkForLoops(int[]arr){
+        for(int i=0;i<arr.length;i+=2){
+            if(arr[i]==arr[i+1]){
+                arr[i]++;
+            }
+        }
+    }
     // Checks if all entries are 5 upto a certain index in an arr. If it is, return true
     // else return false, for generate
     public static boolean checkAllFives(int[]arr, int end){
         for(int i=0;i<=end;i++){
-            if(!(arr[i]==5)) return false;
+            if(!(arr[i]>=5)) return false;
         }
         return true;
     }
