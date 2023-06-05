@@ -124,6 +124,20 @@ class edgeStorage{
 
     }
 
+    //Checks if the two edgeStorages are the same
+    public boolean equals(edgeStorage other){
+        boolean equals = true;
+        if(size()!=other.size()) equals = false;
+        else{
+            for(int i=1;i<size();i++){
+                if(!getIns(i).equals(other.getIns(i))) equals=false;
+                if(!getIns(i).equals(other.getIns(i))) equals=false;
+            }
+        }
+        
+        return equals;
+    }
+
 }
 // Want to move all the code over here for testing
 class testEdges{
@@ -143,6 +157,7 @@ class testEdges{
         // //System.out.println(test2.size());
         gen5KickOff(allCombos);
         printAllCombos(allCombos);
+        System.out.println(allCombos.get(6).equals(allCombos.get(5)));
         
     }
 
