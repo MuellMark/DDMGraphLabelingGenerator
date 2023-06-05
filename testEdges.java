@@ -251,7 +251,11 @@ class testEdges{
         ArrayList<edgeStorage> filtered = new ArrayList<>();
         for(int i=0;i<allCombos.size();i++){
             if(allCombos.get(i).isDDMLabeling()){
-                filtered.add(allCombos.get(i));
+                boolean isRepeat= false;
+                for(int j=0;j<filtered.size();j++){
+                    if(filtered.get(j).equals(allCombos.get(i))) isRepeat=true;
+                }
+                if(!isRepeat) filtered.add(allCombos.get(i));
             }
             //Check if a ddm first
             //If it is, check all other values in filtered, if not repeat, add
