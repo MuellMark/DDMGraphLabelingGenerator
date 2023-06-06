@@ -135,7 +135,7 @@ class edgeStorage{
 
     //Sorts the ins and outs of all ins and outs
     // public int sort(){
-    //     Systen.out.println("ASFDG");
+    //     System.out.println("ASFDG");
     //     // for(int i=1;i<size()+1;i++){
     //     //     Collections.sort(edges[0]);
     //     //     Collections.sort(edges[1]);
@@ -168,9 +168,11 @@ class testEdges6Vertex{
         // edgeStorage sortTest = new edgeStorage(6);
         // sortTest.addPair(2, 1);
         // sortTest.sort();
+
         //Starts generating
         gen5KickOff(allCombos);
-        //sortAllCombos(allCombos);
+
+        sortAllCombos(allCombos);
         // Filters results and prints all valid graphs
         ArrayList<edgeStorage> filtered = filterResults(allCombos);
         printAllCombos(filtered);
@@ -204,11 +206,6 @@ class testEdges6Vertex{
         generate(allCombos, 6);
     }
 
-    // public static void sortAllCombos(ArrayList<edgeStorage> allCombos){
-    //     for(int i=0;i<allCombos.size();i++){
-    //         allCombos.get(i).sort();
-    //     }
-    // }
     // Loops through all recursive calls from checkforSums
     public static void generate(ArrayList<edgeStorage> allCombos, int vertex){
         // Loops through all vertices
@@ -287,5 +284,21 @@ class testEdges6Vertex{
             }
         }
         return filtered;
+    }
+
+    public static void sortAllCombos(ArrayList<edgeStorage> allCombos){
+    //     System.out.println("ASFDG");
+    // //     // for(int i=1;i<size()+1;i++){
+    // //     //     Collections.sort(edges[0]);
+    // //     //     Collections.sort(edges[1]);
+    // //     // }
+    // //     return 2;
+        for(int i=0;i<allCombos.size();i++){
+            for(int j=1;j<allCombos.get(i).size();j++){
+                //System.out.println(allCombos.get(j).edges[1][1]);
+                Collections.sort(allCombos.get(i).edges[j][0]);
+                Collections.sort(allCombos.get(i).edges[j][1]);
+            }
+        }
     }
 }
