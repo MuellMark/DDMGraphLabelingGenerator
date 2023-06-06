@@ -119,6 +119,7 @@ class edgeStorage{
         }
         return isDDM;
     }
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorage copy(){
         edgeStorage newArr = new edgeStorage(this.size());

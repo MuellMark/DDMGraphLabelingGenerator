@@ -133,6 +133,16 @@ class edgeStorage{
 
     }
 
+    //Sorts the ins and outs of all ins and outs
+    // public int sort(){
+    //     Systen.out.println("ASFDG");
+    //     // for(int i=1;i<size()+1;i++){
+    //     //     Collections.sort(edges[0]);
+    //     //     Collections.sort(edges[1]);
+    //     // }
+    //     return 2;
+    // }
+
     //Checks if the two edgeStorages are the same
     public boolean equals(edgeStorage other){
         boolean equals = true;
@@ -147,15 +157,20 @@ class edgeStorage{
         return equals;
     }
 
+    
+
 }
 class testEdges6Vertex{
     public static void main(String[]args){
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
 
+        // edgeStorage sortTest = new edgeStorage(6);
+        // sortTest.addPair(2, 1);
+        // sortTest.sort();
         //Starts generating
         gen5KickOff(allCombos);
-
+        //sortAllCombos(allCombos);
         // Filters results and prints all valid graphs
         ArrayList<edgeStorage> filtered = filterResults(allCombos);
         printAllCombos(filtered);
@@ -189,6 +204,11 @@ class testEdges6Vertex{
         generate(allCombos, 6);
     }
 
+    // public static void sortAllCombos(ArrayList<edgeStorage> allCombos){
+    //     for(int i=0;i<allCombos.size();i++){
+    //         allCombos.get(i).sort();
+    //     }
+    // }
     // Loops through all recursive calls from checkforSums
     public static void generate(ArrayList<edgeStorage> allCombos, int vertex){
         // Loops through all vertices
