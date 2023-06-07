@@ -156,6 +156,20 @@ class edge6Storage{
         return equals;
     }
 
+        //Checks if the two edgeStorages are the same
+        public boolean isInverse(edge6Storage other){
+            boolean equals = true;
+            if(size()!=other.size()) equals = false;
+            else{
+                for(int i=1;i<size()+1;i++){
+                    if(!getIns(i).equals(other.getOuts(i))) equals=false;
+                    if(!getOuts(i).equals(other.getIns(i))) equals=false;
+                }
+            }
+            
+            return equals;
+        }
+
     
 
 }
@@ -164,9 +178,9 @@ class testEdges6Vertex{
         // Stores all possible combinations for all recurssive calls
         ArrayList<edge6Storage> allCombos = new ArrayList<>();
 
-        edge6Storage sortTest = new edge6Storage(6);
-        sortTest.addPair(2, 1);
-        sortTest.sort();
+        // edge6Storage sortTest = new edge6Storage(6);
+        // sortTest.addPair(2, 1);
+        // sortTest.sort();
 
         //Starts generating
         gen5KickOff(allCombos);
@@ -174,7 +188,8 @@ class testEdges6Vertex{
         sortAllCombos(allCombos);
         // Filters results and prints all valid graphs
         ArrayList<edge6Storage> filtered = filterResults(allCombos);
-        printAllCombos(filtered);
+        ArrayList<edge6Storage> inverseFiltered = filterInverseResults(filtered);
+        printAllCombos(inverseFiltered);
     }
 
     // will need to be replaced, need a way to calculate this
@@ -285,13 +300,19 @@ class testEdges6Vertex{
         return filtered;
     }
 
+    public static ArrayList<edge6Storage> filterInverseResults(ArrayList<edge6Storage> allCombos){
+        ArrayList<edge6Storage> filtered = new ArrayList<>(); // Stores the filtered results
+        for(int i=0;i<allCombos.size();i++){
+            boolean isRepeat= false; // Checks if repeat
+            for(int j=0;j<filtered.size();j++){
+                if(filtered.get(j).isInverse(allCombos.get(i))) isRepeat=true;
+            }
+            if(!isRepeat) filtered.add(allCombos.get(i));
+        }
+        return filtered;
+    }
+
     public static void sortAllCombos(ArrayList<edge6Storage> allCombos){
-    //     System.out.println("ASFDG");
-    // //     // for(int i=1;i<size()+1;i++){
-    // //     //     Collections.sort(edges[0]);
-    // //     //     Collections.sort(edges[1]);
-    // //     // }
-    // //     return 2;
         for(int i=0;i<allCombos.size();i++){
             allCombos.get(i).sort();
         }
