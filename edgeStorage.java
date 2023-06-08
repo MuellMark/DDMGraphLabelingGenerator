@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.*;
 
-// Might make it's own file
 class edgeStorage{
     ArrayList<Integer>[][] edges;
 
@@ -79,7 +78,6 @@ class edgeStorage{
         for(int i=0;i<ins.size();i++) edges[vertex][1].add(ins.get(i));
         //edges[vertex][1]=ins;
     }
-
     // Takes in an arraylist of outss, and adds them to then outss one by one 
     public void addOutList(int vertex, ArrayList<Integer> outs){
         for(int i=0;i<outs.size();i++) edges[vertex][0].add(outs.get(i));
@@ -97,7 +95,6 @@ class edgeStorage{
         for(int i=0;i<edges[vertex][1].size();i++) sum+=edges[vertex][1].get(i);
         return sum;
     }
-
     // Gets the sum of the outs at a vertex
     public int getSumOuts(int vertex){
         int sum=0;
@@ -119,6 +116,7 @@ class edgeStorage{
         }
         return isDDM;
     }
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorage copy(){
         edgeStorage newArr = new edgeStorage(this.size());
@@ -152,11 +150,10 @@ class edgeStorage{
                 if(!getIns(i).equals(other.getIns(i))) equals=false;
             }
         }
-        
         return equals;
     }
 
-        //Checks if the two edgeStorages are the same
+        //Checks if the two edgeStorages are the exact same
         public boolean isInverse(edgeStorage other){
             boolean equals = true;
             if(size()!=other.size()) equals = false;
@@ -169,7 +166,4 @@ class edgeStorage{
             
             return equals;
         }
-
-    
-
 }
