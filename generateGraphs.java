@@ -3,17 +3,24 @@ import java.util.*;
 
 class generateGraphs{
     public static void main(String[]args){
+        int numVertices =6; // Change for # of Vertices
+
         // Stores all possible combinations for all recurssive calls
-        int numVertices = 6; // Change for # of Vertices
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
+
+        //Statring vertex is all 0's
         edgeStorage startGraph = new edgeStorage(numVertices);
         allCombos.add(startGraph);
 
-        generate(allCombos, numVertices);
-        sortAllCombos(allCombos);
-        // Filters results and prints all valid graphs
-        ArrayList<edgeStorage> filtered = filterResults(allCombos);
+        generate(allCombos, numVertices); // Starts generating graphs
+
+        sortAllCombos(allCombos); // Sort values for easier comparing
+        ArrayList<edgeStorage> filtered = filterResults(allCombos); //Removes repeats & invalid graphs
+
+        // Removes inverses, comment out if inverses wanted
         ArrayList<edgeStorage> inverseFiltered = filterInverseResults(filtered);
+
+        // Prints all graphs, need to change if inverses wanted
         printAllCombos(inverseFiltered);
     }
 
@@ -23,12 +30,11 @@ class generateGraphs{
         while(vertex>0){
             
             ArrayList<Integer> set = getUsuableSet(vertex);
-            int currentSize=allCombos.size(); // Filter comes at end, may want to add one here 
+            int currentSize=allCombos.size(); // Makes sure not an infinite loop, only checks current graphs
             
             for(int i=0;i<currentSize;i++){
                 edgeStorage temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
                 checkForSums(allCombos, temp, set, vertex, 0);
-                //System.out.println(currentSize);
             }
             vertex--;
         }
@@ -37,7 +43,7 @@ class generateGraphs{
     // Recursive method, finds all possible combinations of edges
     public static void checkForSums(ArrayList<edgeStorage> allCombos, edgeStorage current,
     ArrayList<Integer> set, int vertex, int index){
-        int maxVal = 10; // Place holder, will need a way to calculate it
+        int maxVal = 10; // Place holder, will need a way to calculate it, may be able to remove it
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
@@ -97,10 +103,11 @@ class generateGraphs{
         return filtered;
     }
 
+    // If a graph is just the inverse of another graph, not kept
     public static ArrayList<edgeStorage> filterInverseResults(ArrayList<edgeStorage> allCombos){
         ArrayList<edgeStorage> filtered = new ArrayList<>(); // Stores the filtered results
         for(int i=0;i<allCombos.size();i++){
-            boolean isRepeat= false; // Checks if repeat
+            boolean isRepeat= false; // Checks if inverse
             for(int j=0;j<filtered.size();j++){
                 if(filtered.get(j).isInverse(allCombos.get(i))) isRepeat=true;
             }
@@ -109,6 +116,7 @@ class generateGraphs{
         return filtered;
     }
 
+    // calls sort on every graph in allCombos
     public static void sortAllCombos(ArrayList<edgeStorage> allCombos){
         for(int i=0;i<allCombos.size();i++){
             allCombos.get(i).sort();
