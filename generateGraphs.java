@@ -11,41 +11,13 @@ class testEdges6Vertex{
         // sortTest.sort();
 
         //Starts generating
-        gen5KickOff(allCombos);
-
+        //gen5KickOff(allCombos);
+        generate(allCombos, 6);
         sortAllCombos(allCombos);
         // Filters results and prints all valid graphs
         ArrayList<edgeStorage> filtered = filterResults(allCombos);
         ArrayList<edgeStorage> inverseFiltered = filterInverseResults(filtered);
         printAllCombos(inverseFiltered);
-    }
-
-    // will need to be replaced, need a way to calculate this
-    public static void gen5KickOff(ArrayList<edgeStorage> allCombos){
-        edgeStorage gen5Case1 = new edgeStorage(6);
-        gen5Case1.print();
-        // gen5Case1.addPair(1, 5);
-        // gen5Case1.addPair(4, 5);
-
-        // gen5Case1.addPair(5, 2);
-        // gen5Case1.addPair(5, 3);
-        allCombos.add(gen5Case1);
-
-        // edgeStorage gen5Case2 = new edgeStorage(5);
-        // gen5Case2.addPair(4, 5);
-
-        // gen5Case2.addPair(5, 1);
-        // gen5Case2.addPair(5, 3);
-        // allCombos.add(gen5Case2);
-
-        // edgeStorage gen5Case3 = new edgeStorage(5);
-        // gen5Case3.addPair(3, 5);
-
-        // gen5Case3.addPair(5, 1);
-        // gen5Case3.addPair(5, 2);
-        // allCombos.add(gen5Case3);
-
-        generate(allCombos, 6);
     }
 
     // Loops through all recursive calls from checkforSums
