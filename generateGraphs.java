@@ -1,18 +1,15 @@
 import java.util.ArrayList;
 import java.util.*;
 
-class testEdges6Vertex{
+class generateGraphs{
     public static void main(String[]args){
         // Stores all possible combinations for all recurssive calls
+        int numVertices = 6; // Change for # of Vertices
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
+        edgeStorage startGraph = new edgeStorage(numVertices);
+        allCombos.add(startGraph);
 
-        // edge6Storage sortTest = new edge6Storage(6);
-        // sortTest.addPair(2, 1);
-        // sortTest.sort();
-
-        //Starts generating
-        //gen5KickOff(allCombos);
-        generate(allCombos, 6);
+        generate(allCombos, numVertices);
         sortAllCombos(allCombos);
         // Filters results and prints all valid graphs
         ArrayList<edgeStorage> filtered = filterResults(allCombos);
