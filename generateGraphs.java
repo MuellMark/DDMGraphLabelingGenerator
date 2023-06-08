@@ -3,7 +3,7 @@ import java.util.*;
 
 class generateGraphs{
     public static void main(String[]args){
-        int numVertices =6; // Change for # of Vertices
+        int numVertices =5; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
@@ -43,11 +43,11 @@ class generateGraphs{
     // Recursive method, finds all possible combinations of edges
     public static void checkForSums(ArrayList<edgeStorage> allCombos, edgeStorage current,
     ArrayList<Integer> set, int vertex, int index){
-        int maxVal = 10; // Place holder, will need a way to calculate it, may be able to remove it
+        //int maxVal = 10; // Place holder, will need a way to calculate it, may be able to remove it
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
-        if(sumIns==sumOuts && sumIns>0 && sumIns<=maxVal){
+        if(sumIns==sumOuts && sumIns>0 ){
             allCombos.add(current); 
         }else if(index<set.size()){// Recurssive, may need something with the max
             // Creates copy and adds index to ins
