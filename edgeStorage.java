@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.*;
 
 // Might make it's own file
-class edge5Storage{
+class edgeStorage{
     ArrayList<Integer>[][] edges;
 
     // Constructor to specify size
-    public edge5Storage(int size){
+    public edgeStorage(int size){
         size++;
         edges = new ArrayList[size][2];
         for(int i=1;i<size;i++){
@@ -18,7 +18,7 @@ class edge5Storage{
         }
     }
     //Default Constructor
-    public edge5Storage(){
+    public edgeStorage(){
         edges = new ArrayList[6][2];
         for(int i=1;i<6;i++){
             ArrayList<Integer>[] test = new ArrayList[2];
@@ -119,10 +119,9 @@ class edge5Storage{
         }
         return isDDM;
     }
-
     // Returns a copy of the current edgeStorage in question
-    public edge5Storage copy(){
-        edge5Storage newArr = new edge5Storage(this.size());
+    public edgeStorage copy(){
+        edgeStorage newArr = new edgeStorage(this.size());
         for(int i=1;i<=newArr.size();i++){
             ArrayList<Integer> tempIn = this.getIns(i);
             newArr.addInList(i, tempIn);
@@ -134,8 +133,17 @@ class edge5Storage{
 
     }
 
+    //Sorts the ins and outs of all ins and outs
+    public void sort(){
+        //System.out.println("ASFDG");
+        for(int i=1;i<size()+1;i++){
+            Collections.sort(edges[i][0]);
+            Collections.sort(edges[i][1]);
+        }
+    }
+
     //Checks if the two edgeStorages are the same
-    public boolean equals(edge5Storage other){
+    public boolean equals(edgeStorage other){
         boolean equals = true;
         if(size()!=other.size()) equals = false;
         else{
@@ -148,124 +156,20 @@ class edge5Storage{
         return equals;
     }
 
-}
-class testEdges{
-    public static void main(String[]args){
-        // Stores all possible combinations for all recurssive calls
-        ArrayList<edge5Storage> allCombos = new ArrayList<>();
-
-        //Starts generating
-        gen5KickOff(allCombos);
-
-        // Filters results and prints all valid graphs
-        ArrayList<edge5Storage> filtered = filterResults(allCombos);
-        printAllCombos(filtered);
-    }
-
-    // will need to be replaced, need a way to calculate this
-    public static void gen5KickOff(ArrayList<edge5Storage> allCombos){
-        edge5Storage gen5Case1 = new edge5Storage(5);
-        // gen5Case1.addPair(1, 5);
-        // gen5Case1.addPair(4, 5);
-
-        // gen5Case1.addPair(5, 2);
-        // gen5Case1.addPair(5, 3);
-        allCombos.add(gen5Case1);
-
-        // edgeStorage gen5Case2 = new edgeStorage(5);
-        // gen5Case2.addPair(4, 5);
-
-        // gen5Case2.addPair(5, 1);
-        // gen5Case2.addPair(5, 3);
-        // allCombos.add(gen5Case2);
-
-        // edgeStorage gen5Case3 = new edgeStorage(5);
-        // gen5Case3.addPair(3, 5);
-
-        // gen5Case3.addPair(5, 1);
-        // gen5Case3.addPair(5, 2);
-        // allCombos.add(gen5Case3);
-
-        generate(allCombos, 5);
-    }
-
-    // Loops through all recursive calls from checkforSums
-    public static void generate(ArrayList<edge5Storage> allCombos, int vertex){
-        // Loops through all vertices
-        while(vertex>0){
-            
-            ArrayList<Integer> set = getUsuableSet(vertex);
-            int currentSize=allCombos.size(); // Filter comes at end, may want to add one here 
-            
-            for(int i=0;i<currentSize;i++){
-                edge5Storage temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
-                checkForSums(allCombos, temp, set, vertex, 0);
-                //System.out.println(currentSize);
-            }
-            vertex--;
-        }
-    }
-
-    // Recursive method, finds all possible combinations of edges
-    public static void checkForSums(ArrayList<edge5Storage> allCombos, edge5Storage current,
-    ArrayList<Integer> set, int vertex, int index){
-        int maxVal = 7; // Place holder, will need a way to calculate it
-        int sumIns = current.getSumIns(vertex);
-        int sumOuts = current.getSumOuts(vertex);
-
-        if(sumIns==sumOuts && sumIns>0 && sumIns<=maxVal){
-            allCombos.add(current); 
-        }else if(index<set.size()){// Recurssive, may need something with the max
-            // Creates copy and adds index to ins
-            edge5Storage addToIns = current.copy();
-            addToIns.addPair(set.get(index),vertex);
-
-            // Creates copy and adds index to outs
-            edge5Storage addToOuts = current.copy();
-            addToOuts.addPair(vertex,set.get(index));
-            
-            // Creates copy, does not add index
-            edge5Storage copyCurrent = current.copy(); 
-            index++;
-
-            //Recursive calls
-            checkForSums(allCombos,copyCurrent,set,vertex,index);
-
-            checkForSums(allCombos,addToIns,set,vertex,index);
-
-            checkForSums(allCombos,addToOuts,set,vertex,index);
-
-        }
-    }
-    //Gets usable set for a vertex
-    public static ArrayList<Integer> getUsuableSet(int vertex){
-        ArrayList<Integer> set = new ArrayList<>();
-        for(int i=1;i<vertex;i++){
-            set.add(i);
-        }
-        return set;
-    }
-
-    // Prints arraylist of edgeStorage
-    public static void printAllCombos(ArrayList<edge5Storage> AllCombos){
-        for(int i=0;i<AllCombos.size();i++){
-            System.out.println("Graph #"+(i+1)+":");
-            AllCombos.get(i).print();
-        }
-    }
-
-    // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
-    public static ArrayList<edge5Storage> filterResults(ArrayList<edge5Storage> allCombos){
-        ArrayList<edge5Storage> filtered = new ArrayList<>(); // Stores the filtered results
-        for(int i=0;i<allCombos.size();i++){
-            if(allCombos.get(i).isDDMLabeling()){ //Checks if it is a DDM
-                boolean isRepeat= false; // Checks if repeat
-                for(int j=0;j<filtered.size();j++){
-                    if(filtered.get(j).equals(allCombos.get(i))) isRepeat=true;
+        //Checks if the two edgeStorages are the same
+        public boolean isInverse(edgeStorage other){
+            boolean equals = true;
+            if(size()!=other.size()) equals = false;
+            else{
+                for(int i=1;i<size()+1;i++){
+                    if(!getIns(i).equals(other.getOuts(i))) equals=false;
+                    if(!getOuts(i).equals(other.getIns(i))) equals=false;
                 }
-                if(!isRepeat) filtered.add(allCombos.get(i));
             }
+            
+            return equals;
         }
-        return filtered;
-    }
+
+    
+
 }
