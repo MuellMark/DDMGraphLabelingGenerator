@@ -24,7 +24,7 @@ class generateGraphs{
         ArrayList<edgeStorage> inverseFiltered = filterInverseResults(filtered);
 
         // Prints all graphs, need to change if inverses wanted
-        printAllCombos(inverseFiltered);
+        printAllAdjMatrix(inverseFiltered);
         writeAllCombosToFile(inverseFiltered);
     }
 
@@ -91,6 +91,14 @@ class generateGraphs{
             AllCombos.get(i).print();
         }
     }
+
+        // Prints arraylist of edgeStorage
+        public static void printAllAdjMatrix(ArrayList<edgeStorage> AllCombos){
+            for(int i=0;i<AllCombos.size();i++){
+                System.out.println("Graph #"+(i+1)+":");
+                AllCombos.get(i).printAdjMatrix();
+            }
+        }
 
     // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
     public static ArrayList<edgeStorage> filterResults(ArrayList<edgeStorage> allCombos){

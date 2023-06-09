@@ -189,8 +189,23 @@ class edgeStorage{
               } catch (IOException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
-              }
+            }
 
             
+    }
+
+    public void printAdjMatrix(){
+        for(int i=1;i<=size();i++){
+            String tempStr = "";
+            for(int j=1;j<=size();j++){
+                int found = 0;
+                for(int k =0;k<edges[i][1].size();k++){
+                    if(edges[i][1].get(k)==j) found=1;
+                }
+                tempStr+= " "+found+",";
+            }
+            tempStr=tempStr.substring(0,tempStr.length()-1);
+            System.out.println(tempStr);
         }
+    }
 }
