@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.*;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.FileWriter;
 
 class edgeStorage{
     ArrayList<Integer>[][] edges;
@@ -165,5 +168,29 @@ class edgeStorage{
             }
             
             return equals;
+    }
+        //prints edges in a easily readable way
+        public void writeToFile(FileWriter myWriter){
+            try {
+                //FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+
+                for(int i=1;i<edges.length;i++){
+                    myWriter.write("Vertex "+i+":");
+                    myWriter.write(" [i:");
+                    for(int j=0;j<edges[i][1].size();j++){
+                        myWriter.write(" "+edges[i][1].get(j));
+                    }
+                    myWriter.write("]\n          [o:");
+                    for(int j=0;j<edges[i][0].size();j++){
+                        myWriter.write(" "+edges[i][0].get(j));
+                    }
+                    myWriter.write("]\n");
+                }
+              } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+              }
+
+            
         }
 }
