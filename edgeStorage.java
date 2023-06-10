@@ -193,7 +193,7 @@ class edgeStorage{
 
             
     }
-
+    // Prints as adjacency matrix for easy plug ins
     public void printAdjMatrix(){
         for(int i=1;i<=size();i++){
             String tempStr = "";
@@ -208,4 +208,40 @@ class edgeStorage{
             System.out.println(tempStr);
         }
     }
+
+            //prints edges in adjacency matrix to file
+            public void writeToFileAdjMat(FileWriter myWriter){
+                try {
+                    //FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+                    for(int i=1;i<=size();i++){
+                        String tempStr = "";
+                        for(int j=1;j<=size();j++){
+                            int found = 0;
+                            for(int k =0;k<edges[i][1].size();k++){
+                                if(edges[i][1].get(k)==j) found=1;
+                            }
+                            tempStr+= " "+found+",";
+                        }
+                        tempStr=tempStr.substring(0,tempStr.length()-1);
+                        myWriter.write(tempStr+"\n");
+                    }
+                    // for(int i=1;i<edges.length;i++){
+                    //     myWriter.write("Vertex "+i+":");
+                    //     myWriter.write(" [i:");
+                    //     for(int j=0;j<edges[i][1].size();j++){
+                    //         myWriter.write(" "+edges[i][1].get(j));
+                    //     }
+                    //     myWriter.write("]\n          [o:");
+                    //     for(int j=0;j<edges[i][0].size();j++){
+                    //         myWriter.write(" "+edges[i][0].get(j));
+                    //     }
+                    //     myWriter.write("]\n");
+                    // }
+                  } catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+    
+                
+        }
 }

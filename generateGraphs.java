@@ -25,7 +25,7 @@ class generateGraphs{
 
         // Prints all graphs, need to change if inverses wanted
         printAllAdjMatrix(inverseFiltered);
-        writeAllCombosToFile(inverseFiltered);
+        writeAllCombosToFileAdjMatrix(inverseFiltered);
     }
 
     // Loops through all recursive calls from checkforSums
@@ -149,7 +149,26 @@ class generateGraphs{
               } catch (IOException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
-              }
+            }
+            
+        
+    }
+
+    // Prints arraylist of edgeStorage
+    public static void writeAllCombosToFileAdjMatrix(ArrayList<edgeStorage> AllCombos){
+        try {
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+            for(int i=0;i<AllCombos.size();i++){
+            
+                myWriter.write("\nGraph #"+(i+1)+":\n");
+                
+                AllCombos.get(i).writeToFileAdjMat(myWriter);
+            }
+            myWriter.close();
+              } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
             
         
     }
