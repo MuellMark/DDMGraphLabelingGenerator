@@ -11,7 +11,7 @@ class generateGraphs{
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
 
-        //Statring vertex is all 0's
+        //Starting vertex is all 0's
         edgeStorage startGraph = new edgeStorage(numVertices);
         allCombos.add(startGraph);
 
