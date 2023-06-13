@@ -43,6 +43,7 @@ G.add_edges_from([(1, 2), (1, 3),(2,5),(3,5),(4,2),(4,3),(5,1),(5,4)])
 #G.visualize()
 
 #G = nx.complete_graph(5)
+plt.title("5 Vertex Graph #[number]")
 nx.draw(G,node_color='white',with_labels=True)
 plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
 plt.clf()
