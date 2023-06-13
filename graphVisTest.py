@@ -3,44 +3,26 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
+graphNum=1
 
-# Defining a Class
-class GraphVisualization:
-	def __init__(self):
-		
-		# visual is a list which stores all
-		# the set of edges that constitutes a
-		# graph
-		self.visual = []
-		
-	# addEdge function inputs the vertices of an
-	# edge and appends it to the visual list
-	def addEdge(self, a, b):
-		temp = [a, b]
-		self.visual.append(temp)
-		
-	# In visualize function G is an object of
-	# class Graph given by networkx G.add_edges_from(visual)
-	# creates a graph with a given list
-	# nx.draw_networkx(G) - plots the graph
-	# plt.show() - displays the graph
-	def visualize(self):
-		G = nx.Graph()
-		G.add_edges_from(self.visual)
-		nx.draw_networkx(G)
-		plt.show()
-
+testGraphs = open("/Users/markymarkscomputer/Desktop/Untitled/graphVisTestGraph.txt",'r')
+contents = testGraphs.readlines()
+for line in contents:
+    index =0
+    while index<len(line):
+        #Need functionality for naming maybe
+        if line[index].isdigit():
+            ifrom=int(line[index])
+            index+=2
+            ito=int(line[index])
+            tempTuple = (ifrom,ito)
+            print(tempTuple)
+            #From here, add it to a list, to the be added to G
+        index+=1
 # Driver code
 G = nx.DiGraph()
 list=[(1, 2)]
 G.add_edges_from([(1, 2), (1, 3),(2,5),(3,5),(4,2),(4,3),(5,1),(5,4)])
-# G.addEdge(0, 2)
-# G.addEdge(1, 2)
-# G.addEdge(1, 3)
-# G.addEdge(5, 3)
-# G.addEdge(3, 4)
-# G.addEdge(1, 0)
-#G.visualize()
 
 #G = nx.complete_graph(5)
 plt.title("5 Vertex Graph #[number]")
