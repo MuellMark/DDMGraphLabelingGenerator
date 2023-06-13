@@ -32,7 +32,6 @@ class GraphVisualization:
 
 # Driver code
 G = nx.Graph()
-G.add_nodes_from([(4, {"color": "red"}),2])
 G.add_edges_from([(1, 2), (1, 3)])
 # G.addEdge(0, 2)
 # G.addEdge(1, 2)
@@ -43,5 +42,5 @@ G.add_edges_from([(1, 2), (1, 3)])
 #G.visualize()
 
 #G = nx.complete_graph(5)
-nx.draw(G)
+nx.draw(G,node_color='white',with_labels=True)
 plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
