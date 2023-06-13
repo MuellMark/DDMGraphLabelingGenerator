@@ -22,10 +22,17 @@ for line in contents:
             tempList.append(tempTuple)
         index+=1
 
+    G.add_node(1,pos=(2,1))
+    G.add_node(2,pos=(4,1))
+    G.add_node(3,pos=(1,2))
+    G.add_node(4,pos=(5,2))
+    G.add_node(5,pos=(3,3))
+    pos=nx.get_node_attributes(G,'pos')
+
     print(tempList)
     G.add_edges_from(tempList)
     plt.title("5 Vertex Graph #[number]")
-    nx.draw(G,node_color='white',with_labels=True)
+    nx.draw(G,pos,node_color='white',with_labels=True,)
     plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
     plt.clf()
     G.clear()
