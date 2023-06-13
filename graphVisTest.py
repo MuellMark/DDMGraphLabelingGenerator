@@ -32,7 +32,8 @@ class GraphVisualization:
 
 # Driver code
 G = nx.DiGraph()
-G.add_edges_from([(1, 2), (1, 3)])
+list=[(1, 2)]
+G.add_edges_from([(1, 2), (1, 3),(2,5),(3,5),(4,2),(4,3),(5,1),(5,4)])
 # G.addEdge(0, 2)
 # G.addEdge(1, 2)
 # G.addEdge(1, 3)
@@ -44,3 +45,8 @@ G.add_edges_from([(1, 2), (1, 3)])
 #G = nx.complete_graph(5)
 nx.draw(G,node_color='white',with_labels=True)
 plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
+plt.clf()
+G.clear()
+G.add_edges_from(list)
+nx.draw(G,node_color='white',with_labels=True)
+plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest2.png")
