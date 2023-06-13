@@ -9,27 +9,38 @@ testGraphs = open("/Users/markymarkscomputer/Desktop/Untitled/graphVisTestGraph.
 contents = testGraphs.readlines()
 for line in contents:
     index =0
+    tempList=[]
+    G = nx.DiGraph()
     while index<len(line):
         #Need functionality for naming maybe
+        
         if line[index].isdigit():
             ifrom=int(line[index])
             index+=2
             ito=int(line[index])
             tempTuple = (ifrom,ito)
-            print(tempTuple)
-            #From here, add it to a list, to the be added to G
+            tempList.append(tempTuple)
         index+=1
-# Driver code
-G = nx.DiGraph()
-list=[(1, 2)]
-G.add_edges_from([(1, 2), (1, 3),(2,5),(3,5),(4,2),(4,3),(5,1),(5,4)])
 
-#G = nx.complete_graph(5)
-plt.title("5 Vertex Graph #[number]")
-nx.draw(G,node_color='white',with_labels=True)
-plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
-plt.clf()
-G.clear()
-G.add_edges_from(list)
-nx.draw(G,node_color='white',with_labels=True)
-plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest2.png")
+    print(tempList)
+    G.add_edges_from(tempList)
+    plt.title("5 Vertex Graph #[number]")
+    nx.draw(G,node_color='white',with_labels=True)
+    plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
+    plt.clf()
+    G.clear()
+    #From here, add it to a list, to the be added to G
+
+#G = nx.DiGraph()
+list=[(1, 2)]
+# G.add_edges_from([(1, 2), (1, 3),(2,5),(3,5),(4,2),(4,3),(5,1),(5,4)])
+
+# #G = nx.complete_graph(5)
+# plt.title("5 Vertex Graph #[number]")
+# nx.draw(G,node_color='white',with_labels=True)
+# plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest.png")
+# plt.clf()
+# G.clear()
+# G.add_edges_from(list)
+# nx.draw(G,node_color='white',with_labels=True)
+# plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/graphVisTest2.png")
