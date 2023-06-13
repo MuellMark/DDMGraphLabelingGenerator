@@ -25,7 +25,7 @@ for line in contents:
 
     print(tempList)
     G.add_edges_from(tempList)
-    plt.title("5 Vertex Graph #[number]")
+    plt.title(str(numVertices)+" Vertex Graph #"+str(graphnum))
     nx.draw(G,node_color='white',with_labels=True)
     plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/5VertexNoInverse/graph"+str(graphnum)+".jpeg")
     plt.clf()
