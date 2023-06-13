@@ -32,7 +32,6 @@ for line in contents:
     #From here, add it to a list, to the be added to G
 
 #G = nx.DiGraph()
-list=[(1, 2)]
 # G.add_edges_from([(1, 2), (1, 3),(2,5),(3,5),(4,2),(4,3),(5,1),(5,4)])
 
 # #G = nx.complete_graph(5)
