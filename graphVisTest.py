@@ -31,7 +31,7 @@ class GraphVisualization:
 		plt.show()
 
 # Driver code
-G = nx.Graph()
+G = nx.DiGraph()
 G.add_edges_from([(1, 2), (1, 3)])
 # G.addEdge(0, 2)
 # G.addEdge(1, 2)
