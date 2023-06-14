@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 import java.util.*;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.FileWriter;
 
 class generateGraphs{
     public static void main(String[]args){
-        int numVertices =5; // Change for # of Vertices
+        int numVertices =7; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
 
-        //Statring vertex is all 0's
+        //Starting vertex is all 0's
         edgeStorage startGraph = new edgeStorage(numVertices);
         allCombos.add(startGraph);
 
@@ -21,7 +24,8 @@ class generateGraphs{
         ArrayList<edgeStorage> inverseFiltered = filterInverseResults(filtered);
 
         // Prints all graphs, need to change if inverses wanted
-        printAllCombos(inverseFiltered);
+        printAllAdjMatrix(inverseFiltered);
+        writeAllCombosToFileVisualization(inverseFiltered);
     }
 
     // Loops through all recursive calls from checkforSums
@@ -88,6 +92,14 @@ class generateGraphs{
         }
     }
 
+        // Prints arraylist of edgeStorage
+        public static void printAllAdjMatrix(ArrayList<edgeStorage> AllCombos){
+            for(int i=0;i<AllCombos.size();i++){
+                System.out.println("Graph #"+(i+1)+":");
+                AllCombos.get(i).printAdjMatrix();
+            }
+        }
+
     // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
     public static ArrayList<edgeStorage> filterResults(ArrayList<edgeStorage> allCombos){
         ArrayList<edgeStorage> filtered = new ArrayList<>(); // Stores the filtered results
@@ -121,5 +133,62 @@ class generateGraphs{
         for(int i=0;i<allCombos.size();i++){
             allCombos.get(i).sort();
         }
+    }
+
+    // Prints arraylist of edgeStorage
+    public static void writeAllCombosToFile(ArrayList<edgeStorage> AllCombos){
+        try {
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+            for(int i=0;i<AllCombos.size();i++){
+            
+                myWriter.write("\nGraph #"+(i+1)+":\n");
+                
+                AllCombos.get(i).writeToFile(myWriter);
+            }
+            myWriter.close();
+              } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+            
+        
+    }
+
+    // Prints arraylist of edgeStorage
+    public static void writeAllCombosToFileAdjMatrix(ArrayList<edgeStorage> AllCombos){
+        try {
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+            for(int i=0;i<AllCombos.size();i++){
+            
+                myWriter.write("\nGraph #"+(i+1)+":\n");
+                
+                AllCombos.get(i).writeToFileAdjMat(myWriter);
+            }
+            myWriter.close();
+              } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+            
+        
+    }
+
+    public static void writeAllCombosToFileVisualization(ArrayList<edgeStorage> AllCombos){
+        try {
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/outputForVis.txt");
+            for(int i=0;i<AllCombos.size();i++){
+            
+                
+                
+                AllCombos.get(i).writeToFileForVisualization(myWriter);
+                myWriter.write("\n");
+            }
+            myWriter.close();
+              } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+            
+        
     }
 }
