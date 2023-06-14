@@ -7,14 +7,18 @@ inverses = False
 
 graphnum=1 #Tracks graph number for file
 
+#File all the graphs are stored in
 graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/outputForVis.txt",'r')
 contents = graphsToGenerate.readlines()
+
+#Goes through each graph in the file
 for line in contents:
     index =0
     tempList=[]
-    G = nx.DiGraph()
+    G = nx.DiGraph() #Makes graph
     while index<len(line):
         #Need functionality for naming maybe
+        #Gets all edges and puts them in a list
         if line[index].isdigit():
             ifrom=int(line[index])
             index+=2
@@ -23,6 +27,7 @@ for line in contents:
             tempList.append(tempTuple)
         index+=1
 
+    #Locks vertices in place
     if(numVertices==5):
         G.add_node(1,pos=(2,1))
         G.add_node(2,pos=(4,1))
@@ -47,6 +52,7 @@ for line in contents:
     pos=nx.get_node_attributes(G,'pos')
 
     print(tempList)
+
     G.add_edges_from(tempList)
     plt.title(str(numVertices)+" Vertex Graph #"+str(graphnum))
     nx.draw(G,pos,node_color='white',with_labels=True)
@@ -56,5 +62,3 @@ for line in contents:
     plt.clf()
     G.clear()
     graphnum+=1
-
-#plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/5VertexNoInverse/graph"+str(graphnum)+".jpeg")
