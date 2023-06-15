@@ -16,10 +16,10 @@ class generateGraphs{
         allCombos.add(startGraph);
 
         generate(allCombos, numVertices); // Starts generating graphs
-        System.out.println("Finished! "+allCombos.size()+"Graphs generated, need to sort throught them...");
+        System.out.println("Finished! "+allCombos.size()+" Graphs generated, need to sort throught them...");
         sortAllCombos(allCombos); // Sort values for easier comparing
         ArrayList<edgeStorage> filtered = filterResults(allCombos); //Removes repeats & invalid graphs
-        System.out.println("Finished first filter!! "+filtered.size()+"Graphs are in allCombos");
+        System.out.println("Finished first filter!! "+filtered.size()+" Graphs are in allCombos");
         // Removes inverses, comment out if inverses wanted
         ArrayList<edgeStorage> inverseFiltered = filterInverseResults(filtered);
 
