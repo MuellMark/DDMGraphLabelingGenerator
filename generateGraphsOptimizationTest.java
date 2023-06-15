@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationTest{
     public static void main(String[]args){
-        int numVertices =7; // Change for # of Vertices
+        int numVertices =8; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
