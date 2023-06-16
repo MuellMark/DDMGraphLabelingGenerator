@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 class generateGraphs{
     public static void main(String[]args){
-        int numVertices =7; // Change for # of Vertices
+        int numVertices =8; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
@@ -16,10 +16,10 @@ class generateGraphs{
         allCombos.add(startGraph);
 
         generate(allCombos, numVertices); // Starts generating graphs
-
+        System.out.println("Finished! "+allCombos.size()+" Graphs generated, need to sort throught them...");
         sortAllCombos(allCombos); // Sort values for easier comparing
         ArrayList<edgeStorage> filtered = filterResults(allCombos); //Removes repeats & invalid graphs
-
+        System.out.println("Finished first filter!! "+filtered.size()+" Graphs are in allCombos");
         // Removes inverses, comment out if inverses wanted
         ArrayList<edgeStorage> inverseFiltered = filterInverseResults(filtered);
 
@@ -35,7 +35,7 @@ class generateGraphs{
             
             ArrayList<Integer> set = getUsuableSet(vertex);
             int currentSize=allCombos.size(); // Makes sure not an infinite loop, only checks current graphs
-            
+            System.out.println(currentSize);
             for(int i=0;i<currentSize;i++){
                 edgeStorage temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
                 checkForSums(allCombos, temp, set, vertex, 0);

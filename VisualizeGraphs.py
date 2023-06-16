@@ -49,6 +49,15 @@ for line in contents:
         G.add_node(5,pos=(3,4))
         G.add_node(6,pos=(2,3))
         G.add_node(7,pos=(1,2))
+    elif(numVertices==8):
+        G.add_node(1,pos=(2,1))
+        G.add_node(2,pos=(3,1))
+        G.add_node(3,pos=(4,2))
+        G.add_node(4,pos=(4,3))
+        G.add_node(5,pos=(3,4))
+        G.add_node(6,pos=(2,4))
+        G.add_node(7,pos=(1,3))
+        G.add_node(8,pos=(1,2))
     pos=nx.get_node_attributes(G,'pos')
 
     print(tempList)
