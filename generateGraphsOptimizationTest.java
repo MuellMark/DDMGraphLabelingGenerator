@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationTest{
     public static void main(String[]args){
-        int numVertices =8; // Change for # of Vertices
+        int numVertices =9; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
@@ -63,6 +63,7 @@ class generateGraphsOptimizationTest{
                     }
                 }
                 if(!isInvOrEq){
+                    //System.out.println("Graph added, "+ddmLabelings.size()+"graphs found");
                     ddmLabelings.add(current);
                 }
             }
@@ -78,7 +79,8 @@ class generateGraphsOptimizationTest{
             // Creates copy, does not add index
             edgeStorage copyCurrent = current.copy(); 
             index++;
-
+            if(allCombos.size()%10000==0)
+            System.out.println("Graph added, "+allCombos.size()+" graphs found");
 
             //Recursive calls
             checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings);
