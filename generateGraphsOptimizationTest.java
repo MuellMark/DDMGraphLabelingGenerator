@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationTest{
     public static void main(String[]args){
-        int numVertices =5; // Change for # of Vertices
+        int numVertices =6; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
@@ -50,11 +50,11 @@ class generateGraphsOptimizationTest{
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
-        if(sumIns<=7 || sumOuts<=7){
+        if(sumIns<=10 || sumOuts<=10){
             System.out.println("Sum ins:"+sumIns+" and Sum Outs:"+sumOuts);
         }
         // base case, if the two are equal then a potential labeling could be found
-        if(sumIns==sumOuts && sumIns>0 && (sumIns<=7 || sumOuts<=7)){
+        if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
             if(current.isDDMLabeling()){
                 boolean isInvOrEq = false;
@@ -70,7 +70,7 @@ class generateGraphsOptimizationTest{
                 }
             }
         // Otherwise, does a recurrsive case
-        }else if(index<set.size() && (sumIns<=7 || sumOuts<=7)){
+        }else if(index<set.size() ){
             // Creates copy and adds index to ins
             edgeStorage addToIns = current.copy();
             addToIns.addPair(set.get(index),vertex);
