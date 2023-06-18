@@ -72,19 +72,13 @@ class generateGraphsOptimizationTest{
         // Otherwise, does a recurrsive case
         }else if(index<set.size() ){
             // Creates copy and adds index to ins
-            if(sumIns+index<5){
-                edgeStorage addToIns = current.copy();
-                addToIns.addPair(set.get(index),vertex);
-                checkForSums(allCombos,addToIns,set,vertex,index+1,ddmLabelings);
-            }
-           
-
+            edgeStorage addToIns = current.copy();
+            addToIns.addPair(set.get(index),vertex);
+ 
             // Creates copy and adds index to outs
-            if(sumOuts+index<5){
-                edgeStorage addToOuts = current.copy();
-                addToOuts.addPair(vertex,set.get(index));
-                checkForSums(allCombos,addToOuts,set,vertex,index+1,ddmLabelings);
-            }
+            edgeStorage addToOuts = current.copy();
+            addToOuts.addPair(vertex,set.get(index));
+                
             // Creates copy, does not add index to either ins or outs
             edgeStorage copyCurrent = current.copy(); 
             index++; // Incremenets index
@@ -95,9 +89,9 @@ class generateGraphsOptimizationTest{
             //Recursive calls, one for each new graph created
             checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings);
 
-            
+            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings);
 
-            
+            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings);
 
         }
     }
