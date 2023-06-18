@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationTest{
     public static void main(String[]args){
-        int numVertices =6; // Change for # of Vertices
+        int numVertices =5; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
@@ -50,9 +50,9 @@ class generateGraphsOptimizationTest{
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
-        if(sumIns<=10 || sumOuts<=10){
-            System.out.println("Sum ins:"+sumIns+" and Sum Outs:"+sumOuts);
-        }
+        // if(sumIns>7 || sumOuts>7){
+        //     System.out.println("Sum ins:"+sumIns+" and Sum Outs:"+sumOuts);
+        // }
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
@@ -72,13 +72,19 @@ class generateGraphsOptimizationTest{
         // Otherwise, does a recurrsive case
         }else if(index<set.size() ){
             // Creates copy and adds index to ins
-            edgeStorage addToIns = current.copy();
-            addToIns.addPair(set.get(index),vertex);
+            if(sumIns+index<5){
+                edgeStorage addToIns = current.copy();
+                addToIns.addPair(set.get(index),vertex);
+                checkForSums(allCombos,addToIns,set,vertex,index+1,ddmLabelings);
+            }
+           
 
             // Creates copy and adds index to outs
-            edgeStorage addToOuts = current.copy();
-            addToOuts.addPair(vertex,set.get(index));
-            
+            if(sumOuts+index<5){
+                edgeStorage addToOuts = current.copy();
+                addToOuts.addPair(vertex,set.get(index));
+                checkForSums(allCombos,addToOuts,set,vertex,index+1,ddmLabelings);
+            }
             // Creates copy, does not add index to either ins or outs
             edgeStorage copyCurrent = current.copy(); 
             index++; // Incremenets index
@@ -89,9 +95,9 @@ class generateGraphsOptimizationTest{
             //Recursive calls, one for each new graph created
             checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings);
 
-            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings);
+            
 
-            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings);
+            
 
         }
     }
