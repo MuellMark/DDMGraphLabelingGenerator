@@ -50,8 +50,11 @@ class generateGraphsOptimizationTest{
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
+        if(sumIns<=7 || sumOuts<=7){
+            System.out.println("Sum ins:"+sumIns+" and Sum Outs:"+sumOuts);
+        }
         // base case, if the two are equal then a potential labeling could be found
-        if(sumIns==sumOuts && sumIns>0 ){
+        if(sumIns==sumOuts && sumIns>0 && (sumIns<=7 || sumOuts<=7)){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
             if(current.isDDMLabeling()){
                 boolean isInvOrEq = false;
@@ -67,7 +70,7 @@ class generateGraphsOptimizationTest{
                 }
             }
         // Otherwise, does a recurrsive case
-        }else if(index<set.size()){
+        }else if(index<set.size() && (sumIns<=7 || sumOuts<=7)){
             // Creates copy and adds index to ins
             edgeStorage addToIns = current.copy();
             addToIns.addPair(set.get(index),vertex);
