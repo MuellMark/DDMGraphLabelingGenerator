@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationTest{
     public static void main(String[]args){
-        int numVertices =5; // Change for # of Vertices
+        int numVertices =9; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorage> allCombos = new ArrayList<>();
@@ -23,9 +23,9 @@ class generateGraphsOptimizationTest{
         // Several different version, change depending on desired output
         printAllAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-
+        writeAllCombosToFileAdjMatrix(ddmLabelings);
         // For debugging optimization test
-        writeAllCombosToFile(allCombos);
+        //writeAllCombosToFile(allCombos);
     }
 
     // Loops through all recursive calls from checkforSums
