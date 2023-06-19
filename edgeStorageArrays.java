@@ -80,14 +80,14 @@ class edgeStorageArrays{
     }
 
     // Takes in an arraylist of ins, and adds them to then ins one by one 
-    public void addInList(int vertex, ArrayList<Integer> ins){
+    public void addInList(int vertex, int[] ins){
         //for(int i=0;i<edges[vertex][i].size();i++) outs.add(edges[vertex][0].get(i));
-        for(int i=0;i<ins.size();i++) edges[vertex][1].add(ins.get(i));
+        for(int i=0;i<ins.length;i++) edges[vertex][1][i]=(ins[i]);
         //edges[vertex][1]=ins;
     }
     // Takes in an arraylist of outss, and adds them to then outss one by one 
-    public void addOutList(int vertex, ArrayList<Integer> outs){
-        for(int i=0;i<outs.size();i++) edges[vertex][0].add(outs.get(i));
+    public void addOutList(int vertex, int[] outs){
+        for(int i=0;i<outs.length;i++) edges[vertex][0][i]=(outs[i]);
     }
 
     // Adds a pair of elements from -> to
@@ -99,13 +99,13 @@ class edgeStorageArrays{
     // Gets the sum of the ins at a vertex
     public int getSumIns(int vertex){
         int sum=0;
-        for(int i=0;i<edges[vertex][1].size();i++) sum+=edges[vertex][1].get(i);
+        for(int i=1;i<edges[vertex][1].length;i++) sum+=edges[vertex][1][i];
         return sum;
     }
     // Gets the sum of the outs at a vertex
     public int getSumOuts(int vertex){
         int sum=0;
-        for(int i=0;i<edges[vertex][0].size();i++) sum+=edges[vertex][0].get(i);
+        for(int i=1;i<edges[vertex][0].length;i++) sum+=edges[vertex][0][i];
         return sum;
     }
 
@@ -119,19 +119,19 @@ class edgeStorageArrays{
         boolean isDDM = true;
         for(int i=1;i<size()+1;i++){
             if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
-            if(getIns(i).size()+getOuts(i).size()<3) isDDM =false; // Will need to change later for 0's
+            if(getIns(i).length+getOuts(i).length<3) isDDM =false; // Will need to change later for 0's
         }
         return isDDM;
     }
 
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
-        edgeStorageArrays newArr = new edgeStorage(this.size());
+        edgeStorageArrays newArr = new edgeStorageArrays(this.size());
         for(int i=1;i<=newArr.size();i++){
-            ArrayList<Integer> tempIn = this.getIns(i);
+            int[] tempIn = this.getIns(i);
             newArr.addInList(i, tempIn);
 
-            ArrayList<Integer> tempOut = this.getOuts(i);
+            int[] tempOut = this.getOuts(i);
             newArr.addOutList(i, tempOut);
         }
         return newArr;
@@ -139,12 +139,12 @@ class edgeStorageArrays{
     }
 
     //Sorts the ins and outs of all ins and outs
-    public void sort(){
-        for(int i=1;i<size()+1;i++){
-            Collections.sort(edges[i][0]);
-            Collections.sort(edges[i][1]);
-        }
-    }
+    // public void sort(){
+    //     for(int i=1;i<size()+1;i++){
+    //         Collections.sort(edges[i][0]);
+    //         Collections.sort(edges[i][1]);
+    //     }
+    // }
 
     //Checks if the two edgeStorages are the same
     public boolean equals(edgeStorageArrays other){

@@ -8,9 +8,13 @@ class generateGraphsOptimizationAndArrays{
     public static void main(String[]args){
         edgeStorageArrays testArrGraph = new edgeStorageArrays(5);
         testArrGraph.addPair(1, 2);
-        testArrGraph.addPair(3, 5);
         testArrGraph.addPair(4, 2);
+        int[] testaddins = {2,5,0,0,0,0};
+        testArrGraph.addOutList(4, testaddins);
         testArrGraph.print();
+        System.out.println(testArrGraph.getSumIns(2));
+        edgeStorageArrays graph2 = testArrGraph.copy();
+        graph2.print();
 
 
 
