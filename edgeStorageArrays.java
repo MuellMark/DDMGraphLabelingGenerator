@@ -24,13 +24,11 @@ class edgeStorageArrays{
     }
     //Default Constructor, size of 6 for 5 vertices
     public edgeStorageArrays(){
-        edges = new ArrayList[6][2];
+        edges = new int[6][2][6];
         for(int i=1;i<6;i++){
-            ArrayList<Integer>[] test = new ArrayList[2];
             for (int j = 0; j < 2; j++) {
-                test[j] = new ArrayList<Integer>();
+                edges[i][j][0]=1;
             }
-            edges[i]=test;
         }
     }
 
@@ -40,41 +38,45 @@ class edgeStorageArrays{
             System.out.print("Vertex "+i+":");
             System.out.print(" [i:");
             for(int j=0;j<edges[i][1].length;j++){
-                System.out.print(" "+edges[i][1].get(j));
+                System.out.print(" "+edges[i][1][j]);
             }
             System.out.print("]\n          [o:");
-            for(int j=0;j<edges[i][0].size();j++){
-                System.out.print(" "+edges[i][0].get(j));
+            for(int j=0;j<edges[i][0].length;j++){
+                System.out.print(" "+edges[i][0][j]);
             }
             System.out.println("]");
         }
     }
 
     // Getter for a vertex's inputs, makes a copy, returns arrayList
-    public ArrayList<Integer> getIns(int vertex){
-        ArrayList<Integer> ins = new ArrayList<Integer>();
-        for(int i=0;i<edges[vertex][1].size();i++){
-            ins.add(edges[vertex][1].get(i));
+    public int[] getIns(int vertex){
+        int[] ins = new int[edges[vertex][1].length];
+        for(int i=0;i<edges[vertex][1].length;i++){
+            ins[i]=edges[vertex][1][i];
         } 
         return ins;
     }
 
     // Getter for a vertex's outputs, makes a copy, returns arrayList
-    public ArrayList<Integer> getOuts(int vertex){
-        ArrayList<Integer> outs = new ArrayList<Integer>();
-        for(int i=0;i<edges[vertex][0].size();i++){
-            outs.add(edges[vertex][0].get(i));
+    public int[] getOuts(int vertex){
+        int[] outs = new int[edges[vertex][0].length];
+        for(int i=0;i<edges[vertex][0].length;i++){
+            outs[i]=edges[vertex][0][i];
         } 
         return outs;
     }
 
     // Adds element to inputs at vertex
     public void addIn(int vertex, int element){
-        edges[vertex][1].add(element);
+        int tempIndex = edges[vertex][1][0];
+        edges[vertex][1][tempIndex]=element;
+        edges[vertex][1][0]++;
     }
     // Adds element to outputs at vertex
     public void addOut(int vertex, int element){
-        edges[vertex][0].add(element);
+        int tempIndex = edges[vertex][0][0];
+        edges[vertex][0][tempIndex]=element;
+        edges[vertex][0][0]++;
     }
 
     // Takes in an arraylist of ins, and adds them to then ins one by one 

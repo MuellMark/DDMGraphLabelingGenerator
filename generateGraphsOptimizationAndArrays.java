@@ -6,6 +6,17 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationAndArrays{
     public static void main(String[]args){
+        edgeStorageArrays testArrGraph = new edgeStorageArrays(5);
+        testArrGraph.addPair(1, 2);
+        testArrGraph.addPair(3, 5);
+        testArrGraph.addPair(4, 2);
+        testArrGraph.print();
+
+
+
+
+
+
         int numVertices =5; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
