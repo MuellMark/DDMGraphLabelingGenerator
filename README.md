@@ -1,5 +1,16 @@
-# GraphLabeling2023
+# DDMGraphLabelingGenerator
 
-Repo to track progress for the code for Graph Labeling research
+This repo is for generating and visualizing graphs of the DDM labeling
 
-Link to hours worked: https://docs.google.com/spreadsheets/d/1zY3dHolpvtBQwqAM0TC2TIuY9K4RBTOyqA4tQAkPuns/edit?usp=sharing
+There are 2 parts to this repo, the java portion, which is responsible for generating the graphs, and the python portion, which is responisible for generating the visualization of the graphs found in the java code.
+
+### Getting Started
+-add links to visualizations that have already been output
+### Java
+The java code is responsible for the genertion of all of the text versions of the graphs. All of the code can be found in the Java Code folder with explanations
+found in the .md file, or here: TODO
+### Python
+-The python code is responsible for taking in an txt output from the java code and visualizing it. This is done with networkx and matplotlib. All of the code is in
+the Python Code folder and explaniatinos can be found in the .md file, or here: TODO
+##### Legacy Code
+All past code that didn't end up getting used can be found in the Legacy Code Folder, with explaniations found in the .md file, or here: https://github.com/MuellMark/DDMGraphLabelingGenerator/blob/Mueller/Legacy%20Code/LegacyCode.md
