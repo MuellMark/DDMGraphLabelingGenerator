@@ -10,18 +10,16 @@ import java.io.FileWriter;
 // For each of those arrays there is an array of size 2, 0 is for edges oing out, 1 is for edges coming in
 // Then, for both 0 and 1, there is an arraylist to store all edges
 class edgeStorageArrays{
-    ArrayList<Integer>[][] edges;
+   int[][][] edges;
 
     // Constructor to specify size
     public edgeStorageArrays(int size){
         size++;
-        edges = new ArrayList[size][2];
+        edges = new int[size][2][size];
         for(int i=1;i<size;i++){
-            ArrayList<Integer>[] test = new ArrayList[2];
             for (int j = 0; j < 2; j++) {
-                test[j] = new ArrayList<Integer>();
+                edges[i][j][0]=1;
             }
-            edges[i]=test;
         }
     }
     //Default Constructor, size of 6 for 5 vertices
@@ -41,7 +39,7 @@ class edgeStorageArrays{
         for(int i=1;i<edges.length;i++){
             System.out.print("Vertex "+i+":");
             System.out.print(" [i:");
-            for(int j=0;j<edges[i][1].size();j++){
+            for(int j=0;j<edges[i][1].length;j++){
                 System.out.print(" "+edges[i][1].get(j));
             }
             System.out.print("]\n          [o:");
