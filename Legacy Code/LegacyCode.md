@@ -13,7 +13,4 @@ lack of declared variables, so I shifted my focus over to generating code in Jav
 TODO
 
 ## Visualization Code
-There isn't very much in this folder. The 3 files are a java version of graph generation tools that I ended up scrapping. Because I wrote all of my functinoal code in j
-ava, I thought it would be best to generate graphs in java too. However, many were incompatible with vscode, the IDE I enjoy coding in the best, and trying to transfer
-the code over to eclipse was causing a bunch of errors. That's when I decided to transition over to python, since I knew it was better for this sort of thing. I used 
-netowrkX to generate the graphs, and the 2 png's in this folder are from initial tests of the code to see how I could apply it to mine.
+There isn't very much in this folder. The 3 folders are a java version of graph generation tools that I ended up scrapping called Graph Stream. Because I wrote all of my functinoal code in java, I thought it would be best to generate graphs in java too. However, many were incompatible with vscode, the IDE I enjoy coding in the best, and trying to transfer the code over to eclipse was causing a bunch of errors. The GraphStreamTest.java file was my experimentation with the 3 folders, but it didn't work at all. That's when I decided to transition over to python, since I knew it was better for this sort of thing. I used networkX to generate the graphs, and the 2 png's in this folder are from initial tests of the code to see how I could apply it to mine. The last txt file was used to get the formatting down for the java code's write to files.
