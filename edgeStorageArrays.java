@@ -37,12 +37,12 @@ class edgeStorageArrays{
         for(int i=1;i<edges.length;i++){
             System.out.print("Vertex "+i+":");
             System.out.print(" [i:");
-            for(int j=0;j<edges[i][1].length;j++){
-                System.out.print(" "+edges[i][1][j]);
+            for(int j=1;j<edges[i][1].length;j++){
+                if(edges[i][1][j]>0) System.out.print(" "+edges[i][1][j]);
             }
             System.out.print("]\n          [o:");
-            for(int j=0;j<edges[i][0].length;j++){
-                System.out.print(" "+edges[i][0][j]);
+            for(int j=1;j<edges[i][0].length;j++){
+                if(edges[i][0][j]>0) System.out.print(" "+edges[i][0][j]);
             }
             System.out.println("]");
         }

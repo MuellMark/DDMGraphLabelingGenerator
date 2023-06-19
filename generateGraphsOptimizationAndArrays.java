@@ -34,11 +34,12 @@ class generateGraphsOptimizationAndArrays{
 
         generate(allCombos, numVertices,ddmLabelings); // Starts generating graphs
 
+        printAllCombos(ddmLabelings);
         // Prints all graphs found, then writes to files
         // Several different version, change depending on desired output
-        printAllAdjMatrix(ddmLabelings);
+        //printAllAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-        writeAllCombosToFileAdjMatrix(ddmLabelings);
+        //writeAllCombosToFileAdjMatrix(ddmLabelings);
         // For debugging optimization test
         //writeAllCombosToFile(allCombos);
     }
