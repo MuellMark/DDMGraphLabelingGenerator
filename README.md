@@ -7,8 +7,10 @@ There are 2 parts to this repo, the java portion, which is responsible for gener
 ### Getting Started
 -add links to visualizations that have already been output
 ### Java
--add link to the seperate java mark down file
+The java code is responsible for the genertion of all of the text versions of the graphs. All of the code can be found in the Java Code folder with explanations
+found in the .md file, or here: TODO
 ### Python
--add link to seperate python markdown file
+-The python code is responsible for taking in an txt output from the java code and visualizing it. This is done with networkx and matplotlib. All of the code is in
+the Python Code folder and explaniatinos can be found in the .md file, or here: TODO
 ##### Legacy Code
--add link to seperate legacy code markdown file
+All past code that didn't end up getting used can be found in the Legacy Code Folder, with explaniations found in the .md file, or here: https://github.com/MuellMark/DDMGraphLabelingGenerator/blob/Mueller/Legacy%20Code/LegacyCode.md
