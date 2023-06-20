@@ -152,8 +152,15 @@ class edgeStorageArrays{
         if(size()!=other.size()) equals = false;
         else{
             for(int i=1;i<size()+1;i++){
-                if(!getIns(i).equals(other.getIns(i))) equals=false;
-                if(!getIns(i).equals(other.getIns(i))) equals=false;
+                
+                if(!Arrays.equals(getIns(i),getIns(i))){
+                    equals=false;
+                    //System.out.println(getIns(i)+" =/="+getIns(i));
+                }
+                if(!Arrays.equals(getOuts(i),other.getOuts(i))){
+                    equals=false;
+                    //System.out.println(getOuts(i)+" =/="+getOuts(i));
+                }
             }
         }
         return equals;

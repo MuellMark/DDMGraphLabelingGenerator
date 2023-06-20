@@ -15,7 +15,7 @@ class generateGraphsOptimizationAndArrays{
         //System.out.println(testArrGraph.equals());
         edgeStorageArrays graph2 = testArrGraph.copy();
         //graph2.print();
-        System.out.println(testArrGraph.getIns(2).equals(graph2.getIns(2)));
+        System.out.println(testArrGraph.equals(graph2));
         testArrGraph.print();
         graph2.print();
 
@@ -38,6 +38,8 @@ class generateGraphsOptimizationAndArrays{
         generate(allCombos, numVertices,ddmLabelings); // Starts generating graphs
 
         printAllCombos(ddmLabelings);
+
+
         // Prints all graphs found, then writes to files
         // Several different version, change depending on desired output
         //printAllAdjMatrix(ddmLabelings);
