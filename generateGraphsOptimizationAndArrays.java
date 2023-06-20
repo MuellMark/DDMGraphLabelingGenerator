@@ -11,9 +11,12 @@ class generateGraphsOptimizationAndArrays{
         testArrGraph.addPair(4, 2);
         int[] testaddins = {2,5,0,0,0,0};
         testArrGraph.addOutList(4, testaddins);
-        testArrGraph.print();
-        System.out.println(testArrGraph.getSumIns(2));
+        //testArrGraph.print();
+        //System.out.println(testArrGraph.equals());
         edgeStorageArrays graph2 = testArrGraph.copy();
+        //graph2.print();
+        System.out.println(testArrGraph.getIns(2).equals(graph2.getIns(2)));
+        testArrGraph.print();
         graph2.print();
 
 
