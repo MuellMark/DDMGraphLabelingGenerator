@@ -24,7 +24,7 @@ class generateGraphsOptimizationAndArrays{
 
 
 
-        int numVertices =7; // Change for # of Vertices
+        int numVertices =9; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -132,14 +132,14 @@ class generateGraphsOptimizationAndArrays{
             AllCombos.get(i).print();
         }
     }
-
-        // Prints arraylist of edgeStorage in an adjacency matrix for easy checking
-        public static void printAllAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
-            for(int i=0;i<AllCombos.size();i++){
-                System.out.println("Graph #"+(i+1)+":");
-                AllCombos.get(i).printAdjMatrix();
-            }
-        }
+//fix
+        // // Prints arraylist of edgeStorage in an adjacency matrix for easy checking
+        // public static void printAllAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
+        //     for(int i=0;i<AllCombos.size();i++){
+        //         System.out.println("Graph #"+(i+1)+":");
+        //         AllCombos.get(i).printAdjMatrix();
+        //     }
+        // }
 
     // LEGACY, keeping in case needed in future 
     // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
@@ -172,59 +172,61 @@ class generateGraphsOptimizationAndArrays{
         return filtered;
     }
 
-    // calls sort on every graph in allCombos, sorting the ins and outs for easier checking
-    public static void sortAllCombos(ArrayList<edgeStorageArrays> allCombos){
-        for(int i=0;i<allCombos.size();i++){
-            allCombos.get(i).sort();
-        }
-    }
+    //fix 
 
-    // Writes the arraylist of combinations to a file in a readbale way
-    public static void writeAllCombosToFile(ArrayList<edgeStorageArrays> AllCombos){
-        try {
-            // Opens files
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
-            for(int i=0;i<AllCombos.size();i++){
-                myWriter.write("\nGraph #"+(i+1)+":\n");
-                AllCombos.get(i).writeToFile(myWriter);
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+//     // calls sort on every graph in allCombos, sorting the ins and outs for easier checking
+//     public static void sortAllCombos(ArrayList<edgeStorageArrays> allCombos){
+//         for(int i=0;i<allCombos.size();i++){
+//             allCombos.get(i).sort();
+//         }
+//     }
+
+//     // Writes the arraylist of combinations to a file in a readbale way
+//     public static void writeAllCombosToFile(ArrayList<edgeStorageArrays> AllCombos){
+//         try {
+//             // Opens files
+//             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+//             for(int i=0;i<AllCombos.size();i++){
+//                 myWriter.write("\nGraph #"+(i+1)+":\n");
+//                 AllCombos.get(i).writeToFile(myWriter);
+//             }
+//             myWriter.close();
+//         } catch (IOException e) {
+//             System.out.println("An error occurred.");
+//             e.printStackTrace();
+//         }
  
-    }
+//     }
 
-    // Writes to a file in an adjacency matrix for manual checking
-    public static void writeAllCombosToFileAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
-        try {
-            // Opens file
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
-            for(int i=0;i<AllCombos.size();i++){
-                myWriter.write("\nGraph #"+(i+1)+":\n");
-                AllCombos.get(i).writeToFileAdjMat(myWriter);
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
+//     // Writes to a file in an adjacency matrix for manual checking
+//     public static void writeAllCombosToFileAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
+//         try {
+//             // Opens file
+//             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+//             for(int i=0;i<AllCombos.size();i++){
+//                 myWriter.write("\nGraph #"+(i+1)+":\n");
+//                 AllCombos.get(i).writeToFileAdjMat(myWriter);
+//             }
+//             myWriter.close();
+//         } catch (IOException e) {
+//             System.out.println("An error occurred.");
+//             e.printStackTrace();
+//         }
+//     }
 
-    // Writes to file to be read in by visualizeGraphs.py
-    public static void writeAllCombosToFileVisualization(ArrayList<edgeStorageArrays> AllCombos){
-        try {
-            // Opens File
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/outputForVis.txt");
-            for(int i=0;i<AllCombos.size();i++){
-                AllCombos.get(i).writeToFileForVisualization(myWriter);
-                myWriter.write("\n");
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
+//     // Writes to file to be read in by visualizeGraphs.py
+//     public static void writeAllCombosToFileVisualization(ArrayList<edgeStorageArrays> AllCombos){
+//         try {
+//             // Opens File
+//             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/outputForVis.txt");
+//             for(int i=0;i<AllCombos.size();i++){
+//                 AllCombos.get(i).writeToFileForVisualization(myWriter);
+//                 myWriter.write("\n");
+//             }
+//             myWriter.close();
+//         } catch (IOException e) {
+//             System.out.println("An error occurred.");
+//             e.printStackTrace();
+//         }
+//     }
 }
