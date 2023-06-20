@@ -119,11 +119,21 @@ class edgeStorageArrays{
         boolean isDDM = true;
         for(int i=1;i<size()+1;i++){
             if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
-            if(getIns(i).length+getOuts(i).length<3) isDDM =false; // Will need to change later for 0's
+            if(getIns(i)[0]+getOuts(i)[0]<5) isDDM =false; // Will need to change later for 0's
         }
         return isDDM;
     }
 
+        // Checks if it is a DDM labeling, not accounting for zeroes
+        public boolean isDDMLabelingIncludeZeroes(){
+            boolean isDDM = true;
+            for(int i=1;i<size()+1;i++){
+                if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
+                //if(getIns(i).length+getOuts(i).length<3) isDDM =false; // Will need to change later for 0's
+            }
+            return isDDM;
+    
+        }
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());

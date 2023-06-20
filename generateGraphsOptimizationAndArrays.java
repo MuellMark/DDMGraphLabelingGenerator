@@ -24,7 +24,7 @@ class generateGraphsOptimizationAndArrays{
 
 
 
-        int numVertices =5; // Change for # of Vertices
+        int numVertices =7; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
