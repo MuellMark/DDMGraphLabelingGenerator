@@ -192,7 +192,9 @@ class edgeStorageArrays{
 
 
 // Need to fix:
-
+// for(int j=1;j<edges[i][0].length;j++){
+//     if(edges[i][0][j]>0) System.out.print(" "+edges[i][0][j]);
+// }
 
     //writes edges in an easily readable way to a file
     public void writeToFile(FileWriter myWriter){
@@ -200,12 +202,12 @@ class edgeStorageArrays{
             for(int i=1;i<edges.length;i++){
                 myWriter.write("Vertex "+i+":");
                 myWriter.write(" [i:");
-                for(int j=0;j<edges[i][1].size();j++){
-                    myWriter.write(" "+edges[i][1].get(j));
+                for(int j=0;j<edges[i][1].length;j++){
+                    if(edges[i][0][j]>0) myWriter.write(" "+edges[i][0][j]);
                 }
                 myWriter.write("]\n          [o:");
-                for(int j=0;j<edges[i][0].size();j++){
-                    myWriter.write(" "+edges[i][0].get(j));
+                for(int j=0;j<edges[i][0].length;j++){
+                    if(edges[i][1][j]>0)myWriter.write(" "+edges[i][0][j]);
                 }
                 myWriter.write("]\n");
             }
