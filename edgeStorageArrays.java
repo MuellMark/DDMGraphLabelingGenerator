@@ -207,7 +207,7 @@ class edgeStorageArrays{
                 }
                 myWriter.write("]\n          [o:");
                 for(int j=0;j<edges[i][0].length;j++){
-                    if(edges[i][1][j]>0)myWriter.write(" "+edges[i][0][j]);
+                    if(edges[i][1][j]>0) myWriter.write(" "+edges[i][0][j]);
                 }
                 myWriter.write("]\n");
             }
@@ -258,8 +258,8 @@ class edgeStorageArrays{
     public void writeToFileForVisualization(FileWriter myWriter){
         try {
             for(int i=1;i<edges.length;i++){
-                for(int j=0;j<edges[i][1].size();j++){
-                    myWriter.write(i+" "+edges[i][1].get(j)+",");
+                for(int j=0;j<edges[i][1].length;j++){
+                    if(edges[i][1][j]>0) myWriter.write(i+" "+edges[i][1][j]+",");
                 }
             }
         } catch (IOException e) {
