@@ -37,8 +37,8 @@ class generateGraphsOptimizationAndArrays{
 
         generate(allCombos, numVertices,ddmLabelings); // Starts generating graphs
 
-        printAllCombos(ddmLabelings);
-        writeAllCombosToFile(ddmLabelings);
+        printAllAdjMatrix(ddmLabelings);
+        writeAllCombosToFileAdjMatrix(ddmLabelings);
 
 
         // Prints all graphs found, then writes to files
