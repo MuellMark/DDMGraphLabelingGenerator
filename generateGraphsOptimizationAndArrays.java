@@ -39,14 +39,14 @@ class generateGraphsOptimizationAndArrays{
 
         printAllCombos(ddmLabelings);
         printAllAdjMatrix(ddmLabelings);
-        //writeAllCombosToFileVisualization(ddmLabelings);
+        writeAllCombosToFileVisualization(ddmLabelings);
 
 
         // Prints all graphs found, then writes to files
         // Several different version, change depending on desired output
         //printAllAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-        writeAllCombosToFileAdjMatrix(ddmLabelings);
+        //writeAllCombosToFileAdjMatrix(ddmLabelings);
         // For debugging optimization test
         //writeAllCombosToFile(allCombos);
     }
@@ -79,7 +79,7 @@ class generateGraphsOptimizationAndArrays{
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
-            if(current.isDDMLabelingIncludeZeroes()){ // Changed to include zeroes
+            if(current.isDDMLabeling()){ // Changed to include zeroes
                 boolean isInvOrEq = false;
                 for(int i=0;i<ddmLabelings.size();i++){
                     if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
