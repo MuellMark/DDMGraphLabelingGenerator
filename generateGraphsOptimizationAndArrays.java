@@ -24,7 +24,7 @@ class generateGraphsOptimizationAndArrays{
 
 
 
-        int numVertices =8; // Change for # of Vertices
+        int numVertices =9; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -108,7 +108,7 @@ class generateGraphsOptimizationAndArrays{
 
             // Debugging statement, to track number of graphs generated when dealing with large cases
             if(allCombos.size()%10000==0) System.out.println("Graph added, "+allCombos.size()+" graphs found");
-
+            if(allCombos.size()%500000==0) System.gc();
             //Recursive calls, one for each new graph created
             checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings);
 
@@ -176,12 +176,12 @@ class generateGraphsOptimizationAndArrays{
 
     //fix 
 
-    // calls sort on every graph in allCombos, sorting the ins and outs for easier checking
-    public static void sortAllCombos(ArrayList<edgeStorageArrays> allCombos){
-        for(int i=0;i<allCombos.size();i++){
-            allCombos.get(i).sort();
-        }
-    }
+    // // calls sort on every graph in allCombos, sorting the ins and outs for easier checking
+    // public static void sortAllCombos(ArrayList<edgeStorageArrays> allCombos){
+    //     for(int i=0;i<allCombos.size();i++){
+    //         allCombos.get(i).sort();
+    //     }
+    // }
 
     // Writes the arraylist of combinations to a file in a readbale way
     public static void writeAllCombosToFile(ArrayList<edgeStorageArrays> AllCombos){
