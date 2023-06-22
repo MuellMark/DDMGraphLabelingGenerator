@@ -24,7 +24,7 @@ class generateGraphsOptimizationAndArrays{
 
 
 
-        int numVertices =7; // Change for # of Vertices
+        int numVertices =8; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -79,7 +79,7 @@ class generateGraphsOptimizationAndArrays{
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
-            if(current.isDDMLabeling()){ // Changed to include zeroes
+            if(current.isDDMLabelingIncludeZeroes()){ // Changed to include zeroes
                 boolean isInvOrEq = false;
                 for(int i=0;i<ddmLabelings.size();i++){
                     if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
