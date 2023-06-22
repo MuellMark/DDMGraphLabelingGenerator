@@ -240,7 +240,7 @@ class edgeStorageArrays{
                 String tempStr = "";
                 for(int j=1;j<=size();j++){
                     int found = 0;
-                    for(int k =0;k<edges[i][1].length;k++){
+                    for(int k =1;k<edges[i][1].length;k++){
                         if(edges[i][1][k]==j) found=1;
                     }
                     tempStr+= " "+found+",";
@@ -258,7 +258,7 @@ class edgeStorageArrays{
     public void writeToFileForVisualization(FileWriter myWriter){
         try {
             for(int i=1;i<edges.length;i++){
-                for(int j=0;j<edges[i][1].length;j++){
+                for(int j=1;j<edges[i][1].length;j++){
                     if(edges[i][1][j]>0) myWriter.write(i+" "+edges[i][1][j]+",");
                 }
             }
