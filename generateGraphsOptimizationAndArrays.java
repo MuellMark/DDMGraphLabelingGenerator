@@ -6,25 +6,25 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationAndArrays{
     public static void main(String[]args){
-        edgeStorageArrays testArrGraph = new edgeStorageArrays(5);
-        testArrGraph.addPair(1, 2);
-        testArrGraph.addPair(4, 2);
-        int[] testaddins = {2,5,0,0,0,0};
-        testArrGraph.addOutList(4, testaddins);
-        //testArrGraph.print();
-        //System.out.println(testArrGraph.equals());
-        edgeStorageArrays graph2 = testArrGraph.copy();
-        //graph2.print();
-        System.out.println(testArrGraph.equals(graph2));
-        testArrGraph.print();
-        graph2.print();
+        // edgeStorageArrays testArrGraph = new edgeStorageArrays(5);
+        // testArrGraph.addPair(1, 2);
+        // testArrGraph.addPair(4, 2);
+        // int[] testaddins = {2,5,0,0,0,0};
+        // testArrGraph.addOutList(4, testaddins);
+        // //testArrGraph.print();
+        // //System.out.println(testArrGraph.equals());
+        // edgeStorageArrays graph2 = testArrGraph.copy();
+        // //graph2.print();
+        // System.out.println(testArrGraph.equals(graph2));
+        // testArrGraph.print();
+        // graph2.print();
 
 
 
 
 
 
-        int numVertices =6; // Change for # of Vertices
+        int numVertices =7; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -39,14 +39,14 @@ class generateGraphsOptimizationAndArrays{
 
         printAllCombos(ddmLabelings);
         printAllAdjMatrix(ddmLabelings);
-        writeAllCombosToFileVisualization(ddmLabelings);
+        //writeAllCombosToFileVisualization(ddmLabelings);
 
 
         // Prints all graphs found, then writes to files
         // Several different version, change depending on desired output
         //printAllAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-        //writeAllCombosToFileAdjMatrix(ddmLabelings);
+        writeAllCombosToFileAdjMatrix(ddmLabelings);
         // For debugging optimization test
         //writeAllCombosToFile(allCombos);
     }

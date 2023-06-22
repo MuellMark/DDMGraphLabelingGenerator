@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Change here depending on what needs to be generated
-numVertices = 6
+numVertices = 7
 inverses = False
 
 graphnum=1 #Tracks graph number for file
@@ -45,9 +45,9 @@ for line in contents:
         G.add_node(1,pos=(2,1))
         G.add_node(2,pos=(4,1))
         G.add_node(3,pos=(5,2))
-        G.add_node(4,pos=(4,3))
+        G.add_node(4,pos=(5,3))
         G.add_node(5,pos=(3,4))
-        G.add_node(6,pos=(2,3))
+        G.add_node(6,pos=(1,3))
         G.add_node(7,pos=(1,2))
     elif(numVertices==8):
         G.add_node(1,pos=(2,1))
@@ -67,7 +67,7 @@ for line in contents:
     nx.draw(G,pos,node_color='white',with_labels=True)
 
     # Need to change save location based on what is generated
-    plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Disconnected Graphs/6VertexNoInverse/graph"+str(graphnum)+".jpeg")
+    plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Disconnected Graphs/7VertexNoInverse/graph"+str(graphnum)+".jpeg")
     plt.clf()
     G.clear()
     graphnum+=1
