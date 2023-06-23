@@ -2,13 +2,13 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Change here depending on what needs to be generated
-numVertices = 8
+numVertices = 7
 inverses = False
 
 graphnum=1 #Tracks graph number for file
 
 #File all the graphs are stored in
-graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/outputForVis.txt",'r')
+graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt",'r')
 contents = graphsToGenerate.readlines()
 
 #Goes through each graph in the file
@@ -67,7 +67,7 @@ for line in contents:
     nx.draw(G,pos,node_color='white',with_labels=True)
 
     # Need to change save location based on what is generated
-    plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Disconnected Graphs/8VertexNoInverse/graph"+str(graphnum)+".jpeg")
+    plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Disconnected Graphs/7VertexNoInverse/graph"+str(graphnum)+".jpeg")
     plt.clf()
     G.clear()
     graphnum+=1
