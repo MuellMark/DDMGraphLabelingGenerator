@@ -24,7 +24,7 @@ class generateGraphsOptimizationAndArrays{
 
 
 
-        int numVertices =6; // Change for # of Vertices
+        int numVertices =7; // Change for # of Vertices
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -48,7 +48,7 @@ class generateGraphsOptimizationAndArrays{
         //writeAllCombosToFileVisualization(ddmLabelings);
         //writeAllCombosToFileAdjMatrix(ddmLabelings);
         // For debugging optimization test
-        //writeAllCombosToFile(allCombos);
+        writeAllCombosToFile(allCombos);
     }
 
     // Loops through all recursive calls from checkforSums
@@ -67,7 +67,7 @@ class generateGraphsOptimizationAndArrays{
         }
     }
 
-    // Recursive method, finds all possible combinations of edges TODO: potentailly add a max value to check
+    // Recursive method, finds all possible combinations of edges 
     public static void checkForSums(ArrayList<edgeStorageArrays> allCombos, edgeStorageArrays current,
     ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings){
         int sumIns = current.getSumIns(vertex);
@@ -187,7 +187,7 @@ class generateGraphsOptimizationAndArrays{
     public static void writeAllCombosToFile(ArrayList<edgeStorageArrays> AllCombos){
         try {
             // Opens files
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/output.txt");
             for(int i=0;i<AllCombos.size();i++){
                 myWriter.write("\nGraph #"+(i+1)+":\n");
                 AllCombos.get(i).writeToFile(myWriter);
@@ -204,7 +204,7 @@ class generateGraphsOptimizationAndArrays{
     public static void writeAllCombosToFileAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
         try {
             // Opens file
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/output.txt");
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/output.txt");
             for(int i=0;i<AllCombos.size();i++){
                 myWriter.write("\nGraph #"+(i+1)+":\n");
                 AllCombos.get(i).writeToFileAdjMat(myWriter);
@@ -220,7 +220,7 @@ class generateGraphsOptimizationAndArrays{
     public static void writeAllCombosToFileVisualization(ArrayList<edgeStorageArrays> AllCombos){
         try {
             // Opens File
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/outputForVis.txt");
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt");
             for(int i=0;i<AllCombos.size();i++){
                 AllCombos.get(i).writeToFileForVisualization(myWriter);
                 myWriter.write("\n");
