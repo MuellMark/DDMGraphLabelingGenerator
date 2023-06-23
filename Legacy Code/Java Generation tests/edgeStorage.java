@@ -3,6 +3,9 @@ import java.util.*;
 import java.io.File;  // Import the File class
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.FileWriter;
+//This was the original implementation of EdgeStorage. It used arraylists. this still functions and it
+//is what the other generation tests use in LegacyCode, it's just not as efficient as the array based one
+
 
 // Class used to store a graph. Effectivly an array of arrays of arraylists
 // The first array is of size n+1, where n is the number of vertices in a given graph
