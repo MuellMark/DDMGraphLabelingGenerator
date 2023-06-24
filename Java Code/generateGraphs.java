@@ -4,7 +4,7 @@ import java.io.File;  // Import the File class
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.FileWriter;
 
-class generateGraphsOptimizationAndArrays{
+class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
         int numVertices =5; 
