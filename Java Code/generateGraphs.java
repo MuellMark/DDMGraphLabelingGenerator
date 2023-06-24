@@ -63,7 +63,7 @@ class generateGraphs{
                         i+=allCombos.size();
                     }
                 }
-                // If the graph is a valid labeling, is not a repear or inverse, then it's added to ddmLabelings
+                // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
                 if(!isInvOrEq){
                     ddmLabelings.add(current);
                 }
@@ -122,7 +122,7 @@ class generateGraphs{
     // Writes the arraylist of combinations to a file in a readbale way
     public static void writeAllCombosToFile(ArrayList<edgeStorageArrays> AllCombos){
         try {
-            // Opens files
+            // Opens files, change file name here
             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/output.txt");
             for(int i=0;i<AllCombos.size();i++){
                 myWriter.write("\nGraph #"+(i+1)+":\n");
@@ -139,7 +139,7 @@ class generateGraphs{
     // Writes to a file in an adjacency matrix for manual checking
     public static void writeAllCombosToFileAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
         try {
-            // Opens file
+            // Opens file, change file name here
             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/output.txt");
             for(int i=0;i<AllCombos.size();i++){
                 myWriter.write("\nGraph #"+(i+1)+":\n");
@@ -155,7 +155,7 @@ class generateGraphs{
     // Writes to file to be read in by visualizeGraphs.py
     public static void writeAllCombosToFileVisualization(ArrayList<edgeStorageArrays> AllCombos){
         try {
-            // Opens File
+            // Opens File, change file name here
             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt");
             for(int i=0;i<AllCombos.size();i++){
                 AllCombos.get(i).writeToFileForVisualization(myWriter);
