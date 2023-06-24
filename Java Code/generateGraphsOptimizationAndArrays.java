@@ -6,25 +6,8 @@ import java.io.FileWriter;
 
 class generateGraphsOptimizationAndArrays{
     public static void main(String[]args){
-        // edgeStorageArrays testArrGraph = new edgeStorageArrays(5);
-        // testArrGraph.addPair(1, 2);
-        // testArrGraph.addPair(4, 2);
-        // int[] testaddins = {2,5,0,0,0,0};
-        // testArrGraph.addOutList(4, testaddins);
-        // //testArrGraph.print();
-        // //System.out.println(testArrGraph.equals());
-        // edgeStorageArrays graph2 = testArrGraph.copy();
-        // //graph2.print();
-        // System.out.println(testArrGraph.equals(graph2));
-        // testArrGraph.print();
-        // graph2.print();
-
-
-
-
-
-
-        int numVertices =5; // Change for # of Vertices
+        // Change for # of Vertices you'd like to generate
+        int numVertices =5; 
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -37,18 +20,14 @@ class generateGraphsOptimizationAndArrays{
 
         generate(allCombos, numVertices,ddmLabelings); // Starts generating graphs
 
+        // Different print statements, comment out desired one
         printAllCombos(ddmLabelings);
-        printAllAdjMatrix(ddmLabelings);
-        writeAllCombosToFileVisualization(ddmLabelings);
-
-
-        // Prints all graphs found, then writes to files
-        // Several different version, change depending on desired output
         //printAllAdjMatrix(ddmLabelings);
+
+        //Different Write to files, comment out the desired one
+        //writeAllCombosToFile(ddmLabelings);
+        //writeAllCombosToFileAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-        writeAllCombosToFileAdjMatrix(ddmLabelings);
-        // For debugging optimization test
-        //writeAllCombosToFile(allCombos);
     }
 
     // Loops through all recursive calls from checkforSums
@@ -73,9 +52,6 @@ class generateGraphsOptimizationAndArrays{
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
-        // if(sumIns>7 || sumOuts>7){
-        //     System.out.println("Sum ins:"+sumIns+" and Sum Outs:"+sumOuts);
-        // }
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
@@ -134,7 +110,7 @@ class generateGraphsOptimizationAndArrays{
             AllCombos.get(i).print();
         }
     }
-//fix
+
         // Prints arraylist of edgeStorage in an adjacency matrix for easy checking
         public static void printAllAdjMatrix(ArrayList<edgeStorageArrays> AllCombos){
             for(int i=0;i<AllCombos.size();i++){
@@ -142,46 +118,6 @@ class generateGraphsOptimizationAndArrays{
                 AllCombos.get(i).printAdjMatrix();
             }
         }
-
-    // LEGACY, keeping in case needed in future 
-    // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
-    public static ArrayList<edgeStorageArrays> filterResults(ArrayList<edgeStorageArrays> allCombos){
-        ArrayList<edgeStorageArrays> filtered = new ArrayList<>(); // Stores the filtered results
-        for(int i=0;i<allCombos.size();i++){
-            if(allCombos.get(i).isDDMLabeling()){ //Checks if it is a DDM
-                boolean isRepeat= false; // Checks if repeat
-                for(int j=0;j<filtered.size();j++){
-                    if(filtered.get(j).equals(allCombos.get(i))) isRepeat=true;
-                }
-                if(!isRepeat) filtered.add(allCombos.get(i));
-            }
-        }
-        return filtered;
-    }
-
-    // LEGACY, keeping in case needed in future 
-    // If a graph is just the inverse of another graph, not kept, to be used in addition to 
-    // filterResults, not instead of it
-    public static ArrayList<edgeStorageArrays> filterInverseResults(ArrayList<edgeStorageArrays> allCombos){
-        ArrayList<edgeStorageArrays> filtered = new ArrayList<>(); // Stores the filtered results
-        for(int i=0;i<allCombos.size();i++){
-            boolean isRepeat= false; // Checks if inverse
-            for(int j=0;j<filtered.size();j++){
-                if(filtered.get(j).isInverse(allCombos.get(i))) isRepeat=true;
-            }
-            if(!isRepeat) filtered.add(allCombos.get(i));
-        }
-        return filtered;
-    }
-
-    //fix 
-
-    // // calls sort on every graph in allCombos, sorting the ins and outs for easier checking
-    // public static void sortAllCombos(ArrayList<edgeStorageArrays> allCombos){
-    //     for(int i=0;i<allCombos.size();i++){
-    //         allCombos.get(i).sort();
-    //     }
-    // }
 
     // Writes the arraylist of combinations to a file in a readbale way
     public static void writeAllCombosToFile(ArrayList<edgeStorageArrays> AllCombos){
@@ -230,5 +166,36 @@ class generateGraphsOptimizationAndArrays{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+        
+    // LEGACY, keeping in case needed in future 
+    // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
+    public static ArrayList<edgeStorageArrays> filterResults(ArrayList<edgeStorageArrays> allCombos){
+        ArrayList<edgeStorageArrays> filtered = new ArrayList<>(); // Stores the filtered results
+        for(int i=0;i<allCombos.size();i++){
+            if(allCombos.get(i).isDDMLabeling()){ //Checks if it is a DDM
+                boolean isRepeat= false; // Checks if repeat
+                for(int j=0;j<filtered.size();j++){
+                    if(filtered.get(j).equals(allCombos.get(i))) isRepeat=true;
+                }
+                if(!isRepeat) filtered.add(allCombos.get(i));
+            }
+        }
+        return filtered;
+    }
+
+    // LEGACY, keeping in case needed in future 
+    // If a graph is just the inverse of another graph, not kept, to be used in addition to 
+    // filterResults, not instead of it
+    public static ArrayList<edgeStorageArrays> filterInverseResults(ArrayList<edgeStorageArrays> allCombos){
+        ArrayList<edgeStorageArrays> filtered = new ArrayList<>(); // Stores the filtered results
+        for(int i=0;i<allCombos.size();i++){
+            boolean isRepeat= false; // Checks if inverse
+            for(int j=0;j<filtered.size();j++){
+                if(filtered.get(j).isInverse(allCombos.get(i))) isRepeat=true;
+            }
+            if(!isRepeat) filtered.add(allCombos.get(i));
+        }
+        return filtered;
     }
 }
