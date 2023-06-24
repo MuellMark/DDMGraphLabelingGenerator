@@ -4,11 +4,12 @@ import java.io.File;  // Import the File class
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.FileWriter;
 
-// Class used to store a graph. Effectivly an array of arrays of arraylists
+// Class used to store a graph. Effectivly an array of arrays of arrays
 // The first array is of size n+1, where n is the number of vertices in a given graph
 // The 0th index is not used to make it easier, vertex 1 is index 1, and so on
 // For each of those arrays there is an array of size 2, 0 is for edges oing out, 1 is for edges coming in
-// Then, for both 0 and 1, there is an arraylist to store all edges
+// Then, for both 0 and 1, there is an array to store all the edges where the 0th index is the index at which 
+// to add the next edge
 class edgeStorageArrays{
    int[][][] edges;
 
@@ -81,9 +82,7 @@ class edgeStorageArrays{
 
     // Takes in an arraylist of ins, and adds them to then ins one by one 
     public void addInList(int vertex, int[] ins){
-        //for(int i=0;i<edges[vertex][i].size();i++) outs.add(edges[vertex][0].get(i));
         for(int i=0;i<ins.length;i++) edges[vertex][1][i]=(ins[i]);
-        //edges[vertex][1]=ins;
     }
     // Takes in an arraylist of outss, and adds them to then outss one by one 
     public void addOutList(int vertex, int[] outs){
@@ -129,11 +128,11 @@ class edgeStorageArrays{
             boolean isDDM = true;
             for(int i=1;i<size()+1;i++){
                 if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
-                //if(getIns(i).length+getOuts(i).length<3) isDDM =false; // Will need to change later for 0's
             }
             return isDDM;
     
         }
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());
@@ -145,16 +144,7 @@ class edgeStorageArrays{
             newArr.addOutList(i, tempOut);
         }
         return newArr;
-
     }
-
-    //Sorts the ins and outs of all ins and outs
-    // public void sort(){
-    //     for(int i=1;i<size()+1;i++){
-    //         Collections.sort(edges[i][0]);
-    //         Collections.sort(edges[i][1]);
-    //     }
-    // }
 
     //Checks if the two edgeStorages are the same
     public boolean equals(edgeStorageArrays other){
@@ -186,15 +176,8 @@ class edgeStorageArrays{
                 if(!Arrays.equals(getOuts(i),other.getIns(i))) equals=false;
             }
         }
-        
         return equals;
     }
-
-
-// Need to fix:
-// for(int j=1;j<edges[i][0].length;j++){
-//     if(edges[i][0][j]>0) System.out.print(" "+edges[i][0][j]);
-// }
 
     //writes edges in an easily readable way to a file
     public void writeToFile(FileWriter myWriter){
