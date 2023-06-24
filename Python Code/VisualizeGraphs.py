@@ -1,15 +1,14 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-# Change here depending on what needs to be generated
+# Change number of vertices here
 numVertices = 7
-inverses = False
 
-graphnum=1 #Tracks graph number for file
-
-#File all the graphs are stored in
+#File that all the graphs are stored in, change based on where storing the files
 graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt",'r')
 contents = graphsToGenerate.readlines()
+
+graphnum=1 #Tracks graph number for file
 
 #Goes through each graph in the file
 for line in contents:
@@ -17,7 +16,6 @@ for line in contents:
     tempList=[]
     G = nx.DiGraph() #Makes graph
     while index<len(line):
-        #Need functionality for naming maybe
         #Gets all edges and puts them in a list
         if line[index].isdigit():
             ifrom=int(line[index])
@@ -27,7 +25,7 @@ for line in contents:
             tempList.append(tempTuple)
         index+=1
 
-    #Locks vertices in place
+    #Locks vertices in place, one case for each number of graph
     if(numVertices==5):
         G.add_node(1,pos=(2,1))
         G.add_node(2,pos=(4,1))
@@ -60,14 +58,15 @@ for line in contents:
         G.add_node(8,pos=(1,2))
     pos=nx.get_node_attributes(G,'pos')
 
+    # Used to keep track of the graphs it is visualizing
     print(tempList)
 
-    G.add_edges_from(tempList)
-    plt.title(str(numVertices)+" Vertex Graph #"+str(graphnum))
-    nx.draw(G,pos,node_color='white',with_labels=True)
+    G.add_edges_from(tempList) #Adds edges to the graph object
+    plt.title(str(numVertices)+" Vertex Graph #"+str(graphnum)) # adds title
+    nx.draw(G,pos,node_color='white',with_labels=True) #Draws the graph based on edge list and positions
 
-    # Need to change save location based on what is generated
+    # Saves the figure to a specified path, change based on where you want them saved
     plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Disconnected Graphs/7VertexNoInverse/graph"+str(graphnum)+".jpeg")
-    plt.clf()
-    G.clear()
-    graphnum+=1
+    plt.clf() # clears matplotlib
+    G.clear() # clears graph object
+    graphnum+=1 
