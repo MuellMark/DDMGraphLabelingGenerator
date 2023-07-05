@@ -7,7 +7,9 @@ import java.io.FileWriter;
 class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
-        int numVertices =5; 
+        int numVertices =6; 
+        // Change to true to keep zeroes TODO: change for more options
+        boolean keepZeroes = false;
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -18,7 +20,7 @@ class generateGraphs{
         edgeStorageArrays startGraph = new edgeStorageArrays(numVertices);
         allCombos.add(startGraph);
 
-        generate(allCombos, numVertices,ddmLabelings); // Starts generating graphs
+        generate(allCombos, numVertices,ddmLabelings,keepZeroes); // Starts generating graphs
 
         // Different print statements, comment out desired one
         printAllCombos(ddmLabelings);
@@ -31,7 +33,7 @@ class generateGraphs{
     }
 
     // Loops through all recursive calls from checkforSums
-    public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings){
+    public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,boolean keepZeroes){
         // Loops through all vertices in reverse order
         while(vertex>0){
             ArrayList<Integer> set = getUsuableSet(vertex); // Gets usable edge set
@@ -40,7 +42,7 @@ class generateGraphs{
             // Does a recurrsive call to all graphs in allCombos
             for(int i=0;i<currentSize;i++){
                 edgeStorageArrays temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
-                checkForSums(allCombos, temp, set, vertex, 0,ddmLabelings); // Recursive call
+                checkForSums(allCombos, temp, set, vertex, 0,ddmLabelings,keepZeroes); // Recursive call
             }
             vertex--;
         }
@@ -48,26 +50,43 @@ class generateGraphs{
 
     // Recursive method, finds all possible combinations of edges 
     public static void checkForSums(ArrayList<edgeStorageArrays> allCombos, edgeStorageArrays current,
-    ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings){
+    ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings, boolean keepZeroes){
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
-            if(current.isDDMLabeling()){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
-                boolean isInvOrEq = false;
-                for(int i=0;i<ddmLabelings.size();i++){
-                    if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
-                        isInvOrEq=true;
-                        i+=allCombos.size();
+            if(!keepZeroes){
+                if(current.isDDMLabeling()){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
+                    boolean isInvOrEq = false;
+                    for(int i=0;i<ddmLabelings.size();i++){
+                        if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
+                            isInvOrEq=true;
+                            i+=allCombos.size();
+                        }
+                    }
+                    // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
+                    if(!isInvOrEq){
+                        ddmLabelings.add(current);
                     }
                 }
-                // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
-                if(!isInvOrEq){
-                    ddmLabelings.add(current);
+            }else{
+                if(current.isDDMLabelingIncludeZeroes()){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
+                    boolean isInvOrEq = false;
+                    for(int i=0;i<ddmLabelings.size();i++){
+                        if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
+                            isInvOrEq=true;
+                            i+=allCombos.size();
+                        }
+                    }
+                    // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
+                    if(!isInvOrEq){
+                        ddmLabelings.add(current);
+                    }
                 }
             }
+            
         // Otherwise, does a recurrsive case
         }else if(index<set.size() ){
             // Creates copy and adds index to ins
@@ -86,11 +105,11 @@ class generateGraphs{
             if(allCombos.size()%10000==0) System.out.println("Graph added, "+allCombos.size()+" graphs found");
             if(allCombos.size()%500000==0) System.gc();
             //Recursive calls, one for each new graph created
-            checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings);
+            checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings,keepZeroes);
 
-            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings);
+            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings,keepZeroes);
 
-            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings);
+            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings,keepZeroes);
 
         }
     }
