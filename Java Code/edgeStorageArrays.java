@@ -123,15 +123,26 @@ class edgeStorageArrays{
         return isDDM;
     }
 
-        // Checks if it is a DDM labeling, not accounting for zeroes
-        public boolean isDDMLabelingIncludeZeroes(){
-            boolean isDDM = true;
-            for(int i=1;i<size()+1;i++){
-                if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
-            }
-            return isDDM;
-    
+    // Checks if it is a DDM labeling, not accounting for zeroes
+    public boolean isDDMLabelingIncludeZeroes(){
+        boolean isDDM = true;
+        for(int i=1;i<size()+1;i++){
+            if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
         }
+        return isDDM;
+
+    }
+
+    //TODO
+    // Checks if it is a circulant labeling
+    public boolean isCirculantLabeling(){
+        boolean isCir = true;
+
+        //Needs a check for 4 vertices
+        //Needs method to get the cycle
+        //Needs method to check said cycle
+        return isCir;
+    }
 
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
