@@ -156,6 +156,19 @@ class edgeStorageArrays{
         return all4;
     }
 
+    // Returns all possible cycles in a given graph, kick off method
+    // Not sure if should be arraylist
+    public ArrayList<int[]> getCycles(){
+        ArrayList<int[]> cycles = new ArrayList<>();
+        //Start point always 1, don't need multiple start points
+        //Will keep track of possibleNums to avoid repeating
+        ArrayList<Integer> possibleNums = new ArrayList<>();
+        for(int i=1;i<size();i++) possibleNums.add(i);
+
+
+        return cycles;
+    }
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());
