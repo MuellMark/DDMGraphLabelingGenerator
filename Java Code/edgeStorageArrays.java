@@ -139,7 +139,6 @@ class edgeStorageArrays{
         boolean isCir = true;
 
         if(!allEdgesDegree4()) isCir=false;
-        //Needs a check for 4 vertices
         //Needs method to get the cycle
         //Needs method to check said cycle
         return isCir;

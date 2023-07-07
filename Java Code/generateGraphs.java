@@ -8,7 +8,8 @@ class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
         int numVertices =6; 
-        // Change to true to keep zeroes TODO: change for more options
+
+        // Change number based on the desired method
         // 1 = isDDMLabeling()
         // 2 = isDDMLabelingIncludeZeroes()
         // 3 = isCirculantLabeling()
@@ -175,6 +176,8 @@ class generateGraphs{
         }
     }
 
+    // Selector method to call different methods based on the user selected number
+    // If invalid number selected, no grpahs are generated
     public static boolean callSpecificMethod(int num, edgeStorageArrays current){
         switch(num){
             case(1):
