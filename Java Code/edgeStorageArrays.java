@@ -164,9 +164,18 @@ class edgeStorageArrays{
         //Will keep track of possibleNums to avoid repeating
         ArrayList<Integer> possibleNums = new ArrayList<>();
         for(int i=1;i<size();i++) possibleNums.add(i);
-
+        getCyclesRecur(1,possibleNums,cycles);
 
         return cycles;
+    }
+
+    private void getCyclesRecur(int currentEdge, ArrayList<Integer> possibleNums, 
+    ArrayList<int []> cycles){
+        //Base case, when possiblenums is empty
+        //Recur case, check for all possible next moves, remove it from possiblenum,
+        //Move the current to that edge and call the method again.
+
+        //Meed to check is there are duplicates
     }
 
     // Returns a copy of the current edgeStorage in question
