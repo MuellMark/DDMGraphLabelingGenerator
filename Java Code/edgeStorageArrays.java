@@ -138,10 +138,23 @@ class edgeStorageArrays{
     public boolean isCirculantLabeling(){
         boolean isCir = true;
 
+        if(!allEdgesDegree4()) isCir=false;
         //Needs a check for 4 vertices
         //Needs method to get the cycle
         //Needs method to check said cycle
         return isCir;
+    }
+
+    // Checks if all vertices have degree 4
+    private boolean allEdgesDegree4(){
+        boolean all4 = true;
+        for(int i=1;i<size();i++){
+            int tempSum=0;
+            tempSum+=edges[i][0][0]-1;
+            tempSum+=edges[i][1][0]-1;
+            if(tempSum!=4) all4=false;
+        }
+        return all4;
     }
 
     // Returns a copy of the current edgeStorage in question
