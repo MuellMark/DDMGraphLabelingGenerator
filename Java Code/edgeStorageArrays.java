@@ -179,6 +179,12 @@ class edgeStorageArrays{
     ArrayList<int []> cycles){
         if(possibleNums.size()==0){
             if(contains(edges[currentEdge][0],1) ||contains(edges[currentEdge][1],1)){
+                cycles.add(cycle);
+            }
+        }else{
+            for(int i=1;i<edges[currentEdge][0][0];i++){
+                //TODo need copy method for arrayInts and arraylist of ints
+                //getCyclesRecur(cycle,)
             }
         }
         //Base case, when possiblenums is empty
