@@ -338,4 +338,12 @@ class edgeStorageArrays{
         }
         return newArr;
     }
+
+    private ArrayList<Integer> copyListInts(ArrayList<Integer> list){
+        ArrayList<Integer> newList = new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            newList.add(list.get(i));
+        }
+        return newList;
+    }
 }
