@@ -139,7 +139,9 @@ class edgeStorageArrays{
         boolean isCir = true;
 
         if(!allEdgesDegree4()) isCir=false;
-        ArrayList<int[]> cycles = getCycles();
+        if(isCir){
+            ArrayList<int[]> cycles = getCycles();
+        }
         //Needs method to get the cycle
         //Needs method to check said cycle
         return isCir;
@@ -165,16 +167,18 @@ class edgeStorageArrays{
         //Will keep track of possibleNums to avoid repeating
         ArrayList<Integer> possibleNums = new ArrayList<>();
         for(int i=1;i<size();i++) possibleNums.add(i);
-        getCyclesRecur(3,possibleNums,cycles);
+        int[] cycle = new int[size()-1];
+        cycle[0]=1;
+
+        getCyclesRecur(cycle,1,possibleNums,cycles);
 
         return cycles;
     }
 
-    private void getCyclesRecur(int currentEdge, ArrayList<Integer> possibleNums, 
+    private void getCyclesRecur(int[] cycle,int currentEdge, ArrayList<Integer> possibleNums, 
     ArrayList<int []> cycles){
         if(possibleNums.size()==0){
             if(contains(edges[currentEdge][0],1) ||contains(edges[currentEdge][1],1)){
-                System.out.println("what");
             }
         }
         //Base case, when possiblenums is empty
