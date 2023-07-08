@@ -184,14 +184,25 @@ class edgeStorageArrays{
         }else{
             //print();
             for(int i=1;i<edges[currentEdge][0][0];i++){
-                System.out.println(currentEdge);
-                cycle[cycleIndex]=edges[currentEdge][0][i];
-                possibleNums.remove(Integer.valueOf(edges[currentEdge][0][i]));
-                cycleIndex++;
-                getCyclesRecur(cycle, edges[currentEdge][0][i], possibleNums, cycles, cycleIndex);
-                cycleIndex--;
-                possibleNums.add(edges[currentEdge][0][i]);
-                cycle[cycleIndex]=0;
+                //if(possibleNums.contains(edges[currentEdge][0][0])){
+                    int[] cycleCopy = copyArrInts(cycle);
+                    cycleCopy[cycleIndex]= edges[currentEdge][0][i];
+
+                    ArrayList<Integer> posNumsCopy = copyListInts(possibleNums);
+                    posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
+
+                    getCyclesRecur(cycleCopy, edges[currentEdge][0][i], possibleNums, cycles, cycleIndex);
+                //}
+                
+                // System.out.println(currentEdge);
+                // cycle[cycleIndex]=edges[currentEdge][0][i];
+                // possibleNums.remove(Integer.valueOf(edges[currentEdge][0][i]));
+                // cycleIndex++;
+                // getCyclesRecur(cycle, edges[currentEdge][0][i], possibleNums, cycles, cycleIndex);
+                // cycleIndex--;
+                // possibleNums.add(edges[currentEdge][0][i]);
+                // cycle[cycleIndex]=0;
+                
                 
 
                 //TODo need copy method for arrayInts and arraylist of ints
