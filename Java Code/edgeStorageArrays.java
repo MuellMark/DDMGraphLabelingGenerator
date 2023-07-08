@@ -183,6 +183,8 @@ class edgeStorageArrays{
             }
         }else{
             for(int i=1;i<edges[currentEdge][0][0];i++){
+                possibleNums.remove(edges[currentEdge][0][i]);
+                
                 //TODo need copy method for arrayInts and arraylist of ints
                 //getCyclesRecur(cycle,)
             }
@@ -318,5 +320,13 @@ class edgeStorageArrays{
             if(arr[i]==num) contain=true;
         }
         return contain;
+    }
+
+    private int[] copyArrInts(int[] arr){
+        int[] newArr = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            newArr[i]=arr[i];
+        }
+        return newArr;
     }
 }
