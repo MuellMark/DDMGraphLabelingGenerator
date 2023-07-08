@@ -167,24 +167,33 @@ class edgeStorageArrays{
         //Will keep track of possibleNums to avoid repeating
         ArrayList<Integer> possibleNums = new ArrayList<>();
         for(int i=1;i<size();i++) possibleNums.add(i);
-        int[] cycle = new int[size()-1];
+        int[] cycle = new int[size()];
         cycle[0]=1;
-
-        getCyclesRecur(cycle,1,possibleNums,cycles);
+        int cycleIndex=1;
+        getCyclesRecur(cycle,1,possibleNums,cycles,cycleIndex);
 
         return cycles;
     }
 
     private void getCyclesRecur(int[] cycle,int currentEdge, ArrayList<Integer> possibleNums, 
-    ArrayList<int []> cycles){
+    ArrayList<int []> cycles, int cycleIndex){
         if(possibleNums.size()==0){
             if(contains(edges[currentEdge][0],1) ||contains(edges[currentEdge][1],1)){
                 cycles.add(cycle);
             }
         }else{
+            //print();
             for(int i=1;i<edges[currentEdge][0][0];i++){
-                possibleNums.remove(edges[currentEdge][0][i]);
+                System.out.println(currentEdge);
+                cycle[cycleIndex]=edges[currentEdge][0][i];
+                possibleNums.remove(Integer.valueOf(edges[currentEdge][0][i]));
+                cycleIndex++;
+                getCyclesRecur(cycle, edges[currentEdge][0][i], possibleNums, cycles, cycleIndex);
+                cycleIndex--;
+                possibleNums.add(edges[currentEdge][0][i]);
+                cycle[cycleIndex]=0;
                 
+
                 //TODo need copy method for arrayInts and arraylist of ints
                 //getCyclesRecur(cycle,)
             }
