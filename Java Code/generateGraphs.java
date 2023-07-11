@@ -13,7 +13,9 @@ class generateGraphs{
         // 1 = isDDMLabeling()
         // 2 = isDDMLabelingIncludeZeroes()
         // 3 = isCirculantLabeling()
-        int methodSelect = 3;
+        int methodSelect = 1;
+
+        int usableSetSelector = 1;
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -40,7 +42,7 @@ class generateGraphs{
     public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,int methodSelect){
         // Loops through all vertices in reverse order
         while(vertex>0){
-            ArrayList<Integer> set = getUsuableSet(vertex); // Gets usable edge set
+            ArrayList<Integer> set = getUsuableSetDecreasing(vertex); // Gets usable edge set
             int currentSize=allCombos.size(); // Makes sure not an infinite loop, only checks current graphs
             System.out.println("Graphs generated so far: "+currentSize);
             // Does a recurrsive call to all graphs in allCombos
@@ -102,14 +104,17 @@ class generateGraphs{
 
         }
     }
+
     //Gets usable set for a vertex, basically all vertices less than the input
-    public static ArrayList<Integer> getUsuableSet(int vertex){
+    public static ArrayList<Integer> getUsuableSetDecreasing(int vertex){
         ArrayList<Integer> set = new ArrayList<>();
         for(int i=1;i<vertex;i++){
             set.add(i);
         }
         return set;
     }
+
+
 
     // Prints arraylist of edgeStorage in a readable fassion
     public static void printAllCombos(ArrayList<edgeStorageArrays> AllCombos){
