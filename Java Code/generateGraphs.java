@@ -26,7 +26,7 @@ class generateGraphs{
         edgeStorageArrays startGraph = new edgeStorageArrays(numVertices);
         allCombos.add(startGraph);
 
-        generate(allCombos, numVertices,ddmLabelings,methodSelect); // Starts generating graphs
+        generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector); // Starts generating graphs
 
         // Different print statements, comment out desired one
         printAllCombos(ddmLabelings);
@@ -39,10 +39,11 @@ class generateGraphs{
     }
 
     // Loops through all recursive calls from checkforSums
-    public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,int methodSelect){
+    public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,
+    int methodSelect, int usableSetSelector){
         // Loops through all vertices in reverse order
         while(vertex>0){
-            ArrayList<Integer> set = getUsuableSetDecreasing(vertex); // Gets usable edge set
+            ArrayList<Integer> set = getUsableSet(usableSetSelector, vertex); // Gets usable edge set
             int currentSize=allCombos.size(); // Makes sure not an infinite loop, only checks current graphs
             System.out.println("Graphs generated so far: "+currentSize);
             // Does a recurrsive call to all graphs in allCombos
@@ -94,7 +95,6 @@ class generateGraphs{
 
             // Debugging statement, to track number of graphs generated when dealing with large cases
             if(allCombos.size()%10000==0) System.out.println("Graph added, "+allCombos.size()+" graphs found");
-            if(allCombos.size()%500000==0) System.gc();
             //Recursive calls, one for each new graph created
             checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings,methodSelect);
 
@@ -113,8 +113,6 @@ class generateGraphs{
         }
         return set;
     }
-
-
 
     // Prints arraylist of edgeStorage in a readable fassion
     public static void printAllCombos(ArrayList<edgeStorageArrays> AllCombos){
@@ -193,6 +191,19 @@ class generateGraphs{
                 return current.isCirculantLabeling();
             default:
                 return false;
+        }
+    }
+
+    public static ArrayList<Integer>  getUsableSet(int num, int vertex){
+        ArrayList<Integer> set = new ArrayList<>();
+        switch(num){
+            case(1):
+                set = getUsuableSetDecreasing(vertex);
+                return set;
+            // case(2):
+            //     return current.isDDMLabelingIncludeZeroes();
+            default:
+                return set;
         }
     }
         
