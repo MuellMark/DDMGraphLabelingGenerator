@@ -7,7 +7,7 @@ import java.io.FileWriter;
 class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
-        int numVertices =6; 
+        int numVertices =5; 
 
         // Change number based on the desired method
         // 1 = isDDMLabeling()
