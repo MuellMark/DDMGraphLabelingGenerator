@@ -144,6 +144,11 @@ class edgeStorageArrays{
             if(cycles.size()==0){
                 isCir=false;
             }
+            else{
+                for(int[] cycle:cycles){
+                    checkCirEdges(cycle);
+                }
+            }
             //Debugging, prints all of the cycles
             // for(int[] cycle:cycles){
             //     System.out.println(Arrays.toString(cycle));
@@ -151,7 +156,6 @@ class edgeStorageArrays{
             // System.out.println();
         }
         
-        //Needs method to get the cycle
         //Needs method to check said cycle
         return isCir;
     }
@@ -169,7 +173,6 @@ class edgeStorageArrays{
     }
 
     // Returns all possible cycles in a given graph, kick off method
-    // Not sure if should be arraylist
     public ArrayList<int[]> getCycles(){
         ArrayList<int[]> cycles = new ArrayList<>();
         //Start point always 1, don't need multiple start points
@@ -184,6 +187,7 @@ class edgeStorageArrays{
         return cycles;
     }
 
+    //Recursive method to check is a edge set contains a cycle, and stores any cycles found
     private void getCyclesRecur(int[] cycle,int currentEdge, ArrayList<Integer> possibleNums, 
     ArrayList<int []> cycles, int cycleIndex){
         if(possibleNums.size()==0){
@@ -221,28 +225,16 @@ class edgeStorageArrays{
                     getCyclesRecur(cycleCopy, edges[currentEdge][1][i], posNumsCopy, cycles, cycleIndex);
                     cycleIndex--;
                 }
-                // System.out.println(currentEdge);
-                // cycle[cycleIndex]=edges[currentEdge][0][i];
-                // possibleNums.remove(Integer.valueOf(edges[currentEdge][0][i]));
-                // cycleIndex++;
-                // getCyclesRecur(cycle, edges[currentEdge][0][i], possibleNums, cycles, cycleIndex);
-                // cycleIndex--;
-                // possibleNums.add(edges[currentEdge][0][i]);
-                // cycle[cycleIndex]=0;
-                
-                
-
-                //TODo need copy method for arrayInts and arraylist of ints
-                //getCyclesRecur(cycle,)
             }
         }
-        //Base case, when possiblenums is empty
-        //Recur case, check for all possible next moves, remove it from possiblenum,
-        //Move the current to that edge and call the method again.
-
-        //Meed to check is there are duplicates
     }
 
+    private boolean checkCirEdges(int[] cycle){
+        boolean isCir=false;
+
+        return isCir;
+    }
+    
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());
