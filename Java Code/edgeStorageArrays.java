@@ -245,14 +245,14 @@ class edgeStorageArrays{
 
             if(!(contains(edges[cycle[i]][0],cycle[indexPlus])||contains(edges[cycle[i]][1],cycle[indexPlus]))){
                 isCir=false;
-                System.out.println(Arrays.toString(edges[i][0]));
-                System.out.println("Happenes "+i);
-                System.out.println(cycle[indexPlus]);
+                // System.out.println(Arrays.toString(edges[i][0]));
+                // System.out.println("Happenes "+i);
+                // System.out.println(cycle[indexPlus]);
             }
             if(!(contains(edges[cycle[i]][0],cycle[indexMinus])||contains(edges[cycle[i]][1],cycle[indexMinus]))){
                 isCir=false;
-                System.out.println("Happenes "+i);
-                System.out.println(cycle[indexMinus]);
+                // System.out.println("Happenes "+i);
+                // System.out.println(cycle[indexMinus]);
                 
             } 
         }

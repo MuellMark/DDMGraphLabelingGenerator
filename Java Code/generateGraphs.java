@@ -13,7 +13,7 @@ class generateGraphs{
         // 1 = isDDMLabeling()
         // 2 = isDDMLabelingIncludeZeroes()
         // 3 = isCirculantLabeling()
-        int methodSelect = 3;
+        int methodSelect = 1;
 
         // For changing how the set works, TODO
         int usableSetSelector = 1;
@@ -30,8 +30,8 @@ class generateGraphs{
         generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector); // Starts generating graphs
 
         // Different print statements, comment out desired one
-        printAllCombos(ddmLabelings);
-        //printAllAdjMatrix(ddmLabelings);
+        //printAllCombos(ddmLabelings);
+        printAllAdjMatrix(ddmLabelings);
 
         //Different Write to files, comment out the desired one
         //writeAllCombosToFile(ddmLabelings);
@@ -39,7 +39,7 @@ class generateGraphs{
         //writeAllCombosToFileVisualization(ddmLabelings);
 
         //Test, will be deleted
-        System.out.println("---------------------------------------");
+        //System.out.println("---------------------------------------");
         edgeStorageArrays testCir = new edgeStorageArrays(5);
         testCir.addPair(1, 2);
         testCir.addPair(2, 3);
@@ -51,9 +51,9 @@ class generateGraphs{
         testCir.addPair(2, 4);
         testCir.addPair(2, 5);
         testCir.addPair(3, 5);
-        testCir.print();
+        // testCir.print();
 
-        System.out.println(testCir.isCirculantLabeling());
+        // System.out.println(testCir.isCirculantLabeling());
     }
 
     // Loops through all recursive calls from checkforSums
