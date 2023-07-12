@@ -150,7 +150,7 @@ class edgeStorageArrays{
     // Checks if all vertices have degree 4
     private boolean allEdgesDegree4(){
         boolean all4 = true;
-        for(int i=1;i<size();i++){
+        for(int i=1;i<=size();i++){
             int tempSum=0;
             tempSum+=edges[i][0][0]-1;
             tempSum+=edges[i][1][0]-1;
@@ -166,7 +166,7 @@ class edgeStorageArrays{
         //Start point always 1, don't need multiple start points
         //Will keep track of possibleNums to avoid repeating
         ArrayList<Integer> possibleNums = new ArrayList<>();
-        for(int i=1;i<size();i++) possibleNums.add(i);
+        for(int i=2;i<=size();i++) possibleNums.add(i); // 1 is the start of all cycles
         int[] cycle = new int[size()];
         cycle[0]=1;
         int cycleIndex=1;
@@ -182,9 +182,9 @@ class edgeStorageArrays{
                 cycles.add(cycle);
             }
         }else{
-            //print();
             for(int i=1;i<edges[currentEdge][0][0];i++){
-                //if(possibleNums.contains(edges[currentEdge][0][0])){
+                if(possibleNums.contains(edges[currentEdge][0][0])){
+                    System.out.println(possibleNums);
                     int[] cycleCopy = copyArrInts(cycle);
                     cycleCopy[cycleIndex]= edges[currentEdge][0][i];
                     cycleIndex++;
@@ -192,7 +192,7 @@ class edgeStorageArrays{
                     posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
                     System.out.println(Arrays.toString(cycle));
                     getCyclesRecur(cycleCopy, edges[currentEdge][0][i], posNumsCopy, cycles, cycleIndex);
-                
+                }
                 // System.out.println(currentEdge);
                 // cycle[cycleIndex]=edges[currentEdge][0][i];
                 // possibleNums.remove(Integer.valueOf(edges[currentEdge][0][i]));
