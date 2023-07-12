@@ -145,9 +145,15 @@ class edgeStorageArrays{
                 isCir=false;
             }
             else{
-                for(int[] cycle:cycles){
-                    checkCirEdges(cycle);
+                boolean contWhile=true;
+                int whileIndex=0;
+                while(contWhile && whileIndex<cycles.size()){
+                    boolean temp = checkCirEdges(cycles.get(whileIndex));
+                    if(temp) contWhile=false; // If contWhile is false, one was found
+                    whileIndex++;
                 }
+                if(contWhile)  isCir=false;
+
             }
             //Debugging, prints all of the cycles
             // for(int[] cycle:cycles){
@@ -230,11 +236,19 @@ class edgeStorageArrays{
     }
 
     private boolean checkCirEdges(int[] cycle){
-        boolean isCir=false;
+        boolean isCir=true;
+        int cycleLen = cycle.length;
+        for(int i=0;i<cycleLen;i++){
+            // TODO: need to be able to chenge how much is added
+            int indexPlus=(i+2)%cycleLen;
+            int indexMinus=(i+cycleLen-2)%cycleLen; // % not working for negative
 
+            if(contains(edges[i][0],cycle[indexPlus])||contains(edges[i][1],cycle[indexPlus])) isCir=false;
+            if(contains(edges[i][0],cycle[indexMinus])||contains(edges[i][1],cycle[indexMinus])) isCir=false;
+        }
         return isCir;
     }
-    
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());
