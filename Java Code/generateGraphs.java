@@ -13,8 +13,9 @@ class generateGraphs{
         // 1 = isDDMLabeling()
         // 2 = isDDMLabelingIncludeZeroes()
         // 3 = isCirculantLabeling()
-        int methodSelect = 1;
+        int methodSelect = 3;
 
+        // For changing how the set works, TODO
         int usableSetSelector = 1;
 
         // Stores all possible combinations for all recurssive calls

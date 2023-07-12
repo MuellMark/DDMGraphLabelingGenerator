@@ -187,12 +187,11 @@ class edgeStorageArrays{
                 //if(possibleNums.contains(edges[currentEdge][0][0])){
                     int[] cycleCopy = copyArrInts(cycle);
                     cycleCopy[cycleIndex]= edges[currentEdge][0][i];
-
+                    cycleIndex++;
                     ArrayList<Integer> posNumsCopy = copyListInts(possibleNums);
                     posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
-
-                    getCyclesRecur(cycleCopy, edges[currentEdge][0][i], possibleNums, cycles, cycleIndex);
-                //}
+                    System.out.println(Arrays.toString(cycle));
+                    getCyclesRecur(cycleCopy, edges[currentEdge][0][i], posNumsCopy, cycles, cycleIndex);
                 
                 // System.out.println(currentEdge);
                 // cycle[cycleIndex]=edges[currentEdge][0][i];
