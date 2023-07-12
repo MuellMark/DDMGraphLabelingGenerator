@@ -155,7 +155,7 @@ class edgeStorageArrays{
                 if(contWhile)  isCir=false;
 
             }
-            //Debugging, prints all of the cycles
+            // //Debugging, prints all of the cycles
             // for(int[] cycle:cycles){
             //     System.out.println(Arrays.toString(cycle));
             // }
@@ -243,8 +243,18 @@ class edgeStorageArrays{
             int indexPlus=(i+2)%cycleLen;
             int indexMinus=(i+cycleLen-2)%cycleLen; // % not working for negative
 
-            if(contains(edges[i][0],cycle[indexPlus])||contains(edges[i][1],cycle[indexPlus])) isCir=false;
-            if(contains(edges[i][0],cycle[indexMinus])||contains(edges[i][1],cycle[indexMinus])) isCir=false;
+            if(!(contains(edges[cycle[i]][0],cycle[indexPlus])||contains(edges[cycle[i]][1],cycle[indexPlus]))){
+                isCir=false;
+                System.out.println(Arrays.toString(edges[i][0]));
+                System.out.println("Happenes "+i);
+                System.out.println(cycle[indexPlus]);
+            }
+            if(!(contains(edges[cycle[i]][0],cycle[indexMinus])||contains(edges[cycle[i]][1],cycle[indexMinus]))){
+                isCir=false;
+                System.out.println("Happenes "+i);
+                System.out.println(cycle[indexMinus]);
+                
+            } 
         }
         return isCir;
     }

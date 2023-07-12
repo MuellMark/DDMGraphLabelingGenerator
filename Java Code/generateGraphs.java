@@ -39,6 +39,7 @@ class generateGraphs{
         //writeAllCombosToFileVisualization(ddmLabelings);
 
         //Test, will be deleted
+        System.out.println("---------------------------------------");
         edgeStorageArrays testCir = new edgeStorageArrays(5);
         testCir.addPair(1, 2);
         testCir.addPair(2, 3);
@@ -50,6 +51,7 @@ class generateGraphs{
         testCir.addPair(2, 4);
         testCir.addPair(2, 5);
         testCir.addPair(3, 5);
+        testCir.print();
 
         System.out.println(testCir.isCirculantLabeling());
     }
