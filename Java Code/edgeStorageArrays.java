@@ -149,7 +149,10 @@ class edgeStorageArrays{
                 int whileIndex=0;
                 while(contWhile && whileIndex<cycles.size()){
                     boolean temp = checkCirEdges(cycles.get(whileIndex));
-                    if(temp) contWhile=false; // If contWhile is false, one was found
+                    if(temp){
+                        //System.out.println(Arrays.toString(cycles.get(whileIndex)));
+                        contWhile=false; // If contWhile is false, one was found
+                    } 
                     whileIndex++;
                 }
                 if(contWhile)  isCir=false;
@@ -182,7 +185,6 @@ class edgeStorageArrays{
     public ArrayList<int[]> getCycles(){
         ArrayList<int[]> cycles = new ArrayList<>();
         //Start point always 1, don't need multiple start points
-        //Will keep track of possibleNums to avoid repeating
         ArrayList<Integer> possibleNums = new ArrayList<>();
         for(int i=2;i<=size();i++) possibleNums.add(i); // 1 is the start of all cycles
         int[] cycle = new int[size()];
@@ -203,30 +205,21 @@ class edgeStorageArrays{
         }else if(cycleIndex<size()){
             for(int i=1;i<edges[currentEdge][0][0];i++){
                 if(possibleNums.contains(edges[currentEdge][0][i])){
-                    //System.out.println("posNums:"+possibleNums);
-                    //System.out.println("value:"+edges[currentEdge][0][i]);
                     int[] cycleCopy = copyArrInts(cycle);
-                    //System.out.println("Size:"+size()+" index:"+cycleIndex);
                     cycleCopy[cycleIndex]= edges[currentEdge][0][i];
                     
                     ArrayList<Integer> posNumsCopy = copyListInts(possibleNums);
                     posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
-                    //System.out.println("Cycle:"+Arrays.toString(cycle)+"\n");
-                    // System.out.println("Before:"+cycleIndex);
                     cycleIndex++;
                     getCyclesRecur(cycleCopy, edges[currentEdge][0][i], posNumsCopy, cycles, cycleIndex);
                     cycleIndex--;
                 }
                 else if(possibleNums.contains(edges[currentEdge][1][i])){
-                    //System.out.println("posNums:"+possibleNums);
-                    //System.out.println("value:"+edges[currentEdge][0][i]);
                     int[] cycleCopy = copyArrInts(cycle);
-                    //System.out.println("Size:"+size()+" index:"+cycleIndex);
                     cycleCopy[cycleIndex]= edges[currentEdge][1][i];
                     
                     ArrayList<Integer> posNumsCopy = copyListInts(possibleNums);
                     posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
-                    //System.out.println("Cycle:"+Arrays.toString(cycle)+"\n");
                     cycleIndex++;
                     getCyclesRecur(cycleCopy, edges[currentEdge][1][i], posNumsCopy, cycles, cycleIndex);
                     cycleIndex--;
@@ -245,15 +238,9 @@ class edgeStorageArrays{
 
             if(!(contains(edges[cycle[i]][0],cycle[indexPlus])||contains(edges[cycle[i]][1],cycle[indexPlus]))){
                 isCir=false;
-                // System.out.println(Arrays.toString(edges[i][0]));
-                // System.out.println("Happenes "+i);
-                // System.out.println(cycle[indexPlus]);
             }
             if(!(contains(edges[cycle[i]][0],cycle[indexMinus])||contains(edges[cycle[i]][1],cycle[indexMinus]))){
                 isCir=false;
-                // System.out.println("Happenes "+i);
-                // System.out.println(cycle[indexMinus]);
-                
             } 
         }
         return isCir;
