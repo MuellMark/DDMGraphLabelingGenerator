@@ -141,10 +141,14 @@ class edgeStorageArrays{
         if(!allEdgesDegree4()) isCir=false;
         if(isCir){
             ArrayList<int[]> cycles = getCycles();
-            for(int[] cycle:cycles){
-                System.out.println(Arrays.toString(cycle));
+            if(cycles.size()==0){
+                isCir=false;
             }
-            System.out.println();
+            //Debugging, prints all of the cycles
+            // for(int[] cycle:cycles){
+            //     System.out.println(Arrays.toString(cycle));
+            // }
+            // System.out.println();
         }
         
         //Needs method to get the cycle
@@ -203,7 +207,7 @@ class edgeStorageArrays{
                     getCyclesRecur(cycleCopy, edges[currentEdge][0][i], posNumsCopy, cycles, cycleIndex);
                     cycleIndex--;
                 }
-                if(possibleNums.contains(edges[currentEdge][1][i])){
+                else if(possibleNums.contains(edges[currentEdge][1][i])){
                     //System.out.println("posNums:"+possibleNums);
                     //System.out.println("value:"+edges[currentEdge][0][i]);
                     int[] cycleCopy = copyArrInts(cycle);

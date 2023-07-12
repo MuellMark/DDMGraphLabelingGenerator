@@ -67,6 +67,7 @@ class generateGraphs{
             allCombos.add(current); // Adds to allCombos for future graphs to check from
             if(callSpecificMethod(methodSelect, current)){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
                 boolean isInvOrEq = false;
+                //Checks if the graphs found is an inverse or repeat graph
                 for(int i=0;i<ddmLabelings.size();i++){
                     if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
                         isInvOrEq=true;
