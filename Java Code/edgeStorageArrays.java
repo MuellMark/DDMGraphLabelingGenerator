@@ -332,7 +332,7 @@ class edgeStorageArrays{
             String tempStr = "";
             for(int j=1;j<=size();j++){
                 int found = 0;
-                for(int k =0;k<edges[i][1].length;k++){
+                for(int k =1;k<edges[i][1].length;k++){
                     if(edges[i][1][k]==j) found=1;
                 }
                 tempStr+= " "+found+",";
