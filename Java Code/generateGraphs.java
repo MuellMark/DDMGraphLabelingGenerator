@@ -37,6 +37,21 @@ class generateGraphs{
         //writeAllCombosToFile(ddmLabelings);
         //writeAllCombosToFileAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
+
+        //Test, will be deleted
+        edgeStorageArrays testCir = new edgeStorageArrays(5);
+        testCir.addPair(1, 2);
+        testCir.addPair(2, 3);
+        testCir.addPair(3, 4);
+        testCir.addPair(4, 5);
+        testCir.addPair(5, 1);
+        testCir.addPair(1, 3);
+        testCir.addPair(1, 4);
+        testCir.addPair(2, 4);
+        testCir.addPair(2, 5);
+        testCir.addPair(3, 5);
+
+        System.out.println(testCir.isCirculantLabeling());
     }
 
     // Loops through all recursive calls from checkforSums
