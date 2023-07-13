@@ -17,7 +17,7 @@ class generateGraphs{
 
         // These two variables are only for when methodSelect is set at 3, they select the
         // a and b values for checkign for circulant labelings.
-        // Note: a=/=b, a+b>=numVertices/2
+        // Note: a=/=b, a<b<numVertices/2
         int a=1;
         int b=2;
 
