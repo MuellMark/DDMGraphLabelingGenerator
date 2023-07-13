@@ -12,6 +12,17 @@ class generateCirculantGraphs{
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
 
         // Stores original starter Circulant graph
-        edgeStorageArrays StartCirGraph = new edgeStorageArrays(numVertices);
+        edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
+        createCirculantGraphs(numVertices, a, b, startCirGraph);
+    }
+
+    // Generates the starting circulant graph based on the number of vertices, a and b
+    public static void createCirculantGraphs(int numVertices,int a, int b, edgeStorageArrays startCirGraph){
+        if(a>=b) System.out.println("Invalid Condidtions, a must be less than b");
+        if(numVertices<5) System.out.println("Invalid Condidtions, numVertices must be equal to 5 or more");
+        if(a+b>numVertices/2) System.out.println("Invalid Condidtions, a+b<=numVertices/2");
+        else{
+            System.out.println("Conditions met, generating the graph");
+        }
     }
 }
