@@ -14,6 +14,7 @@ class generateCirculantGraphs{
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         createCirculantGraphs(numVertices, a, b, startCirGraph);
+        startCirGraph.printAdjMatrix();
     }
 
     // Generates the starting circulant graph based on the number of vertices, a and b
@@ -23,6 +24,11 @@ class generateCirculantGraphs{
         if(a+b>numVertices/2) System.out.println("Invalid Condidtions, a+b<=numVertices/2");
         else{
             System.out.println("Conditions met, generating the graph");
+            for(int i=0;i<numVertices;i++){
+                //Makes cycle
+                startCirGraph.addPair(i+1, ((i+1)%numVertices)+1);
+                startCirGraph.addPair(((i+1)%numVertices)+1, i+1);
+            }
         }
     }
 }
