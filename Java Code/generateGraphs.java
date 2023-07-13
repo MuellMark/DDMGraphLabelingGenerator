@@ -37,23 +37,6 @@ class generateGraphs{
         //writeAllCombosToFile(ddmLabelings);
         //writeAllCombosToFileAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-
-        //Test, will be deleted
-        //System.out.println("---------------------------------------");
-        // edgeStorageArrays testCir = new edgeStorageArrays(5);
-        // testCir.addPair(1, 2);
-        // testCir.addPair(2, 3);
-        // testCir.addPair(3, 4);
-        // testCir.addPair(4, 5);
-        // testCir.addPair(5, 1);
-        // testCir.addPair(1, 3);
-        // testCir.addPair(1, 4);
-        // testCir.addPair(2, 4);
-        // testCir.addPair(2, 5);
-        // testCir.addPair(3, 5);
-        // // testCir.print();
-
-        // System.out.println(testCir.isCirculantLabeling());
     }
 
     // Loops through all recursive calls from checkforSums
@@ -124,6 +107,18 @@ class generateGraphs{
         }
     }
 
+    public static ArrayList<Integer>  getUsableSet(int num, int vertex){
+        ArrayList<Integer> set = new ArrayList<>();
+        switch(num){
+            case(1):
+                set = getUsuableSetDecreasing(vertex);
+                return set;
+            // case(2):
+            //     return current.isDDMLabelingIncludeZeroes();
+            default:
+                return set;
+        }
+    }
     //Gets usable set for a vertex, basically all vertices less than the input
     public static ArrayList<Integer> getUsuableSetDecreasing(int vertex){
         ArrayList<Integer> set = new ArrayList<>();
@@ -213,18 +208,7 @@ class generateGraphs{
         }
     }
 
-    public static ArrayList<Integer>  getUsableSet(int num, int vertex){
-        ArrayList<Integer> set = new ArrayList<>();
-        switch(num){
-            case(1):
-                set = getUsuableSetDecreasing(vertex);
-                return set;
-            // case(2):
-            //     return current.isDDMLabelingIncludeZeroes();
-            default:
-                return set;
-        }
-    }
+
         
     // LEGACY, keeping in case needed in future 
     // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that

@@ -270,11 +270,9 @@ class edgeStorageArrays{
                 
                 if(!Arrays.equals(getIns(i),other.getIns(i))){
                     equals=false;
-                    //System.out.println(getIns(i)+" =/="+getIns(i));
                 }
                 if(!Arrays.equals(getOuts(i),other.getOuts(i))){
                     equals=false;
-                    //System.out.println(getOuts(i)+" =/="+getOuts(i));
                 }
             }
         }
