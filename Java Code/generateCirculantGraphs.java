@@ -5,7 +5,7 @@ class generateCirculantGraphs{
         int numVertices =7;
 
         // Used to generate given circulant graph
-        int a=2;
+        int a=1;
         int b=3;
 
         //Stores all ddm labelings of a given Circualnt graph
@@ -26,11 +26,20 @@ class generateCirculantGraphs{
             System.out.println("Conditions met, generating the graph");
             for(int i=0;i<numVertices;i++){
                 //Makes cycle, added
+                //System.out.println(i);
                 startCirGraph.addPair(i+1, ((i+a)%numVertices)+1);
                 startCirGraph.addPair(((i+a)%numVertices)+1, i+1);
                 // Makes cycle, subtracted, 
+                //System.out.println(((i+numVertices-a)%numVertices)+1);
                 startCirGraph.addPair(i+1, ((i+numVertices-a)%numVertices)+1);
                 startCirGraph.addPair(((i+numVertices-a)%numVertices)+1, i+1);
+
+                // // Other edges, by adding
+                // startCirGraph.addPair(i+1, ((i+b)%numVertices)+1);
+                // startCirGraph.addPair(((i+b)%numVertices)+1, i+1);
+                // // Other edges, by subtracting
+                // startCirGraph.addPair(i+1, ((i+numVertices-b)%numVertices)+1);
+                // startCirGraph.addPair(((i+numVertices-b)%numVertices)+1, i+1);
 
             }
         }
