@@ -8,15 +8,8 @@ class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
         int numVertices =6; 
-
-        // Change number based on the desired method
-        // 1 = isDDMLabeling()
-        // 2 = isDDMLabelingIncludeZeroes()
-        // 3 = isCirculantLabeling()
-        int methodSelect = 3;
-
-        // For changing how the set works, TODO
-        int usableSetSelector = 1;
+        // Change to true to keep zeroes TODO: change for more options
+        boolean keepZeroes = false;
 
         // Stores all possible combinations for all recurssive calls
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
@@ -27,47 +20,29 @@ class generateGraphs{
         edgeStorageArrays startGraph = new edgeStorageArrays(numVertices);
         allCombos.add(startGraph);
 
-        generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector); // Starts generating graphs
+        generate(allCombos, numVertices,ddmLabelings,keepZeroes); // Starts generating graphs
 
         // Different print statements, comment out desired one
-        //printAllCombos(ddmLabelings);
-        printAllAdjMatrix(ddmLabelings);
+        printAllCombos(ddmLabelings);
+        //printAllAdjMatrix(ddmLabelings);
 
         //Different Write to files, comment out the desired one
         //writeAllCombosToFile(ddmLabelings);
         //writeAllCombosToFileAdjMatrix(ddmLabelings);
         //writeAllCombosToFileVisualization(ddmLabelings);
-
-        //Test, will be deleted
-        //System.out.println("---------------------------------------");
-        // edgeStorageArrays testCir = new edgeStorageArrays(5);
-        // testCir.addPair(1, 2);
-        // testCir.addPair(2, 3);
-        // testCir.addPair(3, 4);
-        // testCir.addPair(4, 5);
-        // testCir.addPair(5, 1);
-        // testCir.addPair(1, 3);
-        // testCir.addPair(1, 4);
-        // testCir.addPair(2, 4);
-        // testCir.addPair(2, 5);
-        // testCir.addPair(3, 5);
-        // // testCir.print();
-
-        // System.out.println(testCir.isCirculantLabeling());
     }
 
     // Loops through all recursive calls from checkforSums
-    public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,
-    int methodSelect, int usableSetSelector){
+    public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,boolean keepZeroes){
         // Loops through all vertices in reverse order
         while(vertex>0){
-            ArrayList<Integer> set = getUsableSet(usableSetSelector, vertex); // Gets usable edge set
+            ArrayList<Integer> set = getUsuableSet(vertex); // Gets usable edge set
             int currentSize=allCombos.size(); // Makes sure not an infinite loop, only checks current graphs
             System.out.println("Graphs generated so far: "+currentSize);
             // Does a recurrsive call to all graphs in allCombos
             for(int i=0;i<currentSize;i++){
                 edgeStorageArrays temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
-                checkForSums(allCombos, temp, set, vertex, 0,ddmLabelings,methodSelect); // Recursive call
+                checkForSums(allCombos, temp, set, vertex, 0,ddmLabelings,keepZeroes); // Recursive call
             }
             vertex--;
         }
@@ -75,31 +50,45 @@ class generateGraphs{
 
     // Recursive method, finds all possible combinations of edges 
     public static void checkForSums(ArrayList<edgeStorageArrays> allCombos, edgeStorageArrays current,
-    ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings, int methodSelect){
+    ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings, boolean keepZeroes){
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
-            if(callSpecificMethod(methodSelect, current)){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
-                boolean isInvOrEq = false;
-                //Checks if the graphs found is an inverse or repeat graph
-                for(int i=0;i<ddmLabelings.size();i++){
-                    if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
-                        isInvOrEq=true;
-                        i+=allCombos.size();
+            if(!keepZeroes){
+                if(current.isDDMLabeling()){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
+                    boolean isInvOrEq = false;
+                    for(int i=0;i<ddmLabelings.size();i++){
+                        if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
+                            isInvOrEq=true;
+                            i+=allCombos.size();
+                        }
+                    }
+                    // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
+                    if(!isInvOrEq){
+                        ddmLabelings.add(current);
                     }
                 }
-                // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
-                if(!isInvOrEq){
-                    ddmLabelings.add(current);
+            }else{
+                if(current.isDDMLabelingIncludeZeroes()){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
+                    boolean isInvOrEq = false;
+                    for(int i=0;i<ddmLabelings.size();i++){
+                        if(ddmLabelings.get(i).isInverse(current) || ddmLabelings.get(i).equals(current)){
+                            isInvOrEq=true;
+                            i+=allCombos.size();
+                        }
+                    }
+                    // If the graph is a valid labeling, is not a repeat or inverse, then it's added to ddmLabelings
+                    if(!isInvOrEq){
+                        ddmLabelings.add(current);
+                    }
                 }
             }
-        }
             
         // Otherwise, does a recurrsive case
-        else if(index<set.size() ){
+        }else if(index<set.size() ){
             // Creates copy and adds index to ins
             edgeStorageArrays addToIns = current.copy();
             addToIns.addPair(set.get(index),vertex);
@@ -114,18 +103,18 @@ class generateGraphs{
 
             // Debugging statement, to track number of graphs generated when dealing with large cases
             if(allCombos.size()%10000==0) System.out.println("Graph added, "+allCombos.size()+" graphs found");
+            if(allCombos.size()%500000==0) System.gc();
             //Recursive calls, one for each new graph created
-            checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings,methodSelect);
+            checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings,keepZeroes);
 
-            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings,methodSelect);
+            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings,keepZeroes);
 
-            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings,methodSelect);
+            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings,keepZeroes);
 
         }
     }
-
     //Gets usable set for a vertex, basically all vertices less than the input
-    public static ArrayList<Integer> getUsuableSetDecreasing(int vertex){
+    public static ArrayList<Integer> getUsuableSet(int vertex){
         ArrayList<Integer> set = new ArrayList<>();
         for(int i=1;i<vertex;i++){
             set.add(i);
@@ -198,32 +187,10 @@ class generateGraphs{
         }
     }
 
-    // Selector method to call different methods based on the user selected number
-    // If invalid number selected, no grpahs are generated
-    public static boolean callSpecificMethod(int num, edgeStorageArrays current){
-        switch(num){
-            case(1):
-                return current.isDDMLabeling();
-            case(2):
-                return current.isDDMLabelingIncludeZeroes();
-            case(3):
-                return current.isCirculantLabeling();
-            default:
-                return false;
-        }
-    }
+    public static boolean callSpecificMethod(int num){
+        boolean allow = true;
 
-    public static ArrayList<Integer>  getUsableSet(int num, int vertex){
-        ArrayList<Integer> set = new ArrayList<>();
-        switch(num){
-            case(1):
-                set = getUsuableSetDecreasing(vertex);
-                return set;
-            // case(2):
-            //     return current.isDDMLabelingIncludeZeroes();
-            default:
-                return set;
-        }
+        return allow;
     }
         
     // LEGACY, keeping in case needed in future 

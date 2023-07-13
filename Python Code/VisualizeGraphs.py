@@ -2,10 +2,14 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Change number of vertices here
-numVertices = 7
+numVertices = 5
 
 #File that all the graphs are stored in, change based on where storing the files
 graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt",'r')
+
+#File path and name for where all graphs will be changed. Keep /graph at end
+fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/ConnectedGraphs/5VertexNoInverse/graph"
+
 contents = graphsToGenerate.readlines()
 
 graphnum=1 #Tracks graph number for file
@@ -66,7 +70,7 @@ for line in contents:
     nx.draw(G,pos,node_color='white',with_labels=True) #Draws the graph based on edge list and positions
 
     # Saves the figure to a specified path, change based on where you want them saved
-    plt.savefig("/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Disconnected Graphs/7VertexNoInverse/graph"+str(graphnum)+".jpeg")
+    plt.savefig(fileName+str(graphnum)+".jpeg")
     plt.clf() # clears matplotlib
     G.clear() # clears graph object
     graphnum+=1 

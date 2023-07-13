@@ -123,15 +123,130 @@ class edgeStorageArrays{
         return isDDM;
     }
 
-        // Checks if it is a DDM labeling, not accounting for zeroes
-        public boolean isDDMLabelingIncludeZeroes(){
-            boolean isDDM = true;
-            for(int i=1;i<size()+1;i++){
-                if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
-            }
-            return isDDM;
-    
+    // Checks if it is a DDM labeling, not accounting for zeroes
+    public boolean isDDMLabelingIncludeZeroes(){
+        boolean isDDM = true;
+        for(int i=1;i<size()+1;i++){
+            if(getSumIns(i)!=getSumOuts(i)) isDDM =false;
         }
+        return isDDM;
+
+    }
+
+    // Checks if it is a circulant labeling
+    public boolean isCirculantLabeling(){
+        boolean isCir = true;
+
+        //all vertices must have a degree of 4
+        if(!allEdgesDegree4()) isCir=false;
+        // If this is the case, check is there is a cycle, and if there is, 
+        // Returns all cycles possible for a given graph
+        if(isCir){
+            ArrayList<int[]> cycles = getCycles();
+            if(cycles.size()==0){
+                isCir=false;
+            }
+            // For each of the cycles, it checks if the edges work for a circulant graph
+            else{
+                boolean contWhile=true;
+                int whileIndex=0;
+                while(contWhile && whileIndex<cycles.size()){
+                    boolean temp = checkCirEdges(cycles.get(whileIndex));
+                    if(temp){
+                        contWhile=false; // If contWhile is false, one was found
+                    } 
+                    whileIndex++;
+                }
+                if(contWhile)  isCir=false;
+
+            }
+            // //Debugging, prints all of the cycles
+            // for(int[] cycle:cycles){
+            //     System.out.println(Arrays.toString(cycle));
+            // }
+            // System.out.println();
+        }
+        
+        return isCir;
+    }
+
+    // Checks if all vertices have degree 4
+    private boolean allEdgesDegree4(){
+        boolean all4 = true;
+        for(int i=1;i<=size();i++){
+            int tempSum=0;
+            tempSum+=edges[i][0][0]-1;
+            tempSum+=edges[i][1][0]-1;
+            if(tempSum!=4) all4=false;
+        }
+        return all4;
+    }
+
+    // Returns all possible cycles in a given graph, kick off method
+    public ArrayList<int[]> getCycles(){
+        ArrayList<int[]> cycles = new ArrayList<>();
+        //Start point always 1, don't need multiple start points
+        ArrayList<Integer> possibleNums = new ArrayList<>();
+        for(int i=2;i<=size();i++) possibleNums.add(i); // 1 is the start of all cycles
+        int[] cycle = new int[size()];
+        cycle[0]=1;
+        int cycleIndex=1;
+        getCyclesRecur(cycle,1,possibleNums,cycles,cycleIndex);
+
+        return cycles;
+    }
+
+    //Recursive method to check is a edge set contains a cycle, and stores any cycles found
+    private void getCyclesRecur(int[] cycle,int currentEdge, ArrayList<Integer> possibleNums, 
+    ArrayList<int []> cycles, int cycleIndex){
+        if(possibleNums.size()==0){
+            if(contains(edges[currentEdge][0],1) ||contains(edges[currentEdge][1],1)){
+                cycles.add(cycle);
+            }
+        }else if(cycleIndex<size()){
+            for(int i=1;i<edges[currentEdge][0][0];i++){
+                if(possibleNums.contains(edges[currentEdge][0][i])){
+                    int[] cycleCopy = copyArrInts(cycle);
+                    cycleCopy[cycleIndex]= edges[currentEdge][0][i];
+                    
+                    ArrayList<Integer> posNumsCopy = copyListInts(possibleNums);
+                    posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
+                    cycleIndex++;
+                    getCyclesRecur(cycleCopy, edges[currentEdge][0][i], posNumsCopy, cycles, cycleIndex);
+                    cycleIndex--;
+                }
+                else if(possibleNums.contains(edges[currentEdge][1][i])){
+                    int[] cycleCopy = copyArrInts(cycle);
+                    cycleCopy[cycleIndex]= edges[currentEdge][1][i];
+                    
+                    ArrayList<Integer> posNumsCopy = copyListInts(possibleNums);
+                    posNumsCopy.remove(Integer.valueOf(edges[currentEdge][0][i]));
+                    cycleIndex++;
+                    getCyclesRecur(cycleCopy, edges[currentEdge][1][i], posNumsCopy, cycles, cycleIndex);
+                    cycleIndex--;
+                }
+            }
+        }
+    }
+
+    // With a given cycle, it checks if a labeling is a circulant labeling
+    private boolean checkCirEdges(int[] cycle){
+        boolean isCir=true;
+        int cycleLen = cycle.length;
+        for(int i=0;i<cycleLen;i++){
+            // TODO: need to be able to chenge how much is added
+            int indexPlus=(i+2)%cycleLen;
+            int indexMinus=(i+cycleLen-2)%cycleLen; // % not working for negative
+
+            if(!(contains(edges[cycle[i]][0],cycle[indexPlus])||contains(edges[cycle[i]][1],cycle[indexPlus]))){
+                isCir=false;
+            }
+            if(!(contains(edges[cycle[i]][0],cycle[indexMinus])||contains(edges[cycle[i]][1],cycle[indexMinus]))){
+                isCir=false;
+            } 
+        }
+        return isCir;
+    }
 
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
@@ -206,7 +321,7 @@ class edgeStorageArrays{
             String tempStr = "";
             for(int j=1;j<=size();j++){
                 int found = 0;
-                for(int k =0;k<edges[i][1].length;k++){
+                for(int k =1;k<edges[i][1].length;k++){
                     if(edges[i][1][k]==j) found=1;
                 }
                 tempStr+= " "+found+",";
@@ -249,5 +364,29 @@ class edgeStorageArrays{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }    
+    }
+
+    private boolean contains(int[] arr,int num){
+        boolean contain = false;
+        for(int i=1;i<=arr[0];i++){
+            if(arr[i]==num) contain=true;
+        }
+        return contain;
+    }
+
+    private int[] copyArrInts(int[] arr){
+        int[] newArr = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            newArr[i]=arr[i];
+        }
+        return newArr;
+    }
+
+    private ArrayList<Integer> copyListInts(ArrayList<Integer> list){
+        ArrayList<Integer> newList = new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            newList.add(list.get(i));
+        }
+        return newList;
     }
 }
