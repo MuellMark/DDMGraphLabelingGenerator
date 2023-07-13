@@ -36,8 +36,8 @@ class generateGraphs{
         generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector,a,b); // Starts generating graphs
 
         // Different print statements, comment out desired one
-        //printAllCombos(ddmLabelings);
-        printAllAdjMatrix(ddmLabelings);
+        printAllCombos(ddmLabelings);
+        // printAllAdjMatrix(ddmLabelings);
 
         //Different Write to files, comment out the desired one
         //writeAllCombosToFile(ddmLabelings);
