@@ -133,24 +133,26 @@ class edgeStorageArrays{
 
     }
 
-    //TODO
     // Checks if it is a circulant labeling
     public boolean isCirculantLabeling(){
         boolean isCir = true;
 
+        //all vertices must have a degree of 4
         if(!allEdgesDegree4()) isCir=false;
+        // If this is the case, check is there is a cycle, and if there is, 
+        // Returns all cycles possible for a given graph
         if(isCir){
             ArrayList<int[]> cycles = getCycles();
             if(cycles.size()==0){
                 isCir=false;
             }
+            // For each of the cycles, it checks if the edges work for a circulant graph
             else{
                 boolean contWhile=true;
                 int whileIndex=0;
                 while(contWhile && whileIndex<cycles.size()){
                     boolean temp = checkCirEdges(cycles.get(whileIndex));
                     if(temp){
-                        //System.out.println(Arrays.toString(cycles.get(whileIndex)));
                         contWhile=false; // If contWhile is false, one was found
                     } 
                     whileIndex++;
@@ -165,7 +167,6 @@ class edgeStorageArrays{
             // System.out.println();
         }
         
-        //Needs method to check said cycle
         return isCir;
     }
 
@@ -228,6 +229,7 @@ class edgeStorageArrays{
         }
     }
 
+    // With a given cycle, it checks if a labeling is a circulant labeling
     private boolean checkCirEdges(int[] cycle){
         boolean isCir=true;
         int cycleLen = cycle.length;
