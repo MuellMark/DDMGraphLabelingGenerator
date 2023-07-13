@@ -134,7 +134,7 @@ class edgeStorageArrays{
     }
 
     // Checks if it is a circulant labeling
-    public boolean isCirculantLabeling(){
+    public boolean isCirculantLabeling(int a, int b){
         boolean isCir = true;
 
         //all vertices must have a degree of 4
@@ -151,7 +151,7 @@ class edgeStorageArrays{
                 boolean contWhile=true;
                 int whileIndex=0;
                 while(contWhile && whileIndex<cycles.size()){
-                    boolean temp = checkCirEdges(cycles.get(whileIndex));
+                    boolean temp = checkCirEdges(cycles.get(whileIndex),a,b);
                     if(temp){
                         contWhile=false; // If contWhile is false, one was found
                     } 
@@ -230,13 +230,13 @@ class edgeStorageArrays{
     }
 
     // With a given cycle, it checks if a labeling is a circulant labeling
-    private boolean checkCirEdges(int[] cycle){
+    private boolean checkCirEdges(int[] cycle, int a, int b){
         boolean isCir=true;
         int cycleLen = cycle.length;
         for(int i=0;i<cycleLen;i++){
             // TODO: need to be able to chenge how much is added
-            int indexPlus=(i+2)%cycleLen;
-            int indexMinus=(i+cycleLen-2)%cycleLen; // % not working for negative
+            int indexPlus=(i+b)%cycleLen;
+            int indexMinus=(i+cycleLen-b)%cycleLen; // % not working for negative
 
             if(!(contains(edges[cycle[i]][0],cycle[indexPlus])||contains(edges[cycle[i]][1],cycle[indexPlus]))){
                 isCir=false;
