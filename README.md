@@ -17,7 +17,7 @@ Once you have everything installed, you can look at the other two markdown files
 The java code is responsible for the generation of all of the text versions of the graphs. All of the code can be found in the Java Code folder with explanations
 found in the .md file, or here: https://github.com/MuellMark/DDMGraphLabelingGenerator/blob/Mueller/Java%20Code/JavaCode.md
 ### Python
--The python code is responsible for taking in a text output from the java code and visualizing it. This is done with networkx and matplotlib. All of the code is in
+The python code is responsible for taking in a text output from the java code and visualizing it. This is done with networkx and matplotlib. All of the code is in
 the Python Code folder and explanations can be found in the .md file, or here: https://github.com/MuellMark/DDMGraphLabelingGenerator/blob/Mueller/Python%20Code/PythonCode.md
 ##### Legacy Code
 All past code that didn't end up getting used can be found in the Legacy Code Folder, with explanations found in the .md file, or here: https://github.com/MuellMark/DDMGraphLabelingGenerator/blob/Mueller/Legacy%20Code/LegacyCode.md
