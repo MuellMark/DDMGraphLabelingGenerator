@@ -69,15 +69,20 @@ class edgeStorageArrays{
 
     // Adds element to inputs at vertex
     public void addIn(int vertex, int element){
-        int tempIndex = edges[vertex][1][0];
-        edges[vertex][1][tempIndex]=element;
-        edges[vertex][1][0]++;
+        if(!contains(edges[vertex][1],element)){
+            int tempIndex = edges[vertex][1][0];
+            edges[vertex][1][tempIndex]=element;
+            edges[vertex][1][0]++;
+        }
     }
+    
     // Adds element to outputs at vertex
     public void addOut(int vertex, int element){
-        int tempIndex = edges[vertex][0][0];
-        edges[vertex][0][tempIndex]=element;
-        edges[vertex][0][0]++;
+        if(!contains(edges[vertex][0],element)){
+            int tempIndex = edges[vertex][0][0];
+            edges[vertex][0][tempIndex]=element;
+            edges[vertex][0][0]++;
+        }    
     }
 
     // Takes in an arraylist of ins, and adds them to then ins one by one 
@@ -234,7 +239,7 @@ class edgeStorageArrays{
         boolean isCir=true;
         int cycleLen = cycle.length;
         for(int i=0;i<cycleLen;i++){
-            // TODO: need to be able to chenge how much is added
+            // TODO: need to be able to chenge how much is added for a
             int indexPlus=(i+b)%cycleLen;
             int indexMinus=(i+cycleLen-b)%cycleLen; // % not working for negative
 

@@ -34,12 +34,12 @@ class generateCirculantGraphs{
                 startCirGraph.addPair(i+1, ((i+numVertices-a)%numVertices)+1);
                 startCirGraph.addPair(((i+numVertices-a)%numVertices)+1, i+1);
 
-                // // Other edges, by adding
-                // startCirGraph.addPair(i+1, ((i+b)%numVertices)+1);
-                // startCirGraph.addPair(((i+b)%numVertices)+1, i+1);
-                // // Other edges, by subtracting
-                // startCirGraph.addPair(i+1, ((i+numVertices-b)%numVertices)+1);
-                // startCirGraph.addPair(((i+numVertices-b)%numVertices)+1, i+1);
+                // Other edges, by adding
+                startCirGraph.addPair(i+1, ((i+b)%numVertices)+1);
+                startCirGraph.addPair(((i+b)%numVertices)+1, i+1);
+                // Other edges, by subtracting
+                startCirGraph.addPair(i+1, ((i+numVertices-b)%numVertices)+1);
+                startCirGraph.addPair(((i+numVertices-b)%numVertices)+1, i+1);
 
             }
         }
