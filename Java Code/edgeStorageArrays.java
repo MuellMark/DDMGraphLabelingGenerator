@@ -75,7 +75,7 @@ class edgeStorageArrays{
             edges[vertex][1][0]++;
         }
     }
-    
+
     // Adds element to outputs at vertex
     public void addOut(int vertex, int element){
         if(!contains(edges[vertex][0],element)){
@@ -84,6 +84,29 @@ class edgeStorageArrays{
             edges[vertex][0][0]++;
         }    
     }
+
+        // removess element to inputs at vertex
+        public void removeIn(int vertex, int element){
+            if(contains(edges[vertex][1],element)){
+                // int tempIndex = edges[vertex][1][0];
+                // edges[vertex][1][tempIndex]=element;
+                edges[vertex][1][0]--;
+            }else{
+                System.out.println(element+" not in storage, nothing removed");
+            }
+        }
+        
+        // removess element to outputs at vertex
+        public void removeOut(int vertex, int element){
+            if(contains(edges[vertex][0],element)){
+                //Needs a loop to go thru and check all elements
+                // int tempIndex = edges[vertex][0][0];
+                // edges[vertex][0][tempIndex]=element;
+                edges[vertex][0][0]--;
+            }else{
+                System.out.println(element+" not in storage, nothing removed");
+            }   
+        }
 
     // Takes in an arraylist of ins, and adds them to then ins one by one 
     public void addInList(int vertex, int[] ins){
@@ -99,6 +122,8 @@ class edgeStorageArrays{
         addOut(from,to);
         addIn(to,from);
     }
+
+    // Need a remove pair method when each of the remove methods work
 
     // Gets the sum of the ins at a vertex
     public int getSumIns(int vertex){
