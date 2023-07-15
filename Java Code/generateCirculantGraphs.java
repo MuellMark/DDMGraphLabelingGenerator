@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.*;
 class generateCirculantGraphs{
     public static void main(String[]args){
         // Specifies size of graph
@@ -15,6 +16,10 @@ class generateCirculantGraphs{
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         createCirculantGraphs(numVertices, a, b, startCirGraph);
         startCirGraph.printAdjMatrix();
+        ArrayList<int[]> arrTest = startCirGraph.getCycles();
+        for(int[] arr:arrTest){
+            System.out.println(Arrays.toString(arr));
+        }
     }
 
     // Generates the starting circulant graph based on the number of vertices, a and b
