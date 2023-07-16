@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.*;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.FileWriter;
+
 class generateCirculantGraphs{
     public static void main(String[]args){
         // Specifies size of graph
@@ -15,7 +19,10 @@ class generateCirculantGraphs{
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         createCirculantGraphs(numVertices, a, b, startCirGraph);
-        startCirGraph.printAdjMatrix();
+        //startCirGraph.printAdjMatrix();
+
+        allCombos.add(startCirGraph);
+        printGraphForVis(allCombos);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -52,7 +59,18 @@ class generateCirculantGraphs{
     }
 
     // similar to how it was done in generateGraphs, but need extra line for the cycle
-    public static void printGraphForVis(edgeStorageArrays graph){
-
+    public static void printGraphForVis(ArrayList<edgeStorageArrays> AllCombos){
+        try {
+            // Opens files, change file name here
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/outputCirc.txt");
+            for(int i=0;i<AllCombos.size();i++){
+                myWriter.write("\nGraph #"+(i+1)+":\n");
+                AllCombos.get(i).writeToFile(myWriter);
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }
