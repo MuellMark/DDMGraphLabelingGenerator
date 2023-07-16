@@ -282,7 +282,14 @@ class edgeStorageArrays{
     // May switch from int array to arraylist
     public int[] getCirculentCycle(int a, int b){
         int[] cycle = new int[size()];
-
+        ArrayList<int[]> allCycles = getCycles(); //Gets all cycles in a given graph
+        for(int[] arr: allCycles){
+            if(checkCirEdges(arr,a,b)){
+                cycle = arr;
+                return cycle;
+            }
+        }
+        System.out.println("Error: No Circulant Graph found");
         return cycle;
     }
 
