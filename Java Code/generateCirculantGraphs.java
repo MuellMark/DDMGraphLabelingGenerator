@@ -64,8 +64,9 @@ class generateCirculantGraphs{
             // Opens files, change file name here
             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/outputCirc.txt");
             for(int i=0;i<AllCombos.size();i++){
-                myWriter.write("\nGraph #"+(i+1)+":\n");
-                AllCombos.get(i).writeToFile(myWriter);
+                // myWriter.write("\nGraph #"+(i+1)+":\n");
+                //Grapcycle goes here
+                AllCombos.get(i).writeToFileForVisualization(myWriter);
             }
             myWriter.close();
         } catch (IOException e) {
