@@ -278,6 +278,14 @@ class edgeStorageArrays{
         return isCir;
     }
 
+    // Will get the circulant cycle for visualization purposes
+    // May switch from int array to arraylist
+    public int[] getCirculentCycle(int a, int b){
+        int[] cycle = new int[size()];
+
+        return cycle;
+    }
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());
