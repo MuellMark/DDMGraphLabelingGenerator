@@ -29,6 +29,7 @@ for line in contents:
             tempList.append(tempTuple)
         index+=1
 
+    #TODO: could make this an algorithm
     #Locks vertices in place, one case for each number of graph
     if(numVertices==5):
         G.add_node(1,pos=(2,1))

@@ -16,10 +16,11 @@ class generateCirculantGraphs{
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         createCirculantGraphs(numVertices, a, b, startCirGraph);
         startCirGraph.printAdjMatrix();
-        ArrayList<int[]> arrTest = startCirGraph.getCycles();
-        for(int[] arr:arrTest){
-            System.out.println(Arrays.toString(arr));
-        }
+        System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
+        // ArrayList<int[]> arrTest = startCirGraph.getCycles();
+        // for(int[] arr:arrTest){
+        //     System.out.println(Arrays.toString(arr));
+        // }
     }
 
     // Generates the starting circulant graph based on the number of vertices, a and b
@@ -48,5 +49,10 @@ class generateCirculantGraphs{
 
             }
         }
+    }
+
+    // similar to how it was done in generateGraphs, but need extra line for the cycle
+    public static void printGraphForVis(edgeStorageArrays graph){
+
     }
 }
