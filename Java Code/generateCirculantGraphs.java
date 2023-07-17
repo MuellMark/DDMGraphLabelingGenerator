@@ -22,7 +22,7 @@ class generateCirculantGraphs{
         //startCirGraph.printAdjMatrix();
 
         allCombos.add(startCirGraph);
-        printGraphForVis(allCombos);
+        printGraphForVis(allCombos,a,b);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -59,13 +59,14 @@ class generateCirculantGraphs{
     }
 
     // similar to how it was done in generateGraphs, but need extra line for the cycle
-    public static void printGraphForVis(ArrayList<edgeStorageArrays> AllCombos){
+    public static void printGraphForVis(ArrayList<edgeStorageArrays> AllCombos, int a, int b){
         try {
             // Opens files, change file name here
             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForCirVis.txt");
             for(int i=0;i<AllCombos.size();i++){
                 // myWriter.write("\nGraph #"+(i+1)+":\n");
                 //Grapcycle goes here
+                myWriter.write(Arrays.toString(AllCombos.get(i).getCirculentCycle(a,b))+"\n");
                 AllCombos.get(i).writeToFileForVisualization(myWriter);
             }
             myWriter.close();
