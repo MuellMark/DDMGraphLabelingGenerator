@@ -62,7 +62,7 @@ class generateCirculantGraphs{
     public static void printGraphForVis(ArrayList<edgeStorageArrays> AllCombos){
         try {
             // Opens files, change file name here
-            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Java Code/outputCirc.txt");
+            FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVciris.txt");
             for(int i=0;i<AllCombos.size();i++){
                 // myWriter.write("\nGraph #"+(i+1)+":\n");
                 //Grapcycle goes here
