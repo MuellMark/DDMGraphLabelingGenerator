@@ -14,9 +14,14 @@ contents = graphsToGenerate.readlines()
 
 graphnum=1 #Tracks graph number for file
 
+# Make a list to store the node, needs a default
+
 #Goes through each graph in the file
 for line in contents:
-    if line[0] !="[":
+    if line[0] == "[":
+        print("TODO")
+        # Add all elements to the list
+    else:
 
         index =0
         tempList=[]
