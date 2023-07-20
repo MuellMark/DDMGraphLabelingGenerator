@@ -17,9 +17,13 @@ graphnum=1 #Tracks graph number for file
 # Make a list to store the node, needs a default
 
 #Goes through each graph in the file
+edgePlacements =[]
 for line in contents:
     if line[0] == "[":
-        print("TODO")
+        for char in line:
+            if(char.isdigit()):
+                edgePlacements.append(int(char))
+        print(edgePlacements)
         # Add all elements to the list
     else:
 
@@ -52,13 +56,13 @@ for line in contents:
             G.add_node(5,pos=(2,4))
             G.add_node(6,pos=(1,3))
         elif(numVertices==7):
-            G.add_node(1,pos=(2,1))
-            G.add_node(2,pos=(4,1))
-            G.add_node(3,pos=(5,2))
-            G.add_node(4,pos=(5,3))
-            G.add_node(5,pos=(3,4))
-            G.add_node(6,pos=(1,3))
-            G.add_node(7,pos=(1,2))
+            G.add_node(edgePlacements[0],pos=(2,1))
+            G.add_node(edgePlacements[1],pos=(4,1))
+            G.add_node(edgePlacements[2],pos=(5,2))
+            G.add_node(edgePlacements[3],pos=(5,3))
+            G.add_node(edgePlacements[4],pos=(3,4))
+            G.add_node(edgePlacements[5],pos=(1,3))
+            G.add_node(edgePlacements[6],pos=(1,2))
         elif(numVertices==8):
             G.add_node(1,pos=(2,1))
             G.add_node(2,pos=(3,1))
