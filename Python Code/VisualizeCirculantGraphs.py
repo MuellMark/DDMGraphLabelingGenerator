@@ -1,8 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-# Change number of vertices here
-numVertices = 7
+
 
 #File that all the graphs are stored in, change based on where storing the files
 graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForCirVis.txt",'r')
@@ -26,7 +25,8 @@ for line in contents:
         print(edgePlacements)
         # Add all elements to the list
     else:
-
+        # numVertices based on reading in list
+        numVertices = max(edgePlacements)
         index =0
         tempList=[]
         G = nx.DiGraph() #Makes graph
@@ -40,7 +40,8 @@ for line in contents:
                 tempList.append(tempTuple)
             index+=1
 
-        #TODO: could make this an algorithm
+        #TODO: should make this an algorithm, also need functionality for all 
+        # sizes, not just 7
         #Locks vertices in place, one case for each number of graph
         if(numVertices==5):
             G.add_node(1,pos=(2,1))
