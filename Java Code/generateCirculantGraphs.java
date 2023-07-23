@@ -15,11 +15,12 @@ class generateCirculantGraphs{
         int b=3;
 
         //Stores all ddm labelings of a given Circualnt graph
-        ArrayList<edgeStorageArrays> allCombos = new ArrayList<>();
+        ArrayList<edgeStorageArrays> allCombos = new ArrayList<>(); //For recursive
+        ArrayList<edgeStorageArrays> ddmLabelings = new ArrayList<>(); //For ddmlabelings
 
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
-        createCirculantGraphs(numVertices, a, b, startCirGraph);
+        //createCirculantGraphs(numVertices, a, b, startCirGraph);
        
         //startCirGraph.print();
         //startCirGraph.printAdjMatrix();
@@ -63,6 +64,13 @@ class generateCirculantGraphs{
 
             }
         }
+    }
+
+    // Kick off method for recursive method
+    public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
+    ArrayList<edgeStorageArrays> allCombos){
+        //need to make a usuable set
+        //then start checking recursively
     }
 
     // similar to how it was done in generateGraphs, but need extra line for the cycle
