@@ -88,6 +88,12 @@ class edgeStorageArrays{
         // removess element to inputs at vertex
         public void removeIn(int vertex, int element){
             if(contains(edges[vertex][1],element)){
+                for(int i=1;i<edges[vertex][1].length;i++){
+                    if(edges[vertex][1][i]==element){
+                        edges[vertex][1][i]=0;
+                        i+= size(); 
+                    }
+                }
                 // int tempIndex = edges[vertex][1][0];
                 // edges[vertex][1][tempIndex]=element;
                 edges[vertex][1][0]--;
@@ -99,6 +105,12 @@ class edgeStorageArrays{
         // removess element to outputs at vertex
         public void removeOut(int vertex, int element){
             if(contains(edges[vertex][0],element)){
+                for(int i=1;i<edges[vertex][1].length;i++){
+                    if(edges[vertex][1][i]==element){
+                        edges[vertex][1][i]=0;
+                        i+= size(); 
+                    }
+                }
                 //Needs a loop to go thru and check all elements
                 // int tempIndex = edges[vertex][0][0];
                 // edges[vertex][0][tempIndex]=element;

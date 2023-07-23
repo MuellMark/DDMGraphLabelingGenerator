@@ -7,13 +7,13 @@ import java.io.FileWriter;
 class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
-        int numVertices =6; 
+        int numVertices =5; 
 
         // Change number based on the desired method
         // 1 = isDDMLabeling()
         // 2 = isDDMLabelingIncludeZeroes()
-        // 3 = isCirculantLabeling()
-        int methodSelect = 3;
+        // 3 = isCirculantLabeling() REMOVE #, other file
+        int methodSelect = 1;
 
         // These two variables are only for when methodSelect is set at 3, they select the
         // a and b values for checkign for circulant labelings.
@@ -37,12 +37,12 @@ class generateGraphs{
 
         // Different print statements, comment out desired one
         printAllCombos(ddmLabelings);
-        // printAllAdjMatrix(ddmLabelings);
+        //printAllAdjMatrix(ddmLabelings);
 
         //Different Write to files, comment out the desired one
         //writeAllCombosToFile(ddmLabelings);
         //writeAllCombosToFileAdjMatrix(ddmLabelings);
-        //writeAllCombosToFileVisualization(ddmLabelings);
+        writeAllCombosToFileVisualization(ddmLabelings);
     }
 
     // Loops through all recursive calls from checkforSums
