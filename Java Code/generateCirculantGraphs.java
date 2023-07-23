@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.File;  // Import the File class
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.FileWriter;
+import generateGraphs;
 
 class generateCirculantGraphs{
     public static void main(String[]args){
@@ -19,14 +20,17 @@ class generateCirculantGraphs{
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         createCirculantGraphs(numVertices, a, b, startCirGraph);
-        startCirGraph.removePair(2,3);
        
-        startCirGraph.print();
+        //startCirGraph.print();
         //startCirGraph.printAdjMatrix();
 
         allCombos.add(startCirGraph);
         printGraphForVis(allCombos,a,b);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
+
+        // Can use emthods from generateGraphs to avoid rewriting
+        //generateGraphs.printAllCombos(allCombos);
+
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
         //     System.out.println(Arrays.toString(arr));
@@ -67,8 +71,6 @@ class generateCirculantGraphs{
             // Opens files, change file name here
             FileWriter myWriter = new FileWriter("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForCirVis.txt");
             for(int i=0;i<AllCombos.size();i++){
-                // myWriter.write("\nGraph #"+(i+1)+":\n");
-                //Grapcycle goes here
                 myWriter.write(Arrays.toString(AllCombos.get(i).getCirculentCycle(a,b))+"\n");
                 AllCombos.get(i).writeToFileForVisualization(myWriter);
             }

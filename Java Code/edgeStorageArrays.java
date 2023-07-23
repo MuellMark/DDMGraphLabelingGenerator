@@ -94,8 +94,6 @@ class edgeStorageArrays{
                         i+= size(); 
                     }
                 }
-                // int tempIndex = edges[vertex][1][0];
-                // edges[vertex][1][tempIndex]=element;
                 edges[vertex][1][0]--;
             }else{
                 System.out.println(element+" not in storage, nothing removed");
@@ -111,9 +109,6 @@ class edgeStorageArrays{
                         i+= size(); 
                     }
                 }
-                //Needs a loop to go thru and check all elements
-                // int tempIndex = edges[vertex][0][0];
-                // edges[vertex][0][tempIndex]=element;
                 edges[vertex][0][0]--;
             }else{
                 System.out.println(element+" not in storage, nothing removed");
@@ -135,7 +130,7 @@ class edgeStorageArrays{
         addIn(to,from);
     }
 
-    // Need a remove pair method when each of the remove methods work
+    // removes a pair of elements from -> to
     public void removePair(int from,int to){
         removeOut(from,to);
         removeIn(to,from);
