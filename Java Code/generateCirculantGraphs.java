@@ -81,10 +81,12 @@ class generateCirculantGraphs{
             Set<Integer> set = new HashSet<>();
             set.add(i);
             allSets.add(set);
-            
+            // Must have size 4, in and out must be the same, 1 in and out minimum
+            // need way of checking for duplicates
+            // Don;t want it to be recursive if not needed
         }
         System.out.println(allSets);
-        
+
     }
 
     // similar to how it was done in generateGraphs, but need extra line for the cycle
