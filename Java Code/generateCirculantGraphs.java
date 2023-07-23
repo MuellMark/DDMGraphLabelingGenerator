@@ -29,6 +29,7 @@ class generateCirculantGraphs{
         printGraphForVis(allCombos,a,b);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
 
+        getUsableSets(5);
         // Can use emthods from generateGraphs to avoid rewriting
         //generateGraphs.printAllCombos(allCombos);
 
@@ -71,6 +72,19 @@ class generateCirculantGraphs{
     ArrayList<edgeStorageArrays> allCombos){
         //need to make a usuable set
         //then start checking recursively
+    }
+
+    //Returns the set of vertices it can use
+    public static void getUsableSets(int size){
+        ArrayList<Set<Integer>> allSets = new ArrayList<>();
+        for(int i=0;i<size*2;i++){
+            Set<Integer> set = new HashSet<>();
+            set.add(i);
+            allSets.add(set);
+            
+        }
+        System.out.println(allSets);
+        
     }
 
     // similar to how it was done in generateGraphs, but need extra line for the cycle
