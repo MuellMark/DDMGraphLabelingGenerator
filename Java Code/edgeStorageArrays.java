@@ -105,9 +105,9 @@ class edgeStorageArrays{
         // removess element to outputs at vertex
         public void removeOut(int vertex, int element){
             if(contains(edges[vertex][0],element)){
-                for(int i=1;i<edges[vertex][1].length;i++){
-                    if(edges[vertex][1][i]==element){
-                        edges[vertex][1][i]=0;
+                for(int i=1;i<edges[vertex][0].length;i++){
+                    if(edges[vertex][0][i]==element){
+                        edges[vertex][0][i]=0;
                         i+= size(); 
                     }
                 }
@@ -136,6 +136,10 @@ class edgeStorageArrays{
     }
 
     // Need a remove pair method when each of the remove methods work
+    public void removePair(int from,int to){
+        removeOut(from,to);
+        removeIn(to,from);
+    }
 
     // Gets the sum of the ins at a vertex
     public int getSumIns(int vertex){

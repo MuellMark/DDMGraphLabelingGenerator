@@ -19,8 +19,8 @@ class generateCirculantGraphs{
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         createCirculantGraphs(numVertices, a, b, startCirGraph);
-        startCirGraph.removeOut(2,3);
-        startCirGraph.removeOut(2,10);
+        startCirGraph.removePair(2,3);
+       
         startCirGraph.print();
         //startCirGraph.printAdjMatrix();
 
