@@ -76,6 +76,9 @@ class generateCirculantGraphs{
 
     //Returns the set of vertices it can use
     public static void getUsableSets(int size){
+        Set<Integer> baseSet = new HashSet<>();
+        for(int i=1;i<size;i++) baseSet.add(i); //all usuable elements
+
         ArrayList<Set<Integer>> allSets = new ArrayList<>();
         for(int i=0;i<size*2;i++){
             Set<Integer> set = new HashSet<>();
