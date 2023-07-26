@@ -11,7 +11,7 @@ import org.paukov.combinatorics3.Generator;
 class generateCirculantGraphs{
     public static void main(String[]args){
         // Specifies size of graph
-        int numVertices =7;
+        int numVertices =6;
 
         // Used to generate given circulant graph
         int a=1;
@@ -29,10 +29,10 @@ class generateCirculantGraphs{
         //startCirGraph.printAdjMatrix();
 
         allCombos.add(startCirGraph);
-        printGraphForVis(allCombos,a,b);
+        printGraphForVis( allCombos,a,b);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
 
-        getUsableSets(6);
+        findDDMLabelings(ddmLabelings,allCombos,numVertices);
         // Can use emthods from generateGraphs to avoid rewriting
         // generateGraphs.printAllCombos(allCombos);
 
@@ -72,16 +72,18 @@ class generateCirculantGraphs{
 
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
-    ArrayList<edgeStorageArrays> allCombos){
+    ArrayList<edgeStorageArrays> allCombos, int size){
+        List<List<Integer>> test = new ArrayList<>();
+        getUsableSets(size,test);
         //need to make a usuable set
         //then start checking recursively
     }
 
     //Returns the set of vertices it can use
-    public static void getUsableSets(int size){
+    public static void getUsableSets(int size,List<List<Integer>> test){
         List<Integer> dom = new ArrayList<Integer>();
         for(int i=1;i<size;i++) dom.add(i);
-        List<List<Integer>> test = new ArrayList<>();
+
         Generator.combination(dom)
             .simple(4)
             .stream()
