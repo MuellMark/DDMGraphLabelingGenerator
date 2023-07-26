@@ -1,17 +1,18 @@
-package com;
+package com.circulantGraphs;
 import org.paukov.combinatorics3.Generator;
 import java.util.*;
 
-
-public class generateCirculantGraphs {
+/**
+ * Hello world!
+ *
+ */
+public class App {
     public static void main( String[] args ){
         System.out.println( "Hello World!" );
         List<Integer> dom = Arrays.asList(1,2,3,4,5);
-        List<List<Integer>> test = new ArrayList<>();
         Generator.combination(dom)
-            .simple(4)
+            .simple(3)
             .stream()
-            .forEach(combination -> test.add(combination));
-        System.out.println(test);
+            .forEach(System.out::println);
     }
 }
