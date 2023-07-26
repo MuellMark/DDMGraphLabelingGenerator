@@ -5,6 +5,7 @@ import java.util.*;
 import java.io.File;  // Import the File class
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.FileWriter;
+import org.paukov.combinatorics3.Generator;
 //import generateGraphs;
 
 class generateCirculantGraphs{
@@ -31,9 +32,9 @@ class generateCirculantGraphs{
         printGraphForVis(allCombos,a,b);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
 
-        getUsableSets(5);
+        getUsableSets(6);
         // Can use emthods from generateGraphs to avoid rewriting
-        //generateGraphs.printAllCombos(allCombos);
+        // generateGraphs.printAllCombos(allCombos);
 
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -78,19 +79,26 @@ class generateCirculantGraphs{
 
     //Returns the set of vertices it can use
     public static void getUsableSets(int size){
-        Set<Integer> baseSet = new HashSet<>();
-        for(int i=1;i<size;i++) baseSet.add(i); //all usuable elements
+        List<Integer> dom = new ArrayList<Integer>();
+        for(int i=1;i<size;i++) dom.add(i);
+        List<List<Integer>> test = new ArrayList<>();
+        Generator.combination(dom)
+            .simple(4)
+            .stream()
+            .forEach(combination -> test.add(combination));
+        System.out.println(test);
+        // Set<Integer> baseSet = new HashSet<>();
+        // for(int i=1;i<size;i++) baseSet.add(i); //all usuable elements
 
-        ArrayList<Set<Integer>> allSets = new ArrayList<>();
-        for(int i=0;i<size*2;i++){
-            Set<Integer> set = new HashSet<>();
-            set.add(i);
-            allSets.add(set);
-            // Must have size 4, in and out must be the same, 1 in and out minimum
-            // need way of checking for duplicates
-            // Don;t want it to be recursive if not needed
-        }
-        System.out.println(allSets);
+        // ArrayList<Set<Integer>> allSets = new ArrayList<>();
+        // for(int i=0;i<size*2;i++){
+        //     Set<Integer> set = new HashSet<>();
+        //     set.add(i);
+        //     allSets.add(set);
+        //     // Must have size 4, in and out must be the same, 1 in and out minimum
+        //     // need way of checking for duplicates
+        //     // Don;t want it to be recursive if not needed
+        // }
 
     }
 
@@ -115,22 +123,5 @@ class generateCirculantGraphs{
 
 
 
-// import org.paukov.combinatorics3.Generator;
-// import java.util.*;
 
-
-// public class generateCirculantGraphs {
-//     public static void main( String[] args ){
-//         edgeStorageArrays temp = new edgeStorageArrays(5);
-//         temp.addPair(2, 1);
-//         temp.print();
-//         System.out.println( "Hello World!" );
-//         List<Integer> dom = Arrays.asList(1,2,3,4,5);
-//         List<List<Integer>> test = new ArrayList<>();
-//         Generator.combination(dom)
-//             .simple(4)
-//             .stream()
-//             .forEach(combination -> test.add(combination));
-//         System.out.println(test);
-//     }
-// }
+ 
