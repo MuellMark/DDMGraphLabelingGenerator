@@ -1,4 +1,5 @@
 package com.circulantGraphs;
+
 import org.paukov.combinatorics3.Generator;
 import java.util.*;
 

@@ -1,7 +1,8 @@
-package com.circulantGraphs;
+package com.circulantGraphs.LegacyCode; // Anything in legacy code can have new pacakge header and still work
+
 import org.paukov.combinatorics3.Generator;
 import java.util.*;
-
+// Testing, likley to be removed
 /**
  * Hello world!
  *
