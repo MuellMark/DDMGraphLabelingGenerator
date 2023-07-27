@@ -73,9 +73,12 @@ class generateCirculantGraphs{
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size){
-        List<List<Integer>> test = new ArrayList<>();
-        getUsableSets(size,test);
-        //need to make a usuable set
+        List<List<Integer>> sets = new ArrayList<>();
+        getUsableSets(size,sets);
+
+        for(List<Integer> set:sets){
+            System.out.println(set);
+        }
         //then start checking recursively
     }
 
@@ -88,19 +91,7 @@ class generateCirculantGraphs{
             .simple(4)
             .stream()
             .forEach(combination -> test.add(combination));
-        System.out.println(test);
-        // Set<Integer> baseSet = new HashSet<>();
-        // for(int i=1;i<size;i++) baseSet.add(i); //all usuable elements
-
-        // ArrayList<Set<Integer>> allSets = new ArrayList<>();
-        // for(int i=0;i<size*2;i++){
-        //     Set<Integer> set = new HashSet<>();
-        //     set.add(i);
-        //     allSets.add(set);
-        //     // Must have size 4, in and out must be the same, 1 in and out minimum
-        //     // need way of checking for duplicates
-        //     // Don;t want it to be recursive if not needed
-        // }
+        //System.out.println(test);
 
     }
 
