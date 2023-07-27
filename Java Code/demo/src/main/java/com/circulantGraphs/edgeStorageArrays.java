@@ -306,6 +306,18 @@ class edgeStorageArrays{
         return cycle;
     }
 
+    public boolean stillCirculant(){
+        boolean still = true;
+
+        for(int i=1;i<size();i++){
+            if(edges[i][0][0]+edges[i][1][0]-2>4){
+                still=false;
+            }
+        }
+        // Check is circulant after created
+        return still;
+    }
+
     // Returns a copy of the current edgeStorage in question
     public edgeStorageArrays copy(){
         edgeStorageArrays newArr = new edgeStorageArrays(this.size());
