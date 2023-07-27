@@ -32,7 +32,7 @@ class generateCirculantGraphs{
         printGraphForVis( allCombos,a,b);
         System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
 
-        findDDMLabelings(ddmLabelings,allCombos,numVertices);
+        findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
         // generateGraphs.printAllCombos(allCombos);
 
@@ -72,14 +72,30 @@ class generateCirculantGraphs{
 
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
-    ArrayList<edgeStorageArrays> allCombos, int size){
+    ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
         List<List<Integer>> sets = new ArrayList<>();
         getUsableSets(size,sets);
 
+        //Should add all start graphs to allCombos, then a seperate for loop will continue from there
         for(List<Integer> set:sets){
             System.out.println(set);
+            edgeStorageArrays startCirGraph = new edgeStorageArrays(size);
+            findDDMRecur(ddmLabelings,allCombos,size,set,startCirGraph,a,b);
         }
         //then start checking recursively
+    }
+
+    private static void findDDMRecur(ArrayList<edgeStorageArrays> ddmLabelings,
+    ArrayList<edgeStorageArrays> allCombos, int size, List<Integer> set, 
+    edgeStorageArrays graph, int a, int b){
+        //Base case, if a graph is a circulant graph, may need to change
+        if(graph.isCirculantLabeling(a, b)){
+            // add to all combos
+        }else if(graph.stillCirculant()){
+            System.out.println("test");
+        }
+        //recur only if still fits as a circulant graph
+
     }
 
     //Returns the set of vertices it can use
