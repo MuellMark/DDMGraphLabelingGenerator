@@ -34,7 +34,7 @@ class generateCirculantGraphs{
 
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
-        generateGraphs.printAllCombos(allCombos);
+        generateGraphs.printAllAdjMatrix(allCombos);
 
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -78,6 +78,7 @@ class generateCirculantGraphs{
 
         //Should add all start graphs to allCombos, then a seperate for loop will continue from there
         for(List<Integer> set:sets){
+            set.add(0,6);
             System.out.println(set);
             edgeStorageArrays startCirGraph = new edgeStorageArrays(size);
             findDDMRecur(ddmLabelings,allCombos,size,set,startCirGraph,a,b);
@@ -89,12 +90,16 @@ class generateCirculantGraphs{
     ArrayList<edgeStorageArrays> allCombos, int size, List<Integer> set, 
     edgeStorageArrays graph, int a, int b){
         //Base case, if a graph is a circulant graph, may need to change
+        int sumIns = graph.getSumIns(6);
+        int sumOuts = graph.getSumOuts(6); // ALso temporary
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
-        }else if(set.size()==0){ //Temporary!!!!!
+            System.out.println("waaa");
+        }else if(set.size()==1 && sumIns==sumOuts){ //Temporary!!!!!
             allCombos.add(graph);
+            System.out.println("occurs");
         }else if(graph.stillCirculant()){
-            System.out.println("test");
+            //System.out.println("test");
             for(int i=0;i<set.size();i++){
                 for(int j=i+1;j<set.size();j++){
                     edgeStorageArrays newGraph1 = graph.copy();
