@@ -93,6 +93,21 @@ class generateCirculantGraphs{
             // add to all combos
         }else if(graph.stillCirculant()){
             System.out.println("test");
+            for(int i=0;i<set.size();i++){
+                for(int j=i+1;j<set.size();i++){
+                    edgeStorageArrays newGraph1 = graph.copy();
+                    newGraph1.addPair(set.get(i),set.get(j));
+
+                    edgeStorageArrays newGraph2 = graph.copy();
+                    newGraph2.addPair(set.get(j),set.get(i));
+
+                    // No case where edge isn't added, since all edges must be used in these cases
+
+                    //need to make new copy method for sets
+                    findDDMRecur(ddmLabelings,allCombos,size,set,newGraph1,a,b);
+                    findDDMRecur(ddmLabelings,allCombos,size,set,newGraph2,a,b);
+                }
+            }
         }
         //recur only if still fits as a circulant graph
 
