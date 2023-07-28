@@ -141,6 +141,18 @@ class generateCirculantGraphs{
             e.printStackTrace();
         }
     }
+
+    // Used to make copies of arraylists, used for copies of sets
+    public static ArrayList<Integer> copySet(ArrayList<Integer> set){
+        ArrayList<Integer> newSet = new ArrayList<>();
+
+        for(int i=0;i<set.size();i++){
+            newSet.add(set.get(i));
+        }
+        return newSet;
+    }
+
+
 }
 
 
