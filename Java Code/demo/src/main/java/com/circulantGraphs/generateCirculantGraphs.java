@@ -78,7 +78,7 @@ class generateCirculantGraphs{
 
         //Should add all start graphs to allCombos, then a seperate for loop will continue from there
         for(List<Integer> set:sets){
-            set.add(0,6);
+            //set.add(0,6);
             System.out.println(set);
             edgeStorageArrays startCirGraph = new edgeStorageArrays(size);
             findDDMRecur(ddmLabelings,allCombos,size,set,startCirGraph,a,b);
@@ -95,31 +95,51 @@ class generateCirculantGraphs{
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
             System.out.println("waaa");
-        }else if(set.size()==1 && sumIns==sumOuts){ //Temporary!!!!!
+            // Need count of edges method
+        }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(6)==4){ //Temporary!!!!!
             allCombos.add(graph);
             System.out.println("occurs");
         }else if(graph.stillCirculant()){
             //System.out.println("test");
             for(int i=0;i<set.size();i++){
-                for(int j=i+1;j<set.size();j++){
-                    edgeStorageArrays newGraph1 = graph.copy();
-                    newGraph1.addPair(set.get(i),set.get(j));
 
-                    edgeStorageArrays newGraph2 = graph.copy();
-                    newGraph2.addPair(set.get(j),set.get(i));
+                edgeStorageArrays newGraph1 = graph.copy();
+                newGraph1.addPair(set.get(i),6);
 
-                    List<Integer> set1 = copySet(set);
-                    List<Integer> set2 = copySet(set);
+                edgeStorageArrays newGraph2 = graph.copy();
+                newGraph2.addPair(6,set.get(i));
 
-                    set1.remove(i);
-                    set2.remove(i);
+                List<Integer> set1 = copySet(set);
+                List<Integer> set2 = copySet(set);
 
-                    // No case where edge isn't added, since all edges must be used in these cases
+                set1.remove(i);
+                set2.remove(i);
 
-                    //need to make new copy method for sets
-                    findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b);
-                    findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b);
-                }
+                // No case where edge isn't added, since all edges must be used in these cases
+
+                //need to make new copy method for sets
+                findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b);
+                findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b);
+                // Temp commented out for testing
+                // for(int j=i+1;j<set.size();j++){
+                //     edgeStorageArrays newGraph1 = graph.copy();
+                //     newGraph1.addPair(set.get(i),set.get(j));
+
+                //     edgeStorageArrays newGraph2 = graph.copy();
+                //     newGraph2.addPair(set.get(j),set.get(i));
+
+                //     List<Integer> set1 = copySet(set);
+                //     List<Integer> set2 = copySet(set);
+
+                //     set1.remove(i);
+                //     set2.remove(i);
+
+                //     // No case where edge isn't added, since all edges must be used in these cases
+
+                //     //need to make new copy method for sets
+                //     findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b);
+                //     findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b);
+                // }
             }
         }
         //recur only if still fits as a circulant graph

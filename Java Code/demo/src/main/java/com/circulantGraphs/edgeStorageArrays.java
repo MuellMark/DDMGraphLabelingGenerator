@@ -151,6 +151,10 @@ class edgeStorageArrays{
         return sum;
     }
 
+    public int getCountEdges(int vertex){
+        return((edges[vertex][0][0]+edges[vertex][1][0])-2);
+    }
+
     // gets how many vertices are in edges, not actual size of the array
     public int size(){
         return edges.length-1;
