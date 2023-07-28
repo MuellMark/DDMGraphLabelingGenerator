@@ -34,7 +34,7 @@ class generateCirculantGraphs{
 
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
-        // generateGraphs.printAllCombos(allCombos);
+        generateGraphs.printAllCombos(allCombos);
 
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -91,21 +91,29 @@ class generateCirculantGraphs{
         //Base case, if a graph is a circulant graph, may need to change
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
+        }else if(set.size()==0){ //Temporary!!!!!
+            allCombos.add(graph);
         }else if(graph.stillCirculant()){
             System.out.println("test");
             for(int i=0;i<set.size();i++){
-                for(int j=i+1;j<set.size();i++){
+                for(int j=i+1;j<set.size();j++){
                     edgeStorageArrays newGraph1 = graph.copy();
                     newGraph1.addPair(set.get(i),set.get(j));
 
                     edgeStorageArrays newGraph2 = graph.copy();
                     newGraph2.addPair(set.get(j),set.get(i));
 
+                    List<Integer> set1 = copySet(set);
+                    List<Integer> set2 = copySet(set);
+
+                    set1.remove(i);
+                    set2.remove(i);
+
                     // No case where edge isn't added, since all edges must be used in these cases
 
                     //need to make new copy method for sets
-                    findDDMRecur(ddmLabelings,allCombos,size,set,newGraph1,a,b);
-                    findDDMRecur(ddmLabelings,allCombos,size,set,newGraph2,a,b);
+                    findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b);
+                    findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b);
                 }
             }
         }
@@ -143,8 +151,8 @@ class generateCirculantGraphs{
     }
 
     // Used to make copies of arraylists, used for copies of sets
-    public static ArrayList<Integer> copySet(ArrayList<Integer> set){
-        ArrayList<Integer> newSet = new ArrayList<>();
+    public static List<Integer> copySet(List<Integer> set){
+        List<Integer> newSet = new ArrayList<>();
 
         for(int i=0;i<set.size();i++){
             newSet.add(set.get(i));
