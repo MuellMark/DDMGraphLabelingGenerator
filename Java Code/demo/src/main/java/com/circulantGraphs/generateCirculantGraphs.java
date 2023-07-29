@@ -76,27 +76,31 @@ class generateCirculantGraphs{
         List<List<Integer>> sets = new ArrayList<>();
         getUsableSets(size,sets);
 
-        //Should add all start graphs to allCombos, then a seperate for loop will continue from there
-        for(List<Integer> set:sets){
-            //set.add(0,6);
-            System.out.println(set);
-            edgeStorageArrays startCirGraph = new edgeStorageArrays(size);
-            findDDMRecur(ddmLabelings,allCombos,size,set,startCirGraph,a,b);
+        for(int i=6;i>5;i--){
+            //Should add all start graphs to allCombos, then a seperate for loop will continue from there
+            for(List<Integer> set:sets){
+                //set.add(0,6);
+                System.out.println(set);
+                edgeStorageArrays startCirGraph = new edgeStorageArrays(size);
+                findDDMRecur(ddmLabelings,allCombos,size,set,startCirGraph,a,b,i);
+            }
+            // Should get new set based on what edges are not full yet
         }
+  
         //then start checking recursively
     }
 
     private static void findDDMRecur(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, List<Integer> set, 
-    edgeStorageArrays graph, int a, int b){
+    edgeStorageArrays graph, int a, int b, int curr){
         //Base case, if a graph is a circulant graph, may need to change
-        int sumIns = graph.getSumIns(6);
-        int sumOuts = graph.getSumOuts(6); // ALso temporary
+        int sumIns = graph.getSumIns(curr);
+        int sumOuts = graph.getSumOuts(curr); // ALso temporary
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
             System.out.println("waaa");
             // Need count of edges method
-        }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(6)==4){ //Temporary!!!!!
+        }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
             allCombos.add(graph);
             System.out.println("occurs");
         }else if(graph.stillCirculant()){
@@ -104,10 +108,10 @@ class generateCirculantGraphs{
             for(int i=0;i<set.size();i++){
 
                 edgeStorageArrays newGraph1 = graph.copy();
-                newGraph1.addPair(set.get(i),6);
+                newGraph1.addPair(set.get(i),curr);
 
                 edgeStorageArrays newGraph2 = graph.copy();
-                newGraph2.addPair(6,set.get(i));
+                newGraph2.addPair(curr,set.get(i));
 
                 List<Integer> set1 = copySet(set);
                 List<Integer> set2 = copySet(set);
@@ -118,8 +122,8 @@ class generateCirculantGraphs{
                 // No case where edge isn't added, since all edges must be used in these cases
 
                 //need to make new copy method for sets
-                findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b);
-                findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b);
+                findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b,curr);
+                findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b,curr);
                 // Temp commented out for testing
                 // for(int j=i+1;j<set.size();j++){
                 //     edgeStorageArrays newGraph1 = graph.copy();
