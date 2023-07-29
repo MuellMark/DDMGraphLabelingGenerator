@@ -73,17 +73,27 @@ class generateCirculantGraphs{
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
-        List<List<Integer>> sets = new ArrayList<>();
-        getUsableSets(size,sets);
+        
 
-        for(int i=6;i>5;i--){
+        for(int i=6;i>4;i--){
+            List<List<Integer>> sets = new ArrayList<>();
+            getUsableSets(size,sets);
             //Should add all start graphs to allCombos, then a seperate for loop will continue from there
             for(List<Integer> set:sets){
                 //set.add(0,6);
                 System.out.println(set);
-                edgeStorageArrays startCirGraph = new edgeStorageArrays(size);
-                findDDMRecur(ddmLabelings,allCombos,size,set,startCirGraph,a,b,i);
+                int tempLeng = allCombos.size();
+                for(int j=0;j<tempLeng;j++){
+                    findDDMRecur(ddmLabelings,allCombos,size,set,allCombos.get(j),a,b,i);
+                }
+                
             }
+            sets.clear();
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int j=1;j<size;j++){
+                temp.add(j);
+            }
+            sets.add(temp);
             // Should get new set based on what edges are not full yet
         }
   
