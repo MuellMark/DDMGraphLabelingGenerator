@@ -34,7 +34,7 @@ class generateCirculantGraphs{
 
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
-        generateGraphs.printAllAdjMatrix(allCombos);
+        //generateGraphs.printAllAdjMatrix(allCombos);
 
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -73,11 +73,11 @@ class generateCirculantGraphs{
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
-        
-
-        for(int i=6;i>4;i--){
-            List<List<Integer>> sets = new ArrayList<>();
+        List<List<Integer>> sets = new ArrayList<>();
             getUsableSets(size,sets);
+
+        for(int i=size;i>0;i--){
+            
             //Should add all start graphs to allCombos, then a seperate for loop will continue from there
             for(List<Integer> set:sets){
                 //set.add(0,6);
@@ -90,7 +90,7 @@ class generateCirculantGraphs{
             }
             sets.clear();
             ArrayList<Integer> temp = new ArrayList<>();
-            for(int j=1;j<size;j++){
+            for(int j=1;j<=size;j++){
                 temp.add(j);
             }
             sets.add(temp);
