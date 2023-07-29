@@ -15,7 +15,7 @@ class generateCirculantGraphs{
 
         // Used to generate given circulant graph
         int a=1;
-        int b=3;
+        int b=2;
 
         //Stores all ddm labelings of a given Circualnt graph
         ArrayList<edgeStorageArrays> allCombos = new ArrayList<>(); //For recursive
@@ -34,7 +34,9 @@ class generateCirculantGraphs{
 
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
-        //generateGraphs.printAllAdjMatrix(allCombos);
+        generateGraphs.printAllAdjMatrix(allCombos);
+        //generateGraphs.printAllCombos(allCombos);
+        //System.out.println(Arrays.toString(allCombos.get(1).edges[6][0]));
 
         // ArrayList<int[]> arrTest = startCirGraph.getCycles();
         // for(int[] arr:arrTest){
@@ -73,11 +75,11 @@ class generateCirculantGraphs{
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
-        List<List<Integer>> sets = new ArrayList<>();
+        
+        for(int i=size;i>0;i--){
+            List<List<Integer>> sets = new ArrayList<>();
             getUsableSets(size,sets);
 
-        for(int i=size;i>0;i--){
-            
             //Should add all start graphs to allCombos, then a seperate for loop will continue from there
             for(List<Integer> set:sets){
                 //set.add(0,6);
@@ -116,7 +118,7 @@ class generateCirculantGraphs{
         }else if(graph.stillCirculant()){
             //System.out.println("test");
             for(int i=0;i<set.size();i++){
-
+                //System.out.println(curr);
                 edgeStorageArrays newGraph1 = graph.copy();
                 newGraph1.addPair(set.get(i),curr);
 
