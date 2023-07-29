@@ -76,6 +76,9 @@ class edgeStorageArrays{
             edges[vertex][1][tempIndex]=element;
             edges[vertex][1][0]++;
         }
+        // else{
+        //     System.out.println("duplicate found, nothing added"); //Temp, for testing
+        // }  
     }
 
     // Adds element to outputs at vertex
@@ -84,7 +87,10 @@ class edgeStorageArrays{
             int tempIndex = edges[vertex][0][0];
             edges[vertex][0][tempIndex]=element;
             edges[vertex][0][0]++;
-        }    
+        }
+        // else{
+        //     System.out.println("duplicate found, nothing added"); //Temp, for testing
+        // }    
     }
 
         // removess element to inputs at vertex

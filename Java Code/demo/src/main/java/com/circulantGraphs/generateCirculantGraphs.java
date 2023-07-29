@@ -76,7 +76,7 @@ class generateCirculantGraphs{
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
         
-        for(int i=size;i>0;i--){
+        for(int i=size;i>4;i--){
             List<List<Integer>> sets = new ArrayList<>();
             getUsableSets(size,sets);
 
@@ -86,7 +86,7 @@ class generateCirculantGraphs{
                 System.out.println(set);
                 int tempLeng = allCombos.size();
                 for(int j=0;j<tempLeng;j++){
-                    findDDMRecur(ddmLabelings,allCombos,size,set,allCombos.get(j),a,b,i);
+                    findDDMRecur(ddmLabelings,allCombos,i,set,allCombos.get(j),a,b,i);
                 }
                 
             }
