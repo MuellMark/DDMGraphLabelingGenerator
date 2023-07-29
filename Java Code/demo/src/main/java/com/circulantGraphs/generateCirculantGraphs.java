@@ -86,7 +86,7 @@ class generateCirculantGraphs{
                 System.out.println(set);
                 int tempLeng = allCombos.size();
                 for(int j=0;j<tempLeng;j++){
-                    findDDMRecur(ddmLabelings,allCombos,i,set,allCombos.get(j),a,b,i);
+                    findDDMRecur(ddmLabelings,allCombos,size,set,allCombos.get(j),a,b,i);
                 }
                 
             }
@@ -121,7 +121,7 @@ class generateCirculantGraphs{
             ddmLabelings.add(graph);
         }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
             allCombos.add(graph);
-            System.out.println("occurs");
+            //System.out.println("occurs");
         }else if(graph.stillCirculant()){
             //System.out.println("test");
             for(int i=0;i<set.size();i++){
@@ -131,6 +131,8 @@ class generateCirculantGraphs{
 
                 edgeStorageArrays newGraph2 = graph.copy();
                 newGraph2.addPair(curr,set.get(i));
+
+                edgeStorageArrays newGraph3 = graph.copy();
 
                 List<Integer> set1 = copySet(set);
                 List<Integer> set2 = copySet(set);
@@ -143,6 +145,7 @@ class generateCirculantGraphs{
                 //need to make new copy method for sets
                 findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b,curr);
                 findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b,curr);
+                findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph3,a,b,curr);
                 // Temp commented out for testing
                 // for(int j=i+1;j<set.size();j++){
                 //     edgeStorageArrays newGraph1 = graph.copy();
