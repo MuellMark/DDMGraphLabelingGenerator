@@ -34,7 +34,7 @@ class generateCirculantGraphs{
 
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
-        generateGraphs.printAllAdjMatrix(allCombos);
+        generateGraphs.printAllAdjMatrix(ddmLabelings);
         //generateGraphs.printAllCombos(allCombos);
         //System.out.println(Arrays.toString(allCombos.get(1).edges[6][0]));
 
@@ -76,7 +76,7 @@ class generateCirculantGraphs{
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
         
-        for(int i=size;i>4;i--){
+        for(int i=size;i>0;i--){
             List<List<Integer>> sets = new ArrayList<>();
             getUsableSets(size,sets);
 
@@ -97,6 +97,10 @@ class generateCirculantGraphs{
             }
             sets.add(temp);
             // Should get new set based on what edges are not full yet
+
+            if(i==size){
+                allCombos.remove(0);
+            }
         }
   
         //then start checking recursively
@@ -110,8 +114,11 @@ class generateCirculantGraphs{
         int sumOuts = graph.getSumOuts(curr); // ALso temporary
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
+            ddmLabelings.add(graph);
             System.out.println("waaa");
             // Need count of edges method
+        }else if(graph.isDDMLabeling()){
+            ddmLabelings.add(graph);
         }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
             allCombos.add(graph);
             System.out.println("occurs");

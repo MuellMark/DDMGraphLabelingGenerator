@@ -9,7 +9,7 @@ import java.io.FileWriter;
 class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
-        int numVertices =5; 
+        int numVertices =6; 
 
         // Change number based on the desired method
         // 1 = isDDMLabeling()
@@ -38,13 +38,13 @@ class generateGraphs{
         generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector,a,b); // Starts generating graphs
 
         // Different print statements, comment out desired one
-        printAllCombos(ddmLabelings);
-        //printAllAdjMatrix(ddmLabelings);
+        //printAllCombos(ddmLabelings);
+        printAllAdjMatrix(ddmLabelings);
 
         //Different Write to files, comment out the desired one
         //writeAllCombosToFile(ddmLabelings);
         //writeAllCombosToFileAdjMatrix(ddmLabelings);
-        writeAllCombosToFileVisualization(ddmLabelings);
+        //writeAllCombosToFileVisualization(ddmLabelings);
     }
 
     // Loops through all recursive calls from checkforSums
