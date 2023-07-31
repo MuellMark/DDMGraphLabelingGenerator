@@ -75,17 +75,17 @@ class generateCirculantGraphs{
     // Kick off method for recursive method
     public static void findDDMLabelings(ArrayList<edgeStorageArrays> ddmLabelings,
     ArrayList<edgeStorageArrays> allCombos, int size, int a, int b){
-        
-        for(int i=size;i>0;i--){
-            List<List<Integer>> sets = new ArrayList<>();
+        List<List<Integer>> sets = new ArrayList<>();
             getUsableSets(size,sets);
-
+        for(int i=size;i>0;i--){
+            
+            int tempLeng = allCombos.size();
             //Should add all start graphs to allCombos, then a seperate for loop will continue from there
             for(List<Integer> set:sets){
                 //set.add(0,6);
                 System.out.println(set);
                 System.out.println(allCombos.size());
-                int tempLeng = allCombos.size();
+                
                 for(int j=0;j<tempLeng;j++){
                     findDDMRecur(ddmLabelings,allCombos,size,set,allCombos.get(j),a,b,i);
                 }
@@ -120,6 +120,8 @@ class generateCirculantGraphs{
             // Need count of edges method
         }else if(graph.isDDMLabeling()){
             ddmLabelings.add(graph);
+            //Consider making the line below also check for duplicates, I'm not sure if this 
+            //would actually help, but it's worth a try
         }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
             allCombos.add(graph);
             //System.out.println("occurs");
