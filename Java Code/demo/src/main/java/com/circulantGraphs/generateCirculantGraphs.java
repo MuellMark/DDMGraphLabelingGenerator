@@ -216,10 +216,3 @@ class generateCirculantGraphs{
 
 
 }
-
-
-
-
-
-
- 

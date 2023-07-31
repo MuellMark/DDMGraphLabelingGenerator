@@ -70,11 +70,16 @@ class edgeStorageArrays{
     }
 
     // Adds element to inputs at vertex
-    public void addIn(int vertex, int element){
+    public boolean addIn(int vertex, int element){
+        boolean added =true;
         if(!contains(edges[vertex][1],element)){
             int tempIndex = edges[vertex][1][0];
             edges[vertex][1][tempIndex]=element;
             edges[vertex][1][0]++;
+            return added;
+        }else{
+            added=false;
+            return added;
         }
         // else{
         //     System.out.println("duplicate found, nothing added"); //Temp, for testing
@@ -82,11 +87,16 @@ class edgeStorageArrays{
     }
 
     // Adds element to outputs at vertex
-    public void addOut(int vertex, int element){
+    public boolean addOut(int vertex, int element){
+        boolean added =true;
         if(!contains(edges[vertex][0],element)){
             int tempIndex = edges[vertex][0][0];
             edges[vertex][0][tempIndex]=element;
             edges[vertex][0][0]++;
+            return added;
+        }else{
+            added=false;
+            return added;
         }
         // else{
         //     System.out.println("duplicate found, nothing added"); //Temp, for testing
