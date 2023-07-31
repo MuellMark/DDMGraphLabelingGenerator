@@ -84,6 +84,7 @@ class generateCirculantGraphs{
             for(List<Integer> set:sets){
                 //set.add(0,6);
                 System.out.println(set);
+                System.out.println(allCombos.size());
                 int tempLeng = allCombos.size();
                 for(int j=0;j<tempLeng;j++){
                     findDDMRecur(ddmLabelings,allCombos,size,set,allCombos.get(j),a,b,i);
@@ -93,7 +94,7 @@ class generateCirculantGraphs{
             sets.clear();
             ArrayList<Integer> temp = new ArrayList<>();
             for(int j=1;j<=size;j++){
-                temp.add(j);
+                if(j!=i) temp.add(j);
             }
             sets.add(temp);
             // Should get new set based on what edges are not full yet
