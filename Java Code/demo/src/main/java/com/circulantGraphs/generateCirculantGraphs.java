@@ -123,7 +123,14 @@ class generateCirculantGraphs{
             //Consider making the line below also check for duplicates, I'm not sure if this 
             //would actually help, but it's worth a try
         }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
-            allCombos.add(graph);
+            boolean eq = false;
+            for(int i=0;i<allCombos.size();i++){
+                if(allCombos.get(i).equals(graph)){
+                    eq=true;
+                    i+=allCombos.size();
+                }
+            }
+            if(!eq) allCombos.add(graph);
             //System.out.println("occurs");
         }else if(graph.stillCirculant()){
             //System.out.println("test");
