@@ -133,7 +133,7 @@ class generateCirculantGraphs{
                 boolean graph1bool = newGraph1.addPair(set.get(i),curr);
 
                 edgeStorageArrays newGraph2 = graph.copy();
-                newGraph2.addPair(curr,set.get(i));
+                boolean graph2bool = newGraph2.addPair(curr,set.get(i));
 
                 edgeStorageArrays newGraph3 = graph.copy();
 
@@ -146,8 +146,8 @@ class generateCirculantGraphs{
                 // No case where edge isn't added, since all edges must be used in these cases
 
                 //need to make new copy method for sets
-                findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b,curr);
-                findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b,curr);
+                if(graph1bool) findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b,curr);
+                if(graph2bool) findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b,curr);
                 findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph3,a,b,curr);
                 // Temp commented out for testing
                 // for(int j=i+1;j<set.size();j++){
