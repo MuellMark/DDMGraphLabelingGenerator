@@ -143,9 +143,8 @@ class edgeStorageArrays{
     }
 
     // Adds a pair of elements from -> to
-    public void addPair(int from,int to){
-        addOut(from,to);
-        addIn(to,from);
+    public boolean addPair(int from,int to){
+        return(addIn(to,from) && addOut(from,to));
     }
 
     // removes a pair of elements from -> to

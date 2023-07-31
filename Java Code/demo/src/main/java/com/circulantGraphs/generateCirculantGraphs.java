@@ -130,7 +130,7 @@ class generateCirculantGraphs{
             for(int i=0;i<set.size();i++){
                 //System.out.println(curr);
                 edgeStorageArrays newGraph1 = graph.copy();
-                newGraph1.addPair(set.get(i),curr);
+                boolean graph1bool = newGraph1.addPair(set.get(i),curr);
 
                 edgeStorageArrays newGraph2 = graph.copy();
                 newGraph2.addPair(curr,set.get(i));
