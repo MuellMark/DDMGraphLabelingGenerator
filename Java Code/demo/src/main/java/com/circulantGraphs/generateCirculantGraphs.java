@@ -116,16 +116,17 @@ class generateCirculantGraphs{
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
             ddmLabelings.add(graph);
+            //Check for duplicates
             System.out.println("waaa");
             // Need count of edges method
         }else if(graph.isDDMLabeling()){
-            ddmLabelings.add(graph);
+            //ddmLabelings.add(graph);
             //Consider making the line below also check for duplicates, I'm not sure if this 
             //would actually help, but it's worth a try
         }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
             boolean eq = false;
             for(int i=0;i<allCombos.size();i++){
-                if(allCombos.get(i).equals(graph)){
+                if(allCombos.get(i).equals(graph) || allCombos.get(i).isInverse(graph)){
                     eq=true;
                     i+=allCombos.size();
                 }
