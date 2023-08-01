@@ -115,9 +115,16 @@ class generateCirculantGraphs{
         int sumOuts = graph.getSumOuts(curr); // ALso temporary
         if(graph.isCirculantLabeling(a, b)){
             // add to all combos
-            ddmLabelings.add(graph);
+            boolean eq = false;
+            for(int i=0;i<ddmLabelings.size();i++){
+                if(ddmLabelings.get(i).equals(graph) || ddmLabelings.get(i).isInverse(graph)){
+                    eq=true;
+                    i+=ddmLabelings.size();
+                }
+            }
+            if(!eq) ddmLabelings.add(graph);
             //Check for duplicates
-            System.out.println("waaa");
+            //System.out.println("waaa");
             // Need count of edges method
         }else if(graph.isDDMLabeling()){
             //ddmLabelings.add(graph);
