@@ -35,6 +35,7 @@ class generateCirculantGraphs{
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
         // Can use emthods from generateGraphs to avoid rewriting
         generateGraphs.printAllAdjMatrix(ddmLabelings);
+        generateGraphs.writeAllCombosToFileVisualization(ddmLabelings);
         //generateGraphs.printAllCombos(allCombos);
         //System.out.println(Arrays.toString(allCombos.get(1).edges[6][0]));
 
