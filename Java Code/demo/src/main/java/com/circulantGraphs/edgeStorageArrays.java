@@ -81,9 +81,6 @@ class edgeStorageArrays{
             added=false;
             return added;
         }
-        // else{
-        //     System.out.println("duplicate found, nothing added"); //Temp, for testing
-        // }  
     }
 
     // Adds element to outputs at vertex
@@ -98,12 +95,9 @@ class edgeStorageArrays{
             added=false;
             return added;
         }
-        // else{
-        //     System.out.println("duplicate found, nothing added"); //Temp, for testing
-        // }    
     }
 
-        // removess element to inputs at vertex
+        // removes element in inputs at vertex
         public void removeIn(int vertex, int element){
             if(contains(edges[vertex][1],element)){
                 for(int i=1;i<edges[vertex][1].length;i++){
@@ -118,7 +112,7 @@ class edgeStorageArrays{
             }
         }
         
-        // removess element to outputs at vertex
+        // removes element in outputs at vertex
         public void removeOut(int vertex, int element){
             if(contains(edges[vertex][0],element)){
                 for(int i=1;i<edges[vertex][0].length;i++){
@@ -185,7 +179,7 @@ class edgeStorageArrays{
         return isDDM;
     }
 
-    // Checks if it is a DDM labeling, not accounting for zeroes
+    // Checks if it is a DDM labeling, accounting for zeroes
     public boolean isDDMLabelingIncludeZeroes(){
         boolean isDDM = true;
         for(int i=1;i<size()+1;i++){
@@ -195,6 +189,7 @@ class edgeStorageArrays{
 
     }
 
+    // TODO: Needs to be reowkred for larger Circulant Graphs
     // Checks if it is a circulant labeling
     public boolean isCirculantLabeling(int a, int b){
         boolean isCir = true;
@@ -222,13 +217,7 @@ class edgeStorageArrays{
                 if(contWhile)  isCir=false;
 
             }
-            // //Debugging, prints all of the cycles
-            // for(int[] cycle:cycles){
-            //     System.out.println(Arrays.toString(cycle));
-            // }
-            // System.out.println();
         }
-        
         return isCir;
     }
 
@@ -296,7 +285,7 @@ class edgeStorageArrays{
         boolean isCir=true;
         int cycleLen = cycle.length;
         for(int i=0;i<cycleLen;i++){
-            // TODO: need to be able to chenge how much is added for a
+            // TODO: need to be able to chenge how much is added for a, may be a larger issue
             int indexPlus=(i+b)%cycleLen;
             int indexMinus=(i+cycleLen-b)%cycleLen; // % not working for negative
 
@@ -311,7 +300,6 @@ class edgeStorageArrays{
     }
 
     // Will get the circulant cycle for visualization purposes
-    // May switch from int array to arraylist
     public int[] getCirculentCycle(int a, int b){
         int[] cycle = new int[size()];
         ArrayList<int[]> allCycles = getCycles(); //Gets all cycles in a given graph
@@ -325,15 +313,15 @@ class edgeStorageArrays{
         return cycle;
     }
 
+    // checks that the bounds of a cirucalant are not broken
+    // TODO: needs to check for more and should be refactored to use method
     public boolean stillCirculant(){
         boolean still = true;
-
         for(int i=1;i<size();i++){
             if(edges[i][0][0]+edges[i][1][0]-2>4){
                 still=false;
             }
         }
-        // Check is circulant after created
         return still;
     }
 
