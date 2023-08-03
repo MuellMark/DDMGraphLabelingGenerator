@@ -24,9 +24,6 @@ class generateCirculantGraphs{
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
         //createCirculantGraphs(numVertices, a, b, startCirGraph);
-       
-        //startCirGraph.print();
-        //startCirGraph.printAdjMatrix();
 
         allCombos.add(startCirGraph);
         printGraphForVis( allCombos,a,b);
@@ -98,14 +95,11 @@ class generateCirculantGraphs{
                 if(j!=i) temp.add(j);
             }
             sets.add(temp);
-            // Should get new set based on what edges are not full yet
 
             if(i==size){
                 allCombos.remove(0);
             }
         }
-  
-        //then start checking recursively
     }
 
     private static void findDDMRecur(ArrayList<edgeStorageArrays> ddmLabelings,
@@ -229,6 +223,4 @@ class generateCirculantGraphs{
         }
         return newSet;
     }
-
-
 }
