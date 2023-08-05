@@ -1,13 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-
+# TODO, file still in progress, does not work yet
 
 #File that all the graphs are stored in, change based on where storing the files
 graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForCirVis.txt",'r')
 
 #File path and name for where all graphs will be changed. Keep /graph at end
-fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Circulant Graphsgraph"
+fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Circulant Graphs/6VertexDDM"
 
 contents = graphsToGenerate.readlines()
 

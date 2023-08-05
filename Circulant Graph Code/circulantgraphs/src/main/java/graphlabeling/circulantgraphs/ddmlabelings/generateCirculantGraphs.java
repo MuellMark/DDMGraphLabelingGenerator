@@ -11,7 +11,7 @@ import org.paukov.combinatorics3.Generator;
 class generateCirculantGraphs{
     public static void main(String[]args){
         // Specifies size of graph
-        int numVertices =5;
+        int numVertices =6;
 
         // Used to generate given circulant graph
         int a=1;
@@ -74,9 +74,9 @@ class generateCirculantGraphs{
             int tempLeng = allCombos.size();
             //Should add all start graphs to allCombos, then a seperate for loop will continue from there
             for(List<Integer> set:sets){
-                //set.add(0,6);
-                System.out.println(set);
-                System.out.println(allCombos.size());
+                //Debugging
+                // System.out.println(set);
+                // System.out.println(allCombos.size());
                 
                 for(int j=0;j<tempLeng;j++){
                     findDDMRecur(ddmLabelings,allCombos,size,set,allCombos.get(j),a,b,i);
