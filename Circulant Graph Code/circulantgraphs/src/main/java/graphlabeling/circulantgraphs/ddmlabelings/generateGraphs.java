@@ -16,11 +16,11 @@ class generateGraphs{
         // 3 = isCirculantLabeling() REMOVE #, other file
         int methodSelect = 1;
 
-        // These two variables are only for when methodSelect is set at 3, they select the
-        // a and b values for checkign for circulant labelings.
-        // Note: a=/=b, a<b<numVertices/2
-        int a=1;
-        int b=2;
+        // // These two variables are only for when methodSelect is set at 3, they select the
+        // // a and b values for checkign for circulant labelings.
+        // // Note: a=/=b, a<b<numVertices/2
+        // int a=1;
+        // int b=2;
 
         // For changing how the set works, TODO, may be removed
         int usableSetSelector = 1;
@@ -34,7 +34,7 @@ class generateGraphs{
         edgeStorageArrays startGraph = new edgeStorageArrays(numVertices);
         allCombos.add(startGraph);
 
-        generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector,a,b); // Starts generating graphs
+        generate(allCombos, numVertices,ddmLabelings,methodSelect, usableSetSelector); // Starts generating graphs
 
         // Different print statements, comment out desired one
         //printAllCombos(ddmLabelings);
@@ -48,7 +48,7 @@ class generateGraphs{
 
     // Loops through all recursive calls from checkforSums
     public static void generate(ArrayList<edgeStorageArrays> allCombos, int vertex,ArrayList<edgeStorageArrays> ddmLabelings,
-    int methodSelect, int usableSetSelector,int a,int b){
+    int methodSelect, int usableSetSelector){
         // Loops through all vertices in reverse order
         while(vertex>0){
             ArrayList<Integer> set = getUsableSet(usableSetSelector, vertex); // Gets usable edge set
@@ -57,7 +57,7 @@ class generateGraphs{
             // Does a recurrsive call to all graphs in allCombos
             for(int i=0;i<currentSize;i++){
                 edgeStorageArrays temp = allCombos.get(i).copy(); // Creates copy to avoid pointer issues
-                checkForSums(allCombos, temp, set, vertex, 0,ddmLabelings,methodSelect,a,b); // Recursive call
+                checkForSums(allCombos, temp, set, vertex, 0,ddmLabelings,methodSelect); // Recursive call
             }
             vertex--;
         }
@@ -65,15 +65,14 @@ class generateGraphs{
 
     // Recursive method, finds all possible combinations of edges 
     public static void checkForSums(ArrayList<edgeStorageArrays> allCombos, edgeStorageArrays current,
-    ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings, int methodSelect,
-    int a, int b){
+    ArrayList<Integer> set, int vertex, int index, ArrayList<edgeStorageArrays> ddmLabelings, int methodSelect){
         int sumIns = current.getSumIns(vertex);
         int sumOuts = current.getSumOuts(vertex);
 
         // base case, if the two are equal then a potential labeling could be found
         if(sumIns==sumOuts && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
-            if(callSpecificMethod(methodSelect, current,a,b)){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
+            if(callSpecificMethod(methodSelect, current)){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
                 boolean isInvOrEq = false;
                 //Checks if the graphs found is an inverse or repeat graph
                 for(int i=0;i<ddmLabelings.size();i++){
@@ -106,11 +105,11 @@ class generateGraphs{
             // Debugging statement, to track number of graphs generated when dealing with large cases
             if(allCombos.size()%10000==0) System.out.println("Graph added, "+allCombos.size()+" graphs found");
             //Recursive calls, one for each new graph created
-            checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings,methodSelect,a,b);
+            checkForSums(allCombos,copyCurrent,set,vertex,index,ddmLabelings,methodSelect);
 
-            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings,methodSelect,a,b);
+            checkForSums(allCombos,addToOuts,set,vertex,index,ddmLabelings,methodSelect);
 
-            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings,methodSelect,a,b);
+            checkForSums(allCombos,addToIns,set,vertex,index,ddmLabelings,methodSelect);
 
         }
     }
@@ -203,14 +202,12 @@ class generateGraphs{
 
     // Selector method to call different methods based on the user selected number
     // If invalid number selected, no grpahs are generated
-    public static boolean callSpecificMethod(int num, edgeStorageArrays current,int a,int b){
+    public static boolean callSpecificMethod(int num, edgeStorageArrays current){
         switch(num){
             case(1):
                 return current.isDDMLabeling();
             case(2):
                 return current.isDDMLabelingIncludeZeroes();
-            case(3):
-                return current.isCirculantLabeling(a,b);
             default:
                 return false;
         }
