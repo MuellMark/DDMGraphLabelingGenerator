@@ -2,17 +2,19 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Change number of vertices here
-numVertices = 5
+numVertices = 6
 
 #File that all the graphs are stored in, change based on where storing the files
 graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt",'r')
 
 #File path and name for where all graphs will be changed. Keep /graph at end
-fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/ConnectedGraphs/5VertexNoInverse/graph"
+fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Circulant Graphs/6VertexDDM/graph"
 
-contents = graphsToGenerate.readlines()
 
-graphnum=1 #Tracks graph number for file
+
+contents = graphsToGenerate.readlines() #reads from file, do not change 
+
+graphnum=1 #Tracks graph number for file, do not change
 
 #Goes through each graph in the file
 for line in contents:
@@ -29,6 +31,7 @@ for line in contents:
             tempList.append(tempTuple)
         index+=1
 
+    #TODO: should make this an algorithm instead of hardcoded
     #Locks vertices in place, one case for each number of graph
     if(numVertices==5):
         G.add_node(1,pos=(2,1))

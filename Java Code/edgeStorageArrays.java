@@ -69,16 +69,51 @@ class edgeStorageArrays{
 
     // Adds element to inputs at vertex
     public void addIn(int vertex, int element){
-        int tempIndex = edges[vertex][1][0];
-        edges[vertex][1][tempIndex]=element;
-        edges[vertex][1][0]++;
+        if(!contains(edges[vertex][1],element)){
+            int tempIndex = edges[vertex][1][0];
+            edges[vertex][1][tempIndex]=element;
+            edges[vertex][1][0]++;
+        }
     }
+
     // Adds element to outputs at vertex
     public void addOut(int vertex, int element){
-        int tempIndex = edges[vertex][0][0];
-        edges[vertex][0][tempIndex]=element;
-        edges[vertex][0][0]++;
+        if(!contains(edges[vertex][0],element)){
+            int tempIndex = edges[vertex][0][0];
+            edges[vertex][0][tempIndex]=element;
+            edges[vertex][0][0]++;
+        }    
     }
+
+        // removess element to inputs at vertex
+        public void removeIn(int vertex, int element){
+            if(contains(edges[vertex][1],element)){
+                for(int i=1;i<edges[vertex][1].length;i++){
+                    if(edges[vertex][1][i]==element){
+                        edges[vertex][1][i]=0;
+                        i+= size(); 
+                    }
+                }
+                edges[vertex][1][0]--;
+            }else{
+                System.out.println(element+" not in storage, nothing removed");
+            }
+        }
+        
+        // removess element to outputs at vertex
+        public void removeOut(int vertex, int element){
+            if(contains(edges[vertex][0],element)){
+                for(int i=1;i<edges[vertex][0].length;i++){
+                    if(edges[vertex][0][i]==element){
+                        edges[vertex][0][i]=0;
+                        i+= size(); 
+                    }
+                }
+                edges[vertex][0][0]--;
+            }else{
+                System.out.println(element+" not in storage, nothing removed");
+            }   
+        }
 
     // Takes in an arraylist of ins, and adds them to then ins one by one 
     public void addInList(int vertex, int[] ins){
@@ -93,6 +128,12 @@ class edgeStorageArrays{
     public void addPair(int from,int to){
         addOut(from,to);
         addIn(to,from);
+    }
+
+    // removes a pair of elements from -> to
+    public void removePair(int from,int to){
+        removeOut(from,to);
+        removeIn(to,from);
     }
 
     // Gets the sum of the ins at a vertex
@@ -134,7 +175,7 @@ class edgeStorageArrays{
     }
 
     // Checks if it is a circulant labeling
-    public boolean isCirculantLabeling(){
+    public boolean isCirculantLabeling(int a, int b){
         boolean isCir = true;
 
         //all vertices must have a degree of 4
@@ -151,7 +192,7 @@ class edgeStorageArrays{
                 boolean contWhile=true;
                 int whileIndex=0;
                 while(contWhile && whileIndex<cycles.size()){
-                    boolean temp = checkCirEdges(cycles.get(whileIndex));
+                    boolean temp = checkCirEdges(cycles.get(whileIndex),a,b);
                     if(temp){
                         contWhile=false; // If contWhile is false, one was found
                     } 
@@ -230,13 +271,13 @@ class edgeStorageArrays{
     }
 
     // With a given cycle, it checks if a labeling is a circulant labeling
-    private boolean checkCirEdges(int[] cycle){
+    private boolean checkCirEdges(int[] cycle, int a, int b){
         boolean isCir=true;
         int cycleLen = cycle.length;
         for(int i=0;i<cycleLen;i++){
-            // TODO: need to be able to chenge how much is added
-            int indexPlus=(i+2)%cycleLen;
-            int indexMinus=(i+cycleLen-2)%cycleLen; // % not working for negative
+            // TODO: need to be able to chenge how much is added for a
+            int indexPlus=(i+b)%cycleLen;
+            int indexMinus=(i+cycleLen-b)%cycleLen; // % not working for negative
 
             if(!(contains(edges[cycle[i]][0],cycle[indexPlus])||contains(edges[cycle[i]][1],cycle[indexPlus]))){
                 isCir=false;
@@ -246,6 +287,21 @@ class edgeStorageArrays{
             } 
         }
         return isCir;
+    }
+
+    // Will get the circulant cycle for visualization purposes
+    // May switch from int array to arraylist
+    public int[] getCirculentCycle(int a, int b){
+        int[] cycle = new int[size()];
+        ArrayList<int[]> allCycles = getCycles(); //Gets all cycles in a given graph
+        for(int[] arr: allCycles){
+            if(checkCirEdges(arr,a,b)){
+                cycle = arr;
+                return cycle;
+            }
+        }
+        System.out.println("Error: No Circulant Graph found");
+        return cycle;
     }
 
     // Returns a copy of the current edgeStorage in question
@@ -270,11 +326,9 @@ class edgeStorageArrays{
                 
                 if(!Arrays.equals(getIns(i),other.getIns(i))){
                     equals=false;
-                    //System.out.println(getIns(i)+" =/="+getIns(i));
                 }
                 if(!Arrays.equals(getOuts(i),other.getOuts(i))){
                     equals=false;
-                    //System.out.println(getOuts(i)+" =/="+getOuts(i));
                 }
             }
         }
