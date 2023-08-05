@@ -161,6 +161,7 @@ class edgeStorageArrays{
         return sum;
     }
 
+    // Returns the count of edges for a given graph
     public int getCountEdges(int vertex){
         return((edges[vertex][0][0]+edges[vertex][1][0])-2);
     }
@@ -190,7 +191,7 @@ class edgeStorageArrays{
 
     }
 
-    // TODO: Needs to be reowkred for larger Circulant Graphs
+    // TODO: Needs to be reworkred for larger Circulant Graphs
     // Checks if it is a circulant labeling
     public boolean isCirculantLabeling(int a, int b){
         boolean isCir = true;
@@ -442,6 +443,7 @@ class edgeStorageArrays{
         }    
     }
 
+    //Checks if a given graph contains an element in it's outs
     private boolean contains(int[] arr,int num){
         boolean contain = false;
         for(int i=1;i<=arr[0];i++){
@@ -450,6 +452,7 @@ class edgeStorageArrays{
         return contain;
     }
 
+    //Returns a copy of an int array, to be used internally
     private int[] copyArrInts(int[] arr){
         int[] newArr = new int[arr.length];
         for(int i=0;i<arr.length;i++){
@@ -458,6 +461,7 @@ class edgeStorageArrays{
         return newArr;
     }
 
+    //Returns a copy of an int array list, to be used internally
     private ArrayList<Integer> copyListInts(ArrayList<Integer> list){
         ArrayList<Integer> newList = new ArrayList<>();
         for(int i=0;i<list.size();i++){

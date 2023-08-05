@@ -11,7 +11,7 @@ import org.paukov.combinatorics3.Generator;
 class generateCirculantGraphs{
     public static void main(String[]args){
         // Specifies size of graph
-        int numVertices =6;
+        int numVertices =5;
 
         // Used to generate given circulant graph
         int a=1;
@@ -23,26 +23,22 @@ class generateCirculantGraphs{
 
         // Stores original starter Circulant graph
         edgeStorageArrays startCirGraph = new edgeStorageArrays(numVertices);
+        
+        // Used to create a ddm graph of any size
         //createCirculantGraphs(numVertices, a, b, startCirGraph);
 
+        // Generates circulant graphs
         allCombos.add(startCirGraph);
-        printGraphForVis( allCombos,a,b);
-        System.out.println(Arrays.toString(startCirGraph.getCirculentCycle(a, b)));
-
         findDDMLabelings(ddmLabelings,allCombos,numVertices,a,b);
-        // Can use emthods from generateGraphs to avoid rewriting
+
+        //Different print statements, more avaiable, same as in generateGraphs
         generateGraphs.printAllAdjMatrix(ddmLabelings);
         generateGraphs.writeAllCombosToFileVisualization(ddmLabelings);
-        //generateGraphs.printAllCombos(allCombos);
-        //System.out.println(Arrays.toString(allCombos.get(1).edges[6][0]));
 
-        // ArrayList<int[]> arrTest = startCirGraph.getCycles();
-        // for(int[] arr:arrTest){
-        //     System.out.println(Arrays.toString(arr));
-        // }
     }
 
-    // Generates the starting circulant graph based on the number of vertices, a and b
+    // Generates a graph of a given size with valid a and b parameters
+    // Originally to be used for generation, now stand alone function
     public static void createCirculantGraphs(int numVertices,int a, int b, edgeStorageArrays startCirGraph){
         if(a>=b) System.out.println("Invalid Condidtions, a must be less than b");
         if(numVertices<5) System.out.println("Invalid Condidtions, numVertices must be equal to 5 or more");
@@ -51,11 +47,9 @@ class generateCirculantGraphs{
             System.out.println("Conditions met, generating the graph");
             for(int i=0;i<numVertices;i++){
                 //Makes cycle, added
-                //System.out.println(i);
                 startCirGraph.addPair(i+1, ((i+a)%numVertices)+1);
                 startCirGraph.addPair(((i+a)%numVertices)+1, i+1);
                 // Makes cycle, subtracted, 
-                //System.out.println(((i+numVertices-a)%numVertices)+1);
                 startCirGraph.addPair(i+1, ((i+numVertices-a)%numVertices)+1);
                 startCirGraph.addPair(((i+numVertices-a)%numVertices)+1, i+1);
 
@@ -108,7 +102,7 @@ class generateCirculantGraphs{
         //Base case, if a graph is a circulant graph, may need to change
         int sumIns = graph.getSumIns(curr);
         int sumOuts = graph.getSumOuts(curr); // ALso temporary
-        if(graph.isCirculantLabeling(a, b)){
+        if(graph.isCirculantLabeling(a, b) && graph.isDDMLabeling()){
             // add to all combos
             boolean eq = false;
             for(int i=0;i<ddmLabelings.size();i++){
@@ -118,13 +112,6 @@ class generateCirculantGraphs{
                 }
             }
             if(!eq) ddmLabelings.add(graph);
-            //Check for duplicates
-            //System.out.println("waaa");
-            // Need count of edges method
-        }else if(graph.isDDMLabeling()){
-            //ddmLabelings.add(graph);
-            //Consider making the line below also check for duplicates, I'm not sure if this 
-            //would actually help, but it's worth a try
         }else if(set.size()==0 && sumIns==sumOuts&& graph.getCountEdges(curr)==4){ //Temporary!!!!!
             boolean eq = false;
             for(int i=0;i<allCombos.size();i++){
@@ -134,11 +121,10 @@ class generateCirculantGraphs{
                 }
             }
             if(!eq) allCombos.add(graph);
-            //System.out.println("occurs");
         }else if(graph.stillCirculant()){
-            //System.out.println("test");
             for(int i=0;i<set.size();i++){
-                //System.out.println(curr);
+                // Makes 3 new graphs, adding two different ways, and not adding at all
+
                 edgeStorageArrays newGraph1 = graph.copy();
                 newGraph1.addPair(set.get(i),curr);
 
@@ -153,36 +139,11 @@ class generateCirculantGraphs{
                 set1.remove(i);
                 set2.remove(i);
 
-                // No case where edge isn't added, since all edges must be used in these cases
-
-                //need to make new copy method for sets
                 findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b,curr);
                 findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b,curr);
                 findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph3,a,b,curr);
-                // Temp commented out for testing
-                // for(int j=i+1;j<set.size();j++){
-                //     edgeStorageArrays newGraph1 = graph.copy();
-                //     newGraph1.addPair(set.get(i),set.get(j));
-
-                //     edgeStorageArrays newGraph2 = graph.copy();
-                //     newGraph2.addPair(set.get(j),set.get(i));
-
-                //     List<Integer> set1 = copySet(set);
-                //     List<Integer> set2 = copySet(set);
-
-                //     set1.remove(i);
-                //     set2.remove(i);
-
-                //     // No case where edge isn't added, since all edges must be used in these cases
-
-                //     //need to make new copy method for sets
-                //     findDDMRecur(ddmLabelings,allCombos,size,set1,newGraph1,a,b);
-                //     findDDMRecur(ddmLabelings,allCombos,size,set2,newGraph2,a,b);
-                // }
             }
         }
-        //recur only if still fits as a circulant graph
-
     }
 
     //Returns the set of vertices it can use
@@ -194,7 +155,6 @@ class generateCirculantGraphs{
             .simple(4)
             .stream()
             .forEach(combination -> test.add(combination));
-        //System.out.println(test);
 
     }
 
