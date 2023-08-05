@@ -1,4 +1,4 @@
-package graphlabeling.circulantgraphs;
+package graphlabeling.circulantgraphs.legacycode;
 
 import org.paukov.combinatorics3.Generator;
 import java.util.*;
