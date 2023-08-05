@@ -2,13 +2,13 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Change number of vertices here
-numVertices = 6
+numVertices = 5
 
 #File that all the graphs are stored in, change based on where storing the files
-graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForCirVis.txt",'r')
+graphsToGenerate= open("/Users/markymarkscomputer/Desktop/Untitled/Python Code/outputForVis.txt",'r')
 
 #File path and name for where all graphs will be changed. Keep /graph at end
-fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/Circulant Graphs/6Vertex/graph"
+fileName = "/Users/markymarkscomputer/Desktop/Untitled/GraphVisualizations/ConnectedGraphs/5VertexNoInverse/graph"
 
 
 
