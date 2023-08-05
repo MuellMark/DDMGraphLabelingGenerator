@@ -16,13 +16,8 @@ class generateGraphs{
         // 3 = isCirculantLabeling() REMOVE #, other file
         int methodSelect = 1;
 
-        // // These two variables are only for when methodSelect is set at 3, they select the
-        // // a and b values for checkign for circulant labelings.
-        // // Note: a=/=b, a<b<numVertices/2
-        // int a=1;
-        // int b=2;
-
-        // For changing how the set works, TODO, may be removed
+        // For Changing how the set works, currently only 1 works
+        //TODO: for the future, add additional sets
         int usableSetSelector = 1;
 
         // Stores all possible combinations for all recurssive calls
@@ -114,15 +109,15 @@ class generateGraphs{
         }
     }
 
+// TODO: add functionality for additional sets, currently only supports 1
     public static ArrayList<Integer>  getUsableSet(int num, int vertex){
         ArrayList<Integer> set = new ArrayList<>();
         switch(num){
             case(1):
                 set = getUsuableSetDecreasing(vertex);
                 return set;
-            // case(2):
-            //     return current.isDDMLabelingIncludeZeroes();
             default:
+                System.out.println("Invalid set selected");
                 return set;
         }
     }
@@ -212,8 +207,6 @@ class generateGraphs{
                 return false;
         }
     }
-
-
         
     // LEGACY, keeping in case needed in future 
     // Filters results, stores all non-repeated DDM labelings in a new Arraylist, returns that
@@ -246,4 +239,3 @@ class generateGraphs{
         return filtered;
     }
 }
-
