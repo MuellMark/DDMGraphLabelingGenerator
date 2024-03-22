@@ -7,7 +7,7 @@ import java.io.FileWriter;
 class generateGraphs{
     public static void main(String[]args){
         // Change for # of Vertices you'd like to generate
-        int numVertices =5; 
+        int numVertices =7; 
 
         // Change number based on the desired method
         // 1 = isDDMLabeling()
@@ -70,7 +70,7 @@ class generateGraphs{
         int sumOuts = current.getSumOuts(vertex);
 
         // base case, if the two are equal then a potential labeling could be found
-        if(sumIns==sumOuts && sumIns>0){
+        if(sumIns-sumOuts==0 && sumIns>0){
             allCombos.add(current); // Adds to allCombos for future graphs to check from
             if(callSpecificMethod(methodSelect, current,a,b)){ // Change to include zeroes with current.isDDMLabelingIncludeZeroes()
                 boolean isInvOrEq = false;
